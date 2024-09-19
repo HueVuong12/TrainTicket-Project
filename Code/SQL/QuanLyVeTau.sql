@@ -265,13 +265,26 @@ VALUES
 ('TA001', 'GA002'),
 ('TA001', 'GA003');
 
--- Thêm các loại vé vào bảng LoaiVe
+-- Thêm 15 loại vé vào bảng LoaiVe
 INSERT INTO LoaiVe (maLoai, hang, loai)
 VALUES 
-('VE_THUONG_THUONG', 'Thường', 'Thường'),
-('VE_THUONG_TRE_EM', 'Thường', 'Trẻ em'),
-('VE_VIP_THUONG', 'VIP', 'Thường'),
-('VE_VIP_TRE_EM', 'VIP', 'Trẻ em');
+('LVGM_E1', 'Ghe mem', 'Tre em duoi 6 tuoi'),
+('LVGM_E2', 'Ghe mem', 'Tre em 6 den 10 tuoi'),
+('LVGM_NL', 'Ghe mem', 'Nguoi lon'),
+('LVGM_LT', 'Ghe mem', 'Nguoi lon tuoi'),
+('LVGM_SV', 'Ghe mem', 'Sinh vien'),
+
+('LVGN_E1', 'Giuong nam', 'Tre em duoi 6 tuoi'),
+('LVGN_E2', 'Giuong nam', 'Tre em 6 den 10 tuoi'),
+('LVGN_NL', 'Giuong nam', 'Nguoi lon'),
+('LVGN_LT', 'Giuong nam', 'Nguoi lon tuoi'),
+('LVGN_SV', 'Giuong nam', 'Sinh vien'),
+
+('LVVI_E1', 'VIP', 'Tre em duoi 6 tuoi'),
+('LVVI_E2', 'VIP', 'Tre em 6 den 10 tuoi'),
+('LVVI_NL', 'VIP', 'Nguoi lon'),
+('LVVI_LT', 'VIP', 'Nguoi lon tuoi'),
+('LVVI_SV', 'VIP', 'Sinh vien');
 
 -- Thêm 5 tài khoản vào bảng TaiKhoan
 INSERT INTO TaiKhoan (maDangNhap, matKhau, phanQuyen, maNV)
