@@ -11,7 +11,7 @@ public class ConnectDB {
 	public static ConnectDB getInstance() { return instance; }
 
 	public static void connect() { 
-		String url = "jdbc:sqlserver://localhost:8391;databaseName=QuanLyVeTau";
+		String url = "jdbc:sqlserver://localhost:8391;databaseName=DTHP";
 		String user = "sa"; 
 		String password = "123"; 
 		try { 
