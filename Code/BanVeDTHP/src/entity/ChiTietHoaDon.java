@@ -54,8 +54,8 @@ public class ChiTietHoaDon {
 		return thue;
 	}
 
-	public void setThue(float thue) {
-		thue = thue;
+	public void setThue(float thue1) {
+		thue = thue1;
 	}
 
 	@Override

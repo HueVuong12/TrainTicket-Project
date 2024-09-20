@@ -130,7 +130,7 @@ public class Ve {
 	}
 	
 	public float tinhGiaVe() {
-		return 0;
+		return Math.abs(gaDen.getChiSoKm()-836)*loaiVe.tinhTiGia();
 	}
 	
 	public boolean xuatVe() {

@@ -6,13 +6,15 @@ public class Ga {
 	private String maGa;
 	private String tenGa;
 	private String diaChi;
+	private int chiSoKm;
 	private boolean trangThai;
-	
-	public Ga(String maGa, String tenGa, String diaChi, boolean trangThai) {
+
+	public Ga(String maGa, String tenGa, String diaChi, int chiSoKm, boolean trangThai) {
 		super();
 		this.maGa = maGa;
 		this.tenGa = tenGa;
 		this.diaChi = diaChi;
+		this.chiSoKm = chiSoKm;
 		this.trangThai = trangThai;
 	}
 
@@ -45,6 +47,14 @@ public class Ga {
 		this.diaChi = diaChi;
 	}
 
+	public int getChiSoKm() {
+		return chiSoKm;
+	}
+
+	public void setChiSoKm(int chiSoKm) {
+		this.chiSoKm = chiSoKm;
+	}
+
 	public boolean isTrangThai() {
 		return trangThai;
 	}
@@ -72,7 +82,8 @@ public class Ga {
 
 	@Override
 	public String toString() {
-		return "Ga [maGa=" + maGa + ", tenGa=" + tenGa + ", diaChi=" + diaChi + ", trangThai=" + trangThai + "]";
+		return "Ga [maGa=" + maGa + ", tenGa=" + tenGa + ", diaChi=" + diaChi + ", chiSoKm=" + chiSoKm + ", trangThai="
+				+ trangThai + "]";
 	}
 	
 }

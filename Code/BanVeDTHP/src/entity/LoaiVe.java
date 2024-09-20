@@ -65,5 +65,23 @@ public class LoaiVe {
 		return "LoaiVe [maLoai=" + maLoai + ", hang=" + hang + ", loai=" + loai + "]";
 	}
 	
-	
+	public float tinhTiGia() {
+		float tiGia = 0;
+		if (hang.equalsIgnoreCase("Ghe mem"))
+			tiGia += 1;
+		else if (hang.equalsIgnoreCase("Giuong nam"))
+			tiGia += 1.2;
+		else
+			tiGia += 1.8;
+		if (loai.equalsIgnoreCase("Sinh vien"))
+			tiGia += -0.1;
+		else if (loai.equalsIgnoreCase("Nguoi lon"))
+			tiGia += 0;
+		else if (loai.equalsIgnoreCase("Nguoi lon tuoi"))
+			tiGia += -0.15;
+		else if (loai.equalsIgnoreCase("Tre em 6 den 10 tuoi"))
+			tiGia += -0.25;
+		else tiGia = 0;
+		return tiGia;
+	}
 }
