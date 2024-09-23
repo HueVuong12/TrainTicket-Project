@@ -11,11 +11,11 @@ public class Ga {
 
 	public Ga(String maGa, String tenGa, String diaChi, int chiSoKm, boolean trangThai) {
 		super();
-		this.maGa = maGa;
-		this.tenGa = tenGa;
-		this.diaChi = diaChi;
-		this.chiSoKm = chiSoKm;
-		this.trangThai = trangThai;
+		this.setMaGa(maGa);
+		this.setTenGa(tenGa);
+		this.setDiaChi(diaChi);
+		this.setChiSoKm(chiSoKm);
+		this.setTrangThai(trangThai);
 	}
 
 	public Ga(String maGa) {
@@ -28,7 +28,11 @@ public class Ga {
 	}
 
 	public void setMaGa(String maGa) {
-		this.maGa = maGa;
+		String ktMaGa = "^GA\\d{3}$";
+		if (maGa.matches(ktMaGa))
+			this.maGa = maGa;
+		else 
+			throw new IllegalArgumentException("Mã ga không hợp lệ!  Mã ga phải có định dạng 'GA' theo sau bởi 3 chữ số.");
 	}
 
 	public String getTenGa() {
@@ -36,7 +40,12 @@ public class Ga {
 	}
 
 	public void setTenGa(String tenGa) {
-		this.tenGa = tenGa;
+		String ktTenGa = "^(?!\\s)[A-Z][a-z]*(\\s[A-Z][a-z]*)*$";
+		if (tenGa.matches(ktTenGa))
+			this.tenGa = tenGa;
+		else 
+			throw new IllegalArgumentException("Tên ga không hợp lệ! Chữ cái đầu của mỗi tiếng phải viết hoa");
+		//kt trong database
 	}
 
 	public String getDiaChi() {
@@ -52,7 +61,10 @@ public class Ga {
 	}
 
 	public void setChiSoKm(int chiSoKm) {
-		this.chiSoKm = chiSoKm;
+		if (chiSoKm >= 0)
+			this.chiSoKm = chiSoKm;
+		else
+			throw new IllegalArgumentException("Chỉ số km không hợp lệ. Chỉ số km phải là một số dương.");
 	}
 
 	public boolean isTrangThai() {

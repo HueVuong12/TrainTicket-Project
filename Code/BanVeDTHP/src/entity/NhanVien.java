@@ -1,28 +1,28 @@
 package entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class NhanVien {
 	private String maNV;
 	private String tenNV;
-	private Date ngaySinh;
+	private LocalDate ngaySinh;
 	private boolean gioiTinh;
-	private Ca maCa;
+	private Ca ca;
 	private String cccd;
 	private String email;
 	private String sdt;
 	private boolean trangThai;
 	private String chucVu;
 	
-	public NhanVien(String maNV, String tenNV, Date ngaySinh, boolean gioiTinh, Ca maCa, String cccd, String email,
+	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, boolean gioiTinh, Ca maCa, String cccd, String email,
 			String sdt, boolean trangThai, String chucVu) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
 		this.ngaySinh = ngaySinh;
 		this.gioiTinh = gioiTinh;
-		this.maCa = maCa;
+		this.ca = maCa;
 		this.cccd = cccd;
 		this.email = email;
 		this.sdt = sdt;
@@ -51,11 +51,11 @@ public class NhanVien {
 		this.tenNV = tenNV;
 	}
 
-	public Date getNgaySinh() {
+	public LocalDate getNgaySinh() {
 		return ngaySinh;
 	}
 
-	public void setNgaySinh(Date ngaySinh) {
+	public void setNgaySinh(LocalDate ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
 
@@ -67,12 +67,12 @@ public class NhanVien {
 		this.gioiTinh = gioiTinh;
 	}
 
-	public Ca getMaCa() {
-		return maCa;
+	public Ca getCa() {
+		return ca;
 	}
 
-	public void setMaCa(Ca maCa) {
-		this.maCa = maCa;
+	public void setCa(Ca maCa) {
+		this.ca = maCa;
 	}
 
 	public String getCccd() {
@@ -135,7 +135,7 @@ public class NhanVien {
 	@Override
 	public String toString() {
 		return "NhanVien [maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", gioiTinh=" + gioiTinh
-				+ ", maCa=" + maCa + ", cccd=" + cccd + ", email=" + email + ", sdt=" + sdt + ", trangThai=" + trangThai
+				+ ", ca=" + ca + ", cccd=" + cccd + ", email=" + email + ", sdt=" + sdt + ", trangThai=" + trangThai
 				+ ", chucVu=" + chucVu + "]";
 	}
 	

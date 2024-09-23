@@ -10,9 +10,9 @@ public class Toa {
 	
 	public Toa(String maToa, String loaiToa, ArrayList<Ghe> dsGhe) {
 		super();
-		this.maToa = maToa;
-		this.loaiToa = loaiToa;
-		this.dsGhe = dsGhe;
+		this.setMaToa(maToa);
+		this.setLoaiToa(loaiToa);
+		this.setDsGhe(dsGhe);
 	}
 
 	public Toa(String maToa) {
@@ -25,7 +25,11 @@ public class Toa {
 	}
 
 	public void setMaToa(String maToa) {
-		this.maToa = maToa;
+		String ktMaToa = "^TA\\d{3}_\\d{2}$";
+		if (maToa.matches(ktMaToa))
+			this.maToa = maToa;
+		else 
+			throw new IllegalArgumentException("Mã toa không hợp lệ!");
 	}
 
 	public String getLoaiToa() {
@@ -33,7 +37,11 @@ public class Toa {
 	}
 
 	public void setLoaiToa(String loaiToa) {
-		this.loaiToa = loaiToa;
+		String ktLoaiToa = "^(VIP|ghế mềm|giường nằm)$";
+		if (loaiToa.matches(ktLoaiToa))
+			this.loaiToa = loaiToa;
+		else 
+			throw new IllegalArgumentException("Loại toa không hợp lệ. Loại toa phải thuộc (VIP|ghế mềm|giường nằm)");
 	}
 
 	public ArrayList<Ghe> getDsGhe() {

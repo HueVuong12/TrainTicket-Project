@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
 	private String maChiTiet;
-	private HoaDon maHoaDon;
+	private HoaDon hoaDon;
 	private int soLuong;
 	private ArrayList<Ve> dsVe;
 	private float thue;
 	
-	public ChiTietHoaDon(String maChiTiet, HoaDon maHoaDon, int soLuong, ArrayList<Ve> dsVe, float thue) {
+	public ChiTietHoaDon(String maChiTiet, HoaDon hoaDon, int soLuong, ArrayList<Ve> dsVe, float thue) {
 		super();
 		this.maChiTiet = maChiTiet;
-		this.maHoaDon = maHoaDon;
+		this.hoaDon = hoaDon;
 		this.soLuong = soLuong;
 		this.dsVe = dsVe;
 		this.thue = thue;
@@ -26,12 +26,12 @@ public class ChiTietHoaDon {
 		this.maChiTiet = maChiTiet;
 	}
 
-	public HoaDon getMaHoaDon() {
-		return maHoaDon;
+	public HoaDon getHoaDon() {
+		return hoaDon;
 	}
 
-	public void setMaHoaDon(HoaDon maHoaDon) {
-		this.maHoaDon = maHoaDon;
+	public void setHoaDon(HoaDon hoaDon) {
+		this.hoaDon = hoaDon;
 	}
 
 	public int getSoLuong() {
@@ -57,13 +57,13 @@ public class ChiTietHoaDon {
 	public void setThue(float thue1) {
 		thue = thue1;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "ChiTietHoaDon [maChiTiet=" + maChiTiet + ", maHoaDon=" + maHoaDon + ", soLuong=" + soLuong + ", dsVe="
-				+ dsVe + ", Thue=" + thue + "]";
+		return "ChiTietHoaDon [maChiTiet=" + maChiTiet + ", hoaDon=" + hoaDon + ", soLuong=" + soLuong + ", dsVe="
+				+ dsVe + ", thue=" + thue + "]";
 	}
-	
+
 	public float tinhTien() {
 		float tongTien = 0;
 		for (Ve ve : dsVe) {

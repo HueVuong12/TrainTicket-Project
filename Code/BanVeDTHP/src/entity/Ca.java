@@ -1,20 +1,20 @@
 package entity;
 
-import java.sql.Time;
 import java.util.Objects;
+import java.time.LocalTime;
 
 public class Ca {
 	private String maCa;
 	private String tenCa;
-	private Time thoiGianBatDau;
-	private Time thoiGianKetThuc;
+	private LocalTime thoiGianBatDau;
+	private LocalTime thoiGianKetThuc;
 	
-	public Ca(String maCa, String tenCa, Time thoiGianBatDau, Time thoiGianKetThuc) {
+	public Ca(String maCa, String tenCa, LocalTime thoiGianBatDau, LocalTime thoiGianKetThuc) {
 		super();
-		this.maCa = maCa;
-		this.tenCa = tenCa;
-		this.thoiGianBatDau = thoiGianBatDau;
-		this.thoiGianKetThuc = thoiGianKetThuc;
+		this.setMaCa(maCa);
+		this.setTenCa(tenCa);
+		this.setThoiGianBatDau(thoiGianBatDau);
+		this.setThoiGianKetThuc(thoiGianKetThuc);
 	}
 
 	public Ca(String maCa) {
@@ -38,19 +38,19 @@ public class Ca {
 		this.tenCa = tenCa;
 	}
 
-	public Time getThoiGianBatDau() {
+	public LocalTime getThoiGianBatDau() {
 		return thoiGianBatDau;
 	}
 
-	public void setThoiGianBatDau(Time thoiGianBatDau) {
+	public void setThoiGianBatDau(LocalTime thoiGianBatDau) {
 		this.thoiGianBatDau = thoiGianBatDau;
 	}
 
-	public Time getThoiGianKetThuc() {
+	public LocalTime getThoiGianKetThuc() {
 		return thoiGianKetThuc;
 	}
 
-	public void setThoiGianKetThuc(Time thoiGianKetThuc) {
+	public void setThoiGianKetThuc(LocalTime thoiGianKetThuc) {
 		this.thoiGianKetThuc = thoiGianKetThuc;
 	}
 

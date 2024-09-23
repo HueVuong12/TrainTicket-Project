@@ -1,6 +1,8 @@
 package entity;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class HoaDon {
@@ -8,16 +10,20 @@ public class HoaDon {
 	private LocalDateTime ngayLapHoaDon;
 	private NhanVien nhanVien;
 	private KhachHang khachHang;
-	private ChiTietHoaDon maChiTiet;
+	private ChiTietHoaDon chiTiet;
+	private Boolean daHoanVe;
+	private Boolean daHoanTien;
 	
 	public HoaDon(String maHoaDon, LocalDateTime ngayLapHoaDon, NhanVien nhanVien, KhachHang khachHang,
-			ChiTietHoaDon maChiTiet) {
+			ChiTietHoaDon chiTiet) {
 		super();
-		this.maHoaDon = maHoaDon;
+		this.setMaHoaDon(maHoaDon);
 		this.ngayLapHoaDon = ngayLapHoaDon;
 		this.nhanVien = nhanVien;
 		this.khachHang = khachHang;
-		this.maChiTiet = maChiTiet;
+		this.chiTiet = chiTiet;
+		this.daHoanVe = false;
+		this.daHoanTien = false;
 	}
 
 	public HoaDon(String maHoaDon) {
@@ -57,12 +63,28 @@ public class HoaDon {
 		this.khachHang = khachHang;
 	}
 
-	public ChiTietHoaDon getMaChiTiet() {
-		return maChiTiet;
+	public ChiTietHoaDon getChiTiet() {
+		return chiTiet;
 	}
 
-	public void setMaChiTiet(ChiTietHoaDon maChiTiet) {
-		this.maChiTiet = maChiTiet;
+	public void setChiTiet(ChiTietHoaDon chiTiet) {
+		this.chiTiet = chiTiet;
+	}
+
+	public Boolean getDaHoanVe() {
+		return daHoanVe;
+	}
+
+	public void setDaHoanVe(Boolean daHoanVe) {
+		this.daHoanVe = daHoanVe;
+	}
+
+	public Boolean getDaHoanTien() {
+		return daHoanTien;
+	}
+
+	public void setDaHoanTien(Boolean daHoanTien) {
+		this.daHoanTien = daHoanTien;
 	}
 
 	@Override
@@ -85,10 +107,28 @@ public class HoaDon {
 	@Override
 	public String toString() {
 		return "HoaDon [maHoaDon=" + maHoaDon + ", ngayLapHoaDon=" + ngayLapHoaDon + ", nhanVien=" + nhanVien
-				+ ", khachHang=" + khachHang + "]";
+				+ ", khachHang=" + khachHang + ", chiTiet=" + chiTiet + ", daHoanVe=" + daHoanVe + ", daHoanTien="
+				+ daHoanTien + "]";
+	}
+
+	public float tongTien() {
+		return this.chiTiet.tinhTien();
 	}
 	
-	public float getTongTien() {
-		return this.maChiTiet.tinhTien();
+	public float tinhTienHoan() {
+		int size = this.chiTiet.getDsVe().size();
+		long thoiGian = Duration.between(chiTiet.getDsVe().getFirst().getGioDi(), LocalTime.now()).toHours();
+		if (size == 1) {
+			if (thoiGian >= 24)
+				return chiTiet.tinhTien()*0.9f;
+			else if (thoiGian >= 4)
+				return chiTiet.tinhTien()*0.8f;
+		} else {
+			if (thoiGian >= 72)
+				return chiTiet.tinhTien()*0.9f;
+			else if (thoiGian >= 24)
+				return chiTiet.tinhTien()*0.8f; 
+		}
+		return 0;
 	}
 }

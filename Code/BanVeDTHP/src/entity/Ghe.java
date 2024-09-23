@@ -2,19 +2,20 @@ package entity;
 
 public class Ghe {
 	private int soGhe;
-	private Toa maToa;
+	private Toa toa;
 	private boolean trangThai;
 	
-	public Ghe(int soGhe, Toa maToa, boolean trangThai) {
+	public Ghe(int soGhe, Toa toa, boolean trangThai) {
 		super();
-		this.soGhe = soGhe;
-		this.maToa = maToa;
-		this.trangThai = trangThai;
+		this.setSoGhe(soGhe);
+		this.setToa(toa);
+		this.setTrangThai(trangThai);
 	}
 
-	public Ghe(Toa maToa) {
+	public Ghe(int soGhe, Toa toa) {
 		super();
-		this.maToa = maToa;
+		this.soGhe = soGhe;
+		this.toa = toa;
 	}
 
 	public int getSoGhe() {
@@ -22,15 +23,19 @@ public class Ghe {
 	}
 
 	public void setSoGhe(int soGhe) {
-		this.soGhe = soGhe;
+		if ((soGhe >= 0) && (soGhe <= 64))
+			this.soGhe = soGhe;
+		else
+			throw new IllegalArgumentException("Số ghế không hợp lệ. Số ghế phải lớn hơn hoặc bằng 0 và bé hơn hoặc bằng 64.");
 	}
 
-	public Toa getMaToa() {
-		return maToa;
+	public Toa getToa() {
+		return toa;
 	}
 
-	public void setMaToa(Toa maToa) {
-		this.maToa = maToa;
+	public void setToa(Toa toa) {
+		this.toa = toa;
+		//Kiểm tra tồn tại
 	}
 
 	public boolean isTrangThai() {
@@ -43,7 +48,7 @@ public class Ghe {
 
 	@Override
 	public String toString() {
-		return "Ghe [soGhe=" + soGhe + ", maToa=" + maToa + ", trangThai=" + trangThai + "]";
+		return "Ghe [soGhe=" + soGhe + ", toa=" + toa + ", trangThai=" + trangThai + "]";
 	}
 	
 }

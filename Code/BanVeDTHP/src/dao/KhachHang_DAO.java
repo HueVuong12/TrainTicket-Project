@@ -113,7 +113,7 @@ public class KhachHang_DAO {
 		return n > 0;
 	} 
 		   
-	//D: Delete 
+//	//D: Delete 
 //	public boolean delete(String maKH) { 
 //		Connection con = ConnectDB.getInstance().getConnection(); 
 //		PreparedStatement stmt = null; 
@@ -128,10 +128,10 @@ public class KhachHang_DAO {
 //		
 //		return n > 0;
 //	}
-//	
-//	public void reset() {
-//		dsKH.removeAll(dsKH);
-//	}
+	
+	public void reset() {
+		dsKH.removeAll(dsKH);
+	}
 	
 	public KhachHang getKhachHangByTen(String tenKhachHang){
 		KhachHang khachHang = null;

@@ -1,28 +1,31 @@
 package entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Ve {
 	private String maVe;
-	private ChuyenTau maChuyenTau;
-	private Toa maToa;
-	private Ghe maGhe;
+	private ChuyenTau chuyenTau;
+	private Toa toa;
+	private Ghe soGhe;
 	private KhachHang khachHang;
-	private Date ngayDi;
+	private LocalDate ngayDi;
+	private LocalTime gioDi;
 	private Ga gaDen;
 	private boolean trangThai;
 	private LoaiVe loaiVe;
 	
-	public Ve(String maVe, ChuyenTau maChuyenTau, Toa maToa, Ghe maGhe, KhachHang khachHang, Date ngayDi, Ga gaDen,
-			boolean trangThai, LoaiVe loaiVe) {
+	public Ve(String maVe, ChuyenTau chuyenTau, Toa toa, Ghe soGhe, KhachHang khachHang, LocalDate ngayDi, LocalTime gioDi,
+			Ga gaDen, boolean trangThai, LoaiVe loaiVe) {
 		super();
 		this.maVe = maVe;
-		this.maChuyenTau = maChuyenTau;
-		this.maToa = maToa;
-		this.maGhe = maGhe;
+		this.chuyenTau = chuyenTau;
+		this.toa = toa;
+		this.soGhe = soGhe;
 		this.khachHang = khachHang;
 		this.ngayDi = ngayDi;
+		this.gioDi = gioDi;
 		this.gaDen = gaDen;
 		this.trangThai = trangThai;
 		this.loaiVe = loaiVe;
@@ -41,28 +44,28 @@ public class Ve {
 		this.maVe = maVe;
 	}
 
-	public ChuyenTau getMaChuyenTau() {
-		return maChuyenTau;
+	public ChuyenTau getChuyenTau() {
+		return chuyenTau;
 	}
 
-	public void setMaChuyenTau(ChuyenTau maChuyenTau) {
-		this.maChuyenTau = maChuyenTau;
+	public void setChuyenTau(ChuyenTau chuyenTau) {
+		this.chuyenTau = chuyenTau;
 	}
 
-	public Toa getMaToa() {
-		return maToa;
+	public Toa getToa() {
+		return toa;
 	}
 
-	public void setMaToa(Toa maToa) {
-		this.maToa = maToa;
+	public void setToa(Toa toa) {
+		this.toa = toa;
 	}
 
-	public Ghe getMaGhe() {
-		return maGhe;
+	public Ghe getSoGhe() {
+		return soGhe;
 	}
 
-	public void setMaGhe(Ghe maGhe) {
-		this.maGhe = maGhe;
+	public void setSoGhe(Ghe soGhe) {
+		this.soGhe = soGhe;
 	}
 
 	public KhachHang getKhachHang() {
@@ -73,12 +76,20 @@ public class Ve {
 		this.khachHang = khachHang;
 	}
 
-	public Date getNgayDi() {
+	public LocalDate getNgayDi() {
 		return ngayDi;
 	}
 
-	public void setNgayDi(Date ngayDi) {
+	public void setNgayDi(LocalDate ngayDi) {
 		this.ngayDi = ngayDi;
+	}
+
+	public LocalTime getGioDi() {
+		return gioDi;
+	}
+
+	public void setGioDi(LocalTime gioDi) {
+		this.gioDi = gioDi;
 	}
 
 	public Ga getGaDen() {
@@ -121,14 +132,14 @@ public class Ve {
 		Ve other = (Ve) obj;
 		return Objects.equals(maVe, other.maVe);
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Ve [maVe=" + maVe + ", maChuyenTau=" + maChuyenTau + ", maToa=" + maToa + ", maGhe=" + maGhe
-				+ ", khachHang=" + khachHang + ", ngayDi=" + ngayDi + ", gaDen=" + gaDen + ", trangThai=" + trangThai
-				+ ", loaiVe=" + loaiVe + "]";
+		return "Ve [maVe=" + maVe + ", chuyenTau=" + chuyenTau + ", toa=" + toa + ", soGhe=" + soGhe + ", khachHang="
+				+ khachHang + ", ngayDi=" + ngayDi + ", gioDi=" + gioDi + ", gaDen=" + gaDen + ", trangThai="
+				+ trangThai + ", loaiVe=" + loaiVe + "]";
 	}
-	
+
 	public float tinhGiaVe() {
 		return Math.abs(gaDen.getChiSoKm()-836)*loaiVe.tinhTiGia();
 	}
