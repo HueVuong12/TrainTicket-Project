@@ -19,16 +19,16 @@ public class Ve {
 	public Ve(String maVe, ChuyenTau chuyenTau, Toa toa, Ghe soGhe, KhachHang khachHang, LocalDate ngayDi, LocalTime gioDi,
 			Ga gaDen, boolean trangThai, LoaiVe loaiVe) {
 		super();
-		this.maVe = maVe;
-		this.chuyenTau = chuyenTau;
-		this.toa = toa;
-		this.soGhe = soGhe;
-		this.khachHang = khachHang;
-		this.ngayDi = ngayDi;
-		this.gioDi = gioDi;
-		this.gaDen = gaDen;
-		this.trangThai = trangThai;
-		this.loaiVe = loaiVe;
+		this.setMaVe(maVe);
+		this.setChuyenTau(chuyenTau);
+		this.setToa(toa);
+		this.setSoGhe(soGhe);
+		this.setKhachHang(khachHang);
+		this.ngayDi = chuyenTau.getNgayDi();
+		this.gioDi = chuyenTau.getGioDi();
+		this.setGaDen(gaDen);
+		this.setTrangThai(trangThai);
+		this.setLoaiVe(loaiVe);
 	}
 
 	public Ve(String maVe) {
@@ -41,7 +41,11 @@ public class Ve {
 	}
 
 	public void setMaVe(String maVe) {
-		this.maVe = maVe;
+		String ktMaVe = "^VE\\d{2}\\d{2}\\d{2}\\d{4}$";
+		if (maVe.matches(ktMaVe))
+			this.maVe = maVe;
+		else
+			throw new IllegalArgumentException("Mã vé không hợp lệ! Mã vé có dạng VE + 6 số chỉ ngày tháng năm + 4 số chỉ số thứ tự ");
 	}
 
 	public ChuyenTau getChuyenTau() {
@@ -50,6 +54,7 @@ public class Ve {
 
 	public void setChuyenTau(ChuyenTau chuyenTau) {
 		this.chuyenTau = chuyenTau;
+		//Kiểm tra tồn tại
 	}
 
 	public Toa getToa() {
@@ -58,6 +63,7 @@ public class Ve {
 
 	public void setToa(Toa toa) {
 		this.toa = toa;
+		//Kiểm tra tồn tại
 	}
 
 	public Ghe getSoGhe() {
@@ -66,6 +72,7 @@ public class Ve {
 
 	public void setSoGhe(Ghe soGhe) {
 		this.soGhe = soGhe;
+		//Kiểm tra tồn tại
 	}
 
 	public KhachHang getKhachHang() {
@@ -74,22 +81,15 @@ public class Ve {
 
 	public void setKhachHang(KhachHang khachHang) {
 		this.khachHang = khachHang;
-	}
+		//Kiểm tra tồn tại
+}
 
 	public LocalDate getNgayDi() {
 		return ngayDi;
 	}
 
-	public void setNgayDi(LocalDate ngayDi) {
-		this.ngayDi = ngayDi;
-	}
-
 	public LocalTime getGioDi() {
 		return gioDi;
-	}
-
-	public void setGioDi(LocalTime gioDi) {
-		this.gioDi = gioDi;
 	}
 
 	public Ga getGaDen() {
@@ -98,7 +98,8 @@ public class Ve {
 
 	public void setGaDen(Ga gaDen) {
 		this.gaDen = gaDen;
-	}
+		//Kiểm tra tồn tại
+}
 
 	public boolean isTrangThai() {
 		return trangThai;
@@ -114,7 +115,8 @@ public class Ve {
 
 	public void setLoaiVe(LoaiVe loaiVe) {
 		this.loaiVe = loaiVe;
-	}
+		//Kiểm tra tồn tại
+}
 
 	@Override
 	public int hashCode() {

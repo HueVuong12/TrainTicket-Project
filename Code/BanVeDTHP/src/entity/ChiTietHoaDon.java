@@ -11,11 +11,11 @@ public class ChiTietHoaDon {
 	
 	public ChiTietHoaDon(String maChiTiet, HoaDon hoaDon, int soLuong, ArrayList<Ve> dsVe, float thue) {
 		super();
-		this.maChiTiet = maChiTiet;
-		this.hoaDon = hoaDon;
-		this.soLuong = soLuong;
-		this.dsVe = dsVe;
-		this.thue = thue;
+		this.setMaChiTiet(maChiTiet);
+		this.setHoaDon(hoaDon);
+		this.setSoLuong(soLuong);
+		this.setDsVe(dsVe);
+		this.setThue(thue);
 	}
 
 	public String getMaChiTiet() {

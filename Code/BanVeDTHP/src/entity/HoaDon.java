@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -18,10 +19,10 @@ public class HoaDon {
 			ChiTietHoaDon chiTiet) {
 		super();
 		this.setMaHoaDon(maHoaDon);
-		this.ngayLapHoaDon = ngayLapHoaDon;
-		this.nhanVien = nhanVien;
-		this.khachHang = khachHang;
-		this.chiTiet = chiTiet;
+		this.setNgayLapHoaDon(ngayLapHoaDon);
+		this.setNhanVien(nhanVien);
+		this.setKhachHang(khachHang);
+		this.setChiTiet(chiTiet);
 		this.daHoanVe = false;
 		this.daHoanTien = false;
 	}
@@ -36,7 +37,11 @@ public class HoaDon {
 	}
 
 	public void setMaHoaDon(String maHoaDon) {
-		this.maHoaDon = maHoaDon;
+		String ktMaHoaDon = "^\\d{2}\\d{2}\\d{2}NV\\d{3}\\d{5}$";
+		if (ktMaHoaDon.matches(ktMaHoaDon))
+			this.maHoaDon = maHoaDon;
+		else
+			throw new IllegalArgumentException("Mã hóa đơn không hợp lệ!");
 	}
 
 	public LocalDateTime getNgayLapHoaDon() {
@@ -44,7 +49,10 @@ public class HoaDon {
 	}
 
 	public void setNgayLapHoaDon(LocalDateTime ngayLapHoaDon) {
-		this.ngayLapHoaDon = ngayLapHoaDon;
+		if (ngayLapHoaDon.toLocalDate().isEqual(LocalDate.now()))
+			this.ngayLapHoaDon = ngayLapHoaDon;
+		else
+			throw new IllegalArgumentException("Ngày lập hóa đơn phải là ngày hiện tại!");
 	}
 
 	public NhanVien getNhanVien() {
@@ -53,6 +61,7 @@ public class HoaDon {
 
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
+		//Kiểm tra tồn tại
 	}
 
 	public KhachHang getKhachHang() {
@@ -61,6 +70,7 @@ public class HoaDon {
 
 	public void setKhachHang(KhachHang khachHang) {
 		this.khachHang = khachHang;
+		//Kiểm tra tồn tại
 	}
 
 	public ChiTietHoaDon getChiTiet() {
@@ -69,6 +79,7 @@ public class HoaDon {
 
 	public void setChiTiet(ChiTietHoaDon chiTiet) {
 		this.chiTiet = chiTiet;
+		//Kiểm tra tồn tại
 	}
 
 	public Boolean getDaHoanVe() {

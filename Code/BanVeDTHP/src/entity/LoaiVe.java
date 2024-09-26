@@ -9,9 +9,9 @@ public class LoaiVe {
 	
 	public LoaiVe(String maLoai, String hang, String loai) {
 		super();
-		this.maLoai = maLoai;
-		this.hang = hang;
-		this.loai = loai;
+		this.setMaLoai(maLoai);
+		this.setHang(hang);
+		this.setLoai(loai);
 	}
 
 	public LoaiVe(String maLoai) {
@@ -24,7 +24,11 @@ public class LoaiVe {
 	}
 
 	public void setMaLoai(String maLoai) {
-		this.maLoai = maLoai;
+		String ktMaLoai = "^(LVGME[12]|LVGMNL|LVGMCT|LVGMSV|LVGNE[12]|LVGNNL|LVGNCT|LVGNSV|LVVIE[12]|LVVINL|LVVICT|LVVISV)$";
+		if (maLoai.matches(ktMaLoai))
+			this.maLoai = maLoai;
+		else
+			throw new IllegalArgumentException("Mã vé không tồn tại!");
 	}
 
 	public String getHang() {
@@ -32,7 +36,11 @@ public class LoaiVe {
 	}
 
 	public void setHang(String hang) {
-		this.hang = hang;
+		String ktHang = "^(ghế mềm|giường nằm|VIP)$";
+		if (hang.matches(ktHang))
+			this.hang = hang;
+		else
+			throw new IllegalArgumentException("Hạng không tồn tại!");
 	}
 
 	public String getLoai() {
@@ -40,7 +48,11 @@ public class LoaiVe {
 	}
 
 	public void setLoai(String loai) {
-		this.loai = loai;
+		String ktLoai = "^(Trẻ em dưới 6 tuổi|trẻ em 6 đến 10 tuổi|người lớn|người cao tuổi|sinh viên)$";
+		if (loai.matches(ktLoai))
+			this.loai = loai;
+		else
+			throw new IllegalArgumentException("Loại không tồn tại!");
 	}
 
 	@Override
