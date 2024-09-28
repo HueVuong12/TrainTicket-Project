@@ -10,10 +10,10 @@ public class TaiKhoan {
 	
 	public TaiKhoan(String maTaiKhoan, String matKhau, int phanQuyen, NhanVien nhanVien) {
 		super();
-		this.maTaiKhoan = maTaiKhoan;
-		this.matKhau = matKhau;
-		this.phanQuyen = phanQuyen;
-		this.nhanVien = nhanVien;
+		this.setMaTaiKhoan(maTaiKhoan);
+		this.setMatKhau(matKhau);
+		this.setPhanQuyen(phanQuyen);
+		this.setNhanVien(nhanVien);
 	}
 
 	public TaiKhoan(String maTaiKhoan) {
