@@ -18,16 +18,16 @@ public class NhanVien {
 	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, boolean gioiTinh, Ca maCa, String cccd, String email,
 			String sdt, boolean trangThai, String chucVu) {
 		super();
-		this.maNV = maNV;
-		this.tenNV = tenNV;
-		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
-		this.ca = maCa;
-		this.cccd = cccd;
-		this.email = email;
-		this.sdt = sdt;
-		this.trangThai = trangThai;
-		this.chucVu = chucVu;
+		this.setMaNV(maNV);
+		this.setTenNV(tenNV);
+		this.setNgaySinh(ngaySinh);
+		this.setGioiTinh(gioiTinh);
+		this.setCa(maCa);
+		this.setCccd(cccd);
+		this.setEmail(email);
+		this.setSdt(sdt);
+		this.setTrangThai(trangThai);
+		this.setChucVu(chucVu);
 	}
 
 	public NhanVien(String maNV) {
