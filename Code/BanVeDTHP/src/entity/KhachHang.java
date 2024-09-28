@@ -11,11 +11,11 @@ public class KhachHang {
 	
 	public KhachHang(String maKH, String tenKH, String email, String sdt, String cccd) {
 		super();
-		this.maKH = maKH;
-		this.tenKH = tenKH;
-		this.email = email;
-		this.sdt = sdt;
-		this.cccd = cccd;
+		this.setMaKH(maKH);
+		this.setTenKH(tenKH);
+		this.setEmail(email);
+		this.setSdt(sdt);
+		this.setCccd(cccd);
 	}
 	
 	public KhachHang(String maKH) {
