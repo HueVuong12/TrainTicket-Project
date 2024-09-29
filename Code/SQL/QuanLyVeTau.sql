@@ -10,8 +10,8 @@ GO
 CREATE TABLE Ga (
     maGa VARCHAR(50) PRIMARY KEY,
     tenGa VARCHAR(100) NOT NULL,
-    diaChi VARCHAR(200),
-    chiSoKm INT,
+    diaChi VARCHAR(200) NOT NULL,
+    chiSoKm INT NOT NULL,
     trangThai BIT NOT NULL
 );
 
@@ -35,8 +35,8 @@ CREATE TABLE ChuyenTau_Ga (
 
 CREATE TABLE Toa (
     maToa VARCHAR(50) PRIMARY KEY,
-    loaiToa VARCHAR(50),
-    maTau VARCHAR(50),
+    loaiToa VARCHAR(50) NOT NULL,
+    maTau VARCHAR(50) NOT NULL,
     FOREIGN KEY (maTau) REFERENCES ChuyenTau(maTau)
 );
 
@@ -52,9 +52,9 @@ CREATE TABLE Ghe (
 -- Tạo bảng Ca
 CREATE TABLE Ca (
     maCa VARCHAR(50) PRIMARY KEY,
-    tenCa VARCHAR(100),
-    thoiGianBatDau TIME,
-    thoiGianKetThuc TIME
+    tenCa VARCHAR(100) NOT NULL,
+    thoiGianBatDau TIME NOT NULL,
+    thoiGianKetThuc TIME NOT NULL
 );
 
 -- Tạo bảng NhanVien
@@ -63,12 +63,12 @@ CREATE TABLE NhanVien (
     tenNV VARCHAR(100) NOT NULL,
     ngaySinh DATE,
     gioiTinh BIT,
-	ca VARCHAR(50),
-	cccd VARCHAR(20),
+	ca VARCHAR(50) NOT NULL,
+	cccd VARCHAR(20) NOT NULL,
     email VARCHAR(100),
     sdt VARCHAR(20),
     trangThai BIT,
-    chucVu VARCHAR(100),
+    chucVu VARCHAR(100) NOT NULL,
 	FOREIGN KEY (ca) REFERENCES Ca(maCa)
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE KhachHang (
     maKH VARCHAR(50) PRIMARY KEY,
     tenKH VARCHAR(100) NOT NULL,
     email VARCHAR(100),
-    sdt VARCHAR(20),
+    sdt VARCHAR(20) NOT NULL,
     cccd VARCHAR(20)
 );
 
@@ -85,8 +85,8 @@ CREATE TABLE KhachHang (
 CREATE TABLE HoaDon (
     maHoaDon VARCHAR(50) PRIMARY KEY,
     ngayLapHoaDon DATE NOT NULL,
-    nhanVien VARCHAR(50),
-    khachHang VARCHAR(50),
+    nhanVien VARCHAR(50) NOT NULL,
+    khachHang VARCHAR(50) NOT NULL,
     daHoanVe BIT NOT NULL,
 	daHoanTien BIT NOT NULL,
     FOREIGN KEY (nhanVien) REFERENCES NhanVien(maNV),
@@ -96,8 +96,8 @@ CREATE TABLE HoaDon (
 -- Tạo bảng ChiTietHoaDon
 CREATE TABLE ChiTietHoaDon (
     maChiTiet VARCHAR(50) PRIMARY KEY,
-    hoaDon VARCHAR(50),
-    soLuong INT,
+    hoaDon VARCHAR(50) NOT NULL,
+    soLuong INT NOT NULL,
     thue FLOAT,
     FOREIGN KEY (hoaDon) REFERENCES HoaDon(maHoaDon)
 );
@@ -112,16 +112,16 @@ CREATE TABLE LoaiVe (
 -- Tạo bảng Ve
 CREATE TABLE Ve (
     maVe VARCHAR(50) PRIMARY KEY,
-    tau VARCHAR(50),
-    toa VARCHAR(50),
-    soGhe INT,
-    khachHang VARCHAR(50),
-    ngayDi DATE,
-    gioDi TIME,
-    gaDen VARCHAR(50),
+    tau VARCHAR(50) NOT NULL,
+    toa VARCHAR(50) NOT NULL,
+    soGhe INT NOT NULL,
+    khachHang VARCHAR(50) NOT NULL,
+    ngayDi DATE NOT NULL,
+    gioDi TIME NOT NULL,
+    gaDen VARCHAR(50) NOT NULL,
     trangThai BIT,
-    loaiVe VARCHAR(50),
-	chiTiet VARCHAR(50),
+    loaiVe VARCHAR(50) NOT NULL,
+	chiTiet VARCHAR(50) NOT NULL,
     FOREIGN KEY (tau) REFERENCES ChuyenTau(maTau),
     FOREIGN KEY (toa) REFERENCES Toa(maToa),
     FOREIGN KEY (soGhe, toa) REFERENCES Ghe(soGhe, maToa),
