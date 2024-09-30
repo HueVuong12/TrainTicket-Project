@@ -26,7 +26,11 @@ public class TaiKhoan {
 	}
 
 	public void setMaTaiKhoan(String maTaiKhoan) {
-		this.maTaiKhoan = maTaiKhoan;
+		String regexMaTaiKhoan="^(TKQL|TKNV)\\d{3}$";
+		if(maTaiKhoan.matches(regexMaTaiKhoan))
+			this.maTaiKhoan = maTaiKhoan;
+		else
+			throw new IllegalArgumentException("Mã tài khoản không hợp lê!");
 	}
 
 	public String getMatKhau() {
@@ -34,7 +38,11 @@ public class TaiKhoan {
 	}
 
 	public void setMatKhau(String matKhau) {
-		this.matKhau = matKhau;
+		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$";
+		if(matKhau.matches(regex))
+			this.matKhau = matKhau;
+		else
+			throw new IllegalArgumentException("Mật khẩu không hợp lê!");
 	}
 
 	public int getPhanQuyen() {

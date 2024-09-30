@@ -27,7 +27,11 @@ public class Ca {
 	}
 
 	public void setMaCa(String maCa) {
-		this.maCa = maCa;
+		String regex= "^CA[0-9]{2}$";
+		if(maCa.matches(regex))
+			this.maCa = maCa;
+		else
+			throw new IllegalArgumentException("Mã ca không hợp lệ!");
 	}
 
 	public String getTenCa() {

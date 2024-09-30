@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class NhanVien {
@@ -40,7 +41,11 @@ public class NhanVien {
 	}
 
 	public void setMaNV(String maNV) {
-		this.maNV = maNV;
+		String regex = "^NV[0-9]{3}$";
+		if(maNV.matches(regex))
+			this.maNV = maNV;
+		else
+			throw new IllegalArgumentException("Mã nhân viên không hợp lệ");
 	}
 
 	public String getTenNV() {
@@ -48,7 +53,11 @@ public class NhanVien {
 	}
 
 	public void setTenNV(String tenNV) {
-		this.tenNV = tenNV;
+		String regexTenNV="^[A-Z][a-z\\p{L}]*([ ]+[A-Z][a-z\\p{L}]*)*$";
+		if(tenNV.matches(regexTenNV))
+			this.tenNV = tenNV;
+		else
+			throw new IllegalArgumentException("Tên nhân viên không hợp lê!");
 	}
 
 	public LocalDate getNgaySinh() {
@@ -56,7 +65,21 @@ public class NhanVien {
 	}
 
 	public void setNgaySinh(LocalDate ngaySinh) {
-		this.ngaySinh = ngaySinh;
+		LocalDate ngayHienTai = LocalDate.now();
+	    int tuoi = Period.between(ngaySinh, ngayHienTai).getYears();
+	    if(this.gioiTinh) {// Nam
+	    	if (tuoi >= 18 && tuoi < 61) {
+                this.ngaySinh = ngaySinh;
+            } else {
+                throw new IllegalArgumentException("Tuổi của nam phải từ 18 đến dưới 61.");
+            }
+	    }else { // Nữ
+            if (tuoi >= 18 && tuoi < 56) {
+                this.ngaySinh = ngaySinh;
+            } else {
+                throw new IllegalArgumentException("Tuổi của nữ phải từ 18 đến dưới 56.");
+            }
+        }
 	}
 
 	public boolean isGioiTinh() {
@@ -80,7 +103,11 @@ public class NhanVien {
 	}
 
 	public void setCccd(String cccd) {
-		this.cccd = cccd;
+		String regexCccd = "^0[0-9]{2}[0-3]\\d{2}\\d{6}$";
+		if(cccd.matches(regexCccd))
+			this.cccd = cccd;
+		else
+			throw new IllegalArgumentException("Căn cước công dân không hợp lê!");
 	}
 
 	public String getEmail() {
@@ -88,7 +115,11 @@ public class NhanVien {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		String regexEmail = "^[a-zA-Z0-9.]+@gmail\\.com$";
+		if(email.matches(regexEmail))
+			this.email = email;
+		else
+			throw new IllegalArgumentException("Email không hợp lê!");
 	}
 
 	public String getSdt() {
@@ -96,7 +127,11 @@ public class NhanVien {
 	}
 
 	public void setSdt(String sdt) {
-		this.sdt = sdt;
+		String regexSdt = "^(03|05|07|08|09)\\d{8}$";
+	    if(sdt.matches(regexSdt))
+	    	this.sdt = sdt;
+	    else
+	    	throw new IllegalArgumentException("Số điện thoại không hợp lê!");
 	}
 
 	public boolean isTrangThai() {

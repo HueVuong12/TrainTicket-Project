@@ -23,7 +23,11 @@ public class ChiTietHoaDon {
 	}
 
 	public void setMaChiTiet(String maChiTiet) {
-		this.maChiTiet = maChiTiet;
+		String regexCthd = "^CT\\d{2}\\d{2}\\d{2}NV\\d{3}\\d{5}$";
+		if(maChiTiet.matches(regexCthd))
+			this.maChiTiet = maChiTiet;
+		else
+			throw new IllegalArgumentException("Mã chi tiết hóa đơn không hợp lệ!");
 	}
 
 	public HoaDon getHoaDon() {
@@ -39,7 +43,10 @@ public class ChiTietHoaDon {
 	}
 
 	public void setSoLuong(int soLuong) {
-		this.soLuong = soLuong;
+		if((soLuong > 0) && (soLuong<= 4))
+			this.soLuong = soLuong;
+		else
+			throw new IllegalArgumentException("Số lượng không hợp lệ!");
 	}
 
 	public ArrayList<Ve> getDsVe() {
