@@ -6,12 +6,14 @@ import java.util.Objects;
 public class Toa {
 	private String maToa;
 	private String loaiToa;
+	private String maTau;
 	private ArrayList<Ghe> dsGhe;
 	
-	public Toa(String maToa, String loaiToa, ArrayList<Ghe> dsGhe) {
+	public Toa(String maToa, String loaiToa, String maTau, ArrayList<Ghe> dsGhe) {
 		super();
 		this.setMaToa(maToa);
 		this.setLoaiToa(loaiToa);
+		this.setMaTau(maTau);
 		this.setDsGhe(dsGhe);
 	}
 
@@ -44,6 +46,14 @@ public class Toa {
 			throw new IllegalArgumentException("Loại toa không hợp lệ. Loại toa phải thuộc (VIP|ghế mềm|giường nằm)");
 	}
 
+	public String getMaTau() {
+		return maTau;
+	}
+
+	public void setMaTau(String maTau) {
+		this.maTau = maTau;
+	}
+
 	public ArrayList<Ghe> getDsGhe() {
 		return dsGhe;
 	}
@@ -71,6 +81,7 @@ public class Toa {
 
 	@Override
 	public String toString() {
-		return "Toa [maToa=" + maToa + ", loaiToa=" + loaiToa + ", dsGhe=" + dsGhe + "]";
+		return "Toa [maToa=" + maToa + ", loaiToa=" + loaiToa + ", maTau=" + maTau + ", dsGhe=" + dsGhe + "]";
 	}
+	
 }

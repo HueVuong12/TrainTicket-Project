@@ -15,9 +15,10 @@ public class Ve {
 	private Ga gaDen;
 	private boolean trangThai;
 	private LoaiVe loaiVe;
+	private ChiTietHoaDon chiTiet;
 	
 	public Ve(String maVe, ChuyenTau chuyenTau, Toa toa, Ghe soGhe, KhachHang khachHang, LocalDate ngayDi, LocalTime gioDi,
-			Ga gaDen, boolean trangThai, LoaiVe loaiVe) {
+			Ga gaDen, boolean trangThai, LoaiVe loaiVe, ChiTietHoaDon chiTiet) {
 		super();
 		this.setMaVe(maVe);
 		this.setChuyenTau(chuyenTau);
@@ -29,6 +30,7 @@ public class Ve {
 		this.setGaDen(gaDen);
 		this.setTrangThai(trangThai);
 		this.setLoaiVe(loaiVe);
+		this.setChiTiet(chiTiet);
 	}
 
 	public Ve(String maVe) {
@@ -116,7 +118,15 @@ public class Ve {
 	public void setLoaiVe(LoaiVe loaiVe) {
 		this.loaiVe = loaiVe;
 		//Kiểm tra tồn tại
-}
+	}
+
+	public ChiTietHoaDon getChiTiet() {
+		return chiTiet;
+	}
+
+	public void setChiTiet(ChiTietHoaDon chiTiet) {
+		this.chiTiet = chiTiet;
+	}
 
 	@Override
 	public int hashCode() {
