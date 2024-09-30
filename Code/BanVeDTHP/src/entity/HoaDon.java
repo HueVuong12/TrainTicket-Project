@@ -128,7 +128,7 @@ public class HoaDon {
 	
 	public float tinhTienHoan() {
 		int size = this.chiTiet.getDsVe().size();
-		long thoiGian = Duration.between(chiTiet.getDsVe().getFirst().getGioDi(), LocalTime.now()).toHours();
+		long thoiGian = Duration.between(chiTiet.getDsVe().get(0).getGioDi(), LocalTime.now()).toHours();
 		if (size == 1) {
 			if (thoiGian >= 24)
 				return chiTiet.tinhTien()*0.9f;
