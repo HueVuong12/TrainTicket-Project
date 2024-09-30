@@ -84,7 +84,7 @@ CREATE TABLE KhachHang (
 -- Tạo bảng HoaDon
 CREATE TABLE HoaDon (
     maHoaDon VARCHAR(50) PRIMARY KEY,
-    ngayLapHoaDon DATE NOT NULL,
+    ngayLapHoaDon DATETIME NOT NULL,
     nhanVien VARCHAR(50) NOT NULL,
     khachHang VARCHAR(50) NOT NULL,
     daHoanVe BIT NOT NULL,
