@@ -6,10 +6,10 @@ import java.util.Objects;
 public class Toa {
 	private String maToa;
 	private String loaiToa;
-	private String maTau;
+	private ChuyenTau maTau;
 	private ArrayList<Ghe> dsGhe;
 	
-	public Toa(String maToa, String loaiToa, String maTau, ArrayList<Ghe> dsGhe) {
+	public Toa(String maToa, String loaiToa, ChuyenTau maTau, ArrayList<Ghe> dsGhe) {
 		super();
 		this.setMaToa(maToa);
 		this.setLoaiToa(loaiToa);
@@ -46,11 +46,11 @@ public class Toa {
 			throw new IllegalArgumentException("Loại toa không hợp lệ. Loại toa phải thuộc (VIP|ghế mềm|giường nằm)");
 	}
 
-	public String getMaTau() {
+	public ChuyenTau getMaTau() {
 		return maTau;
 	}
 
-	public void setMaTau(String maTau) {
+	public void setMaTau(ChuyenTau maTau) {
 		this.maTau = maTau;
 	}
 

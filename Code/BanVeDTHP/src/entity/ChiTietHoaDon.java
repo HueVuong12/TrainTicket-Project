@@ -18,6 +18,11 @@ public class ChiTietHoaDon {
 		this.setThue(thue);
 	}
 
+	public ChiTietHoaDon(String maChiTiet) {
+		super();
+		this.maChiTiet = maChiTiet;
+	}
+
 	public String getMaChiTiet() {
 		return maChiTiet;
 	}
