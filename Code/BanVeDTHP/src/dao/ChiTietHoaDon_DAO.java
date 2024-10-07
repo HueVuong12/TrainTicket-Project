@@ -33,8 +33,7 @@ public class ChiTietHoaDon_DAO {
                 int soLuong=rs.getInt("soLuong");
                 float thue=rs.getFloat("thue");
                 HoaDon hoaDon = new HoaDon(maHD);
-                ArrayList<Ve> danhSachVe = dsVe.getVeTheoChiTiet(maChiTiet);
-                
+                ArrayList<Ve> danhSachVe = dsVe.getVeTheoChiTiet(maChiTiet); 
                 ChiTietHoaDon cthd= new ChiTietHoaDon(maChiTiet, hoaDon, soLuong, danhSachVe, thue);
                 dsCTHD.add(cthd);
             }	

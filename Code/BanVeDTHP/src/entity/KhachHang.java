@@ -55,7 +55,7 @@ public class KhachHang {
 		if(email.matches(regexEmail))
 			this.email = email;
 		else
-			throw new IllegalArgumentException("Email không hợp lê!");
+			throw new IllegalArgumentException("Email không hợp lệ!");
 	}
 
 	public String getSdt() {
@@ -67,7 +67,7 @@ public class KhachHang {
 	    if(sdt.matches(regexSdt))
 	    	this.sdt = sdt;
 	    else
-	    	throw new IllegalArgumentException("Số điện thoại không hợp lê!");
+	    	throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
 	}
 
 	public String getCccd() {
@@ -79,7 +79,7 @@ public class KhachHang {
 		if(cccd.matches(regexCccd))
 			this.cccd = cccd;
 		else
-			throw new IllegalArgumentException("Căn cước công dân không hợp lê!");
+			throw new IllegalArgumentException("Căn cước công dân không hợp lệ!");
 	}
 
 	@Override

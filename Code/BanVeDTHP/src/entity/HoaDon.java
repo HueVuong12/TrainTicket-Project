@@ -12,19 +12,18 @@ public class HoaDon {
 	private NhanVien nhanVien;
 	private KhachHang khachHang;
 	private ChiTietHoaDon chiTiet;
-	private Boolean daHoanVe;
-	private Boolean daHoanTien;
+	private Boolean daHoanVe = false;
+	private Boolean daHoanTien = false;
 	
-	public HoaDon(String maHoaDon, LocalDateTime ngayLapHoaDon, NhanVien nhanVien, KhachHang khachHang,
-			ChiTietHoaDon chiTiet) {
-		super();
+	public HoaDon(String maHoaDon, LocalDateTime ngayLapHoaDon, NhanVien nhanVien, KhachHang khachHang,ChiTietHoaDon chiTiet,
+			Boolean daHoanVe, Boolean daHoanTien) {
 		this.setMaHoaDon(maHoaDon);
 		this.setNgayLapHoaDon(ngayLapHoaDon);
 		this.setNhanVien(nhanVien);
 		this.setKhachHang(khachHang);
 		this.setChiTiet(chiTiet);
-		this.daHoanVe = false;
-		this.daHoanTien = false;
+		this.setDaHoanVe(daHoanVe);
+		this.setDaHoanTien(daHoanTien);
 	}
 
 	public HoaDon(String maHoaDon) {
@@ -72,16 +71,14 @@ public class HoaDon {
 		this.khachHang = khachHang;
 		//Kiểm tra tồn tại
 	}
-
+	
 	public ChiTietHoaDon getChiTiet() {
 		return chiTiet;
 	}
-
+	
 	public void setChiTiet(ChiTietHoaDon chiTiet) {
 		this.chiTiet = chiTiet;
-		//Kiểm tra tồn tại
 	}
-
 	public Boolean getDaHoanVe() {
 		return daHoanVe;
 	}

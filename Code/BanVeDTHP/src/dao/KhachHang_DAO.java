@@ -113,22 +113,6 @@ public class KhachHang_DAO {
 		return n > 0;
 	} 
 		   
-//	//D: Delete 
-//	public boolean delete(String maKH) { 
-//		Connection con = ConnectDB.getInstance().getConnection(); 
-//		PreparedStatement stmt = null; 
-//		int n = 0; 
-//		try { 
-//			stmt = con.prepareStatement("delete from KhachHang where maKH = ?"); 
-//		    stmt.setString(1, maKH); 
-//		    n = stmt.executeUpdate(); 
-//		} catch (SQLException e) { 
-//			e.printStackTrace(); 
-//		} 
-//		
-//		return n > 0;
-//	}
-	
 	public void reset() {
 		dsKH.removeAll(dsKH);
 	}
@@ -164,7 +148,6 @@ public class KhachHang_DAO {
 	
 	public KhachHang getKhachhangcapByma(String maKhachHang){
 		KhachHang khachHang = null;
-		
 		Connection con = null;
 		PreparedStatement stmt = null;
 

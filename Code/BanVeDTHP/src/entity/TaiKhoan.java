@@ -30,7 +30,7 @@ public class TaiKhoan {
 		if(maTaiKhoan.matches(regexMaTaiKhoan))
 			this.maTaiKhoan = maTaiKhoan;
 		else
-			throw new IllegalArgumentException("Mã tài khoản không hợp lê!");
+			throw new IllegalArgumentException("Mã tài khoản không hợp lệ!");
 	}
 
 	public String getMatKhau() {
@@ -42,7 +42,7 @@ public class TaiKhoan {
 		if(matKhau.matches(regex))
 			this.matKhau = matKhau;
 		else
-			throw new IllegalArgumentException("Mật khẩu không hợp lê!");
+			throw new IllegalArgumentException("Mật khẩu không hợp lệ!");
 	}
 
 	public int getPhanQuyen() {
