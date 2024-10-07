@@ -44,32 +44,31 @@ public class KhachHang_DAO {
 	    return dsKH; 
 	}
 	
-	public ArrayList<KhachHang> getKHTheoMaKH(String mKH) { 
+	public KhachHang getKHTheoMaKH(String mKH) { 
 		Connection con = ConnectDB.getInstance().getConnection(); 
 		PreparedStatement stmt =null; 
+		KhachHang kh = null;
+		
 		try {       
 			String sql = "Select * from KhachHang where maKH = ?"; 
-			//String sql = "Select * from KhachHang"; 
 			stmt = con.prepareStatement(sql); 
 			stmt.setString(1, mKH); 
 			ResultSet rs = stmt.executeQuery(); 
-			while (rs.next()) {
+			
+			if (rs.next()) {
 				String maKH = rs.getString("maKH"); 
 	    		String tenKH = rs.getString("tenKH"); 
 	    		String email = rs.getString("email");
 	    		String sdt = rs.getString("sdt"); 
-	    		String cccd = rs.getString("cccd"); 
+	    		String cccd = rs.getString("cccd");
 
-
-	    		KhachHang kh = new KhachHang(maKH, tenKH, email, sdt, cccd);
-	           
-	    		dsKH.add(kh);
+	    		kh = new KhachHang(maKH, tenKH, email, sdt, cccd);
 			} 
 		} catch (SQLException e) { 
 			e.printStackTrace();     
 		} 
-		
-		return dsKH; 
+
+		return kh; 
 	} 
 	
 	public boolean create(KhachHang p) { 

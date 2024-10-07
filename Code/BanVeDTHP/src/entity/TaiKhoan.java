@@ -38,11 +38,7 @@ public class TaiKhoan {
 	}
 
 	public void setMatKhau(String matKhau) {
-		String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$";
-		if(matKhau.matches(regex))
-			this.matKhau = matKhau;
-		else
-			throw new IllegalArgumentException("Mật khẩu không hợp lệ!");
+		this.matKhau = matKhau;
 	}
 
 	public int getPhanQuyen() {

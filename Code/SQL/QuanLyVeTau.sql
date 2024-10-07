@@ -1,5 +1,6 @@
 ﻿-- Tạo database DTHP
-CREATE DATABASE DTHP;
+CREATE DATABASE DTHP
+COLLATE Vietnamese_CI_AS;
 GO
 
 -- Sử dụng database DTHP
@@ -9,8 +10,8 @@ GO
 -- Tạo bảng Ga
 CREATE TABLE Ga (
     maGa VARCHAR(50) PRIMARY KEY,
-    tenGa VARCHAR(100) NOT NULL,
-    diaChi VARCHAR(200) NOT NULL,
+    tenGa NVARCHAR(100) NOT NULL,
+    diaChi NVARCHAR(200) NOT NULL,
     chiSoKm INT NOT NULL,
     trangThai BIT NOT NULL
 );
@@ -35,7 +36,7 @@ CREATE TABLE ChuyenTau_Ga (
 
 CREATE TABLE Toa (
     maToa VARCHAR(50) PRIMARY KEY,
-    loaiToa VARCHAR(50) NOT NULL,
+    loaiToa NVARCHAR(50) NOT NULL,
     maTau VARCHAR(50) NOT NULL,
     FOREIGN KEY (maTau) REFERENCES ChuyenTau(maTau)
 );
@@ -52,7 +53,7 @@ CREATE TABLE Ghe (
 -- Tạo bảng Ca
 CREATE TABLE Ca (
     maCa VARCHAR(50) PRIMARY KEY,
-    tenCa VARCHAR(100) NOT NULL,
+    tenCa NVARCHAR(100) NOT NULL,
     thoiGianBatDau TIME NOT NULL,
     thoiGianKetThuc TIME NOT NULL
 );
@@ -60,7 +61,7 @@ CREATE TABLE Ca (
 -- Tạo bảng NhanVien
 CREATE TABLE NhanVien (
     maNV VARCHAR(50) PRIMARY KEY,
-    tenNV VARCHAR(100) NOT NULL,
+    tenNV NVARCHAR(100) NOT NULL,
     ngaySinh DATE,
     gioiTinh BIT,
 	ca VARCHAR(50) NOT NULL,
@@ -68,14 +69,14 @@ CREATE TABLE NhanVien (
     email VARCHAR(100),
     sdt VARCHAR(20),
     trangThai BIT,
-    chucVu VARCHAR(100) NOT NULL,
+    chucVu INT NOT NULL,
 	FOREIGN KEY (ca) REFERENCES Ca(maCa)
 );
 
 -- Tạo bảng KhachHang
 CREATE TABLE KhachHang (
     maKH VARCHAR(50) PRIMARY KEY,
-    tenKH VARCHAR(100) NOT NULL,
+    tenKH NVARCHAR(100) NOT NULL,
     email VARCHAR(100),
     sdt VARCHAR(20) NOT NULL,
     cccd VARCHAR(20)
@@ -139,3 +140,19 @@ CREATE TABLE TaiKhoan (
     nhanVien VARCHAR(50),
     FOREIGN KEY (nhanVien) REFERENCES NhanVien(maNV)
 );
+
+-- Thêm 3 ca vào bảng Ca
+INSERT INTO Ca (maCa, tenCa, thoiGianBatDau, thoiGianKetThuc) VALUES
+('CA01', 'Ca 1', '06:00:00', '13:59:00'),
+('CA02', 'Ca 2', '14:00:00', '21:59:00'),
+('CA03', 'Ca 3', '22:00:00', '05:59:00');
+
+-- Thêm 3 nhân viên vào bảng NhanVien
+INSERT INTO NhanVien (maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu) VALUES
+('NV001', N'Lê Tấn Phong', '2004-03-30', 0, 'CA01', '049204013502', 'letanphong400@gmail.com', '0919128639', 1, 1),
+('NV002', N'Vương Ngọc Huệ', '2003-08-12', 1, 'CA02', '049203000000', 'ngochue12@gmail.com', '0987654321', 0, 2);
+
+-- Thêm 2 tài khoản vào bảng TaiKhoan
+INSERT INTO TaiKhoan (maTaiKhoan, matKhau, phanQuyen, nhanVien) VALUES
+('TKQL001', 'password1', 1, 'NV001'), 
+('TKNV001', 'password2', 2, 'NV002');

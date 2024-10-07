@@ -92,8 +92,9 @@ public class Toa_DAO {
             n = stmt.executeUpdate();
 
             // Sau khi tạo toa, tạo danh sách ghế cho toa đó trong bảng Ghe
-            if (n > 0 && toa.getDsGhe() != null) {
-                for (Ghe ghe : toa.getDsGhe()) {
+            ArrayList<Ghe> dsGhe = taoDsGhe(toa.getMaToa(), toa.getLoaiToa());
+            if (n > 0 && dsGhe != null) {
+                for (Ghe ghe : dsGhe) {
                     gheDAO.create(ghe);
                 }
             }

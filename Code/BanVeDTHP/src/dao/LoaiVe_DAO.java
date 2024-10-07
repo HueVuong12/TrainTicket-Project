@@ -43,32 +43,6 @@ public class LoaiVe_DAO {
 	    return dsLoaiVe; 
 	}
 	
-	public ArrayList<LoaiVe> getKHTheomaLoai(String mLoaiVe) { 
-		Connection con = ConnectDB.getInstance().getConnection(); 
-		PreparedStatement stmt =null; 
-		try {       
-			String sql = "Select * from LoaiVe where maLoai = ?"; 
-			//String sql = "Select * from LoaiVe"; 
-			stmt = con.prepareStatement(sql); 
-			stmt.setString(1, mLoaiVe); 
-			ResultSet rs = stmt.executeQuery(); 
-			while (rs.next()) {
-				String maLoai = rs.getString("maLoai"); 
-	    		String hang = rs.getString("hang"); 
-	    		String loai = rs.getString("loai");
-
-	    		LoaiVe loaiVe = new LoaiVe(maLoai, hang, loai);
-	    		
-	    		dsLoaiVe.add(loaiVe);
-	           
-			} 
-		} catch (SQLException e) { 
-			e.printStackTrace();     
-		} 
-		
-		return dsLoaiVe; 
-	} 
-	
 	public boolean create(LoaiVe p) { 
 		Connection con = ConnectDB.getInstance().getConnection();
 		PreparedStatement stmt = null; 

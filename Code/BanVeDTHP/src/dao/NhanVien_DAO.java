@@ -32,12 +32,12 @@ public class NhanVien_DAO {
                 String tenNV = rs.getString("tenNV");
                 LocalDate ngaySinh = rs.getDate("ngaySinh").toLocalDate();
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
-                Ca ca = new Ca(rs.getString("ca"));
+                Ca ca = new Ca(rs.getString("ca")); //Sửa
                 String cccd = rs.getString("cccd");
                 String email = rs.getString("email");
                 String sdt = rs.getString("sdt");
                 boolean trangThai = rs.getBoolean("trangThai");
-                String chucVu = rs.getString("chucVu");
+                int chucVu = rs.getInt("chucVu");
 
                 NhanVien nhanVien = new NhanVien(maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu);
                 
@@ -49,16 +49,19 @@ public class NhanVien_DAO {
         return dsNhanVien; 
     }
     
-    public ArrayList<NhanVien> getNhanVienByMaNV(String maNV) { 
+    public NhanVien getNhanVienByMaNV(String maNV) { 
         Connection con = ConnectDB.getInstance().getConnection(); 
         PreparedStatement stmt = null; 
+        NhanVien nhanVien = null; // Khởi tạo biến để lưu đối tượng NhanVien
         try {       
-            String sql = "Select * from NhanVien where maNV = ?"; 
+            String sql = "SELECT * FROM NhanVien WHERE maNV = ?"; 
             stmt = con.prepareStatement(sql); 
             stmt.setString(1, maNV); 
             ResultSet rs = stmt.executeQuery(); 
-            while (rs.next()) {
-            	String tenNV = rs.getString("tenNV");
+            
+            // Kiểm tra kết quả truy vấn
+            if (rs.next()) { 
+                String tenNV = rs.getString("tenNV");
                 LocalDate ngaySinh = rs.getDate("ngaySinh").toLocalDate();
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 Ca ca = new Ca(rs.getString("ca"));
@@ -66,18 +69,17 @@ public class NhanVien_DAO {
                 String email = rs.getString("email");
                 String sdt = rs.getString("sdt");
                 boolean trangThai = rs.getBoolean("trangThai");
-                String chucVu = rs.getString("chucVu");
+                int chucVu = rs.getInt("chucVu");
 
-                NhanVien nhanVien = new NhanVien(maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu);
-                
-                dsNhanVien.add(nhanVien);
+                // Tạo đối tượng NhanVien
+                nhanVien = new NhanVien(maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu);
             } 
         } catch (SQLException e) { 
             e.printStackTrace();     
-        } 
-        
-        return dsNhanVien; 
-    } 
+        }
+        return nhanVien; // Trả về đối tượng NhanVien, hoặc null nếu không tìm thấy
+    }
+
     
     public boolean create(NhanVien nv) { 
         Connection con = ConnectDB.getInstance().getConnection();
@@ -94,7 +96,7 @@ public class NhanVien_DAO {
             stmt.setString(7, nv.getEmail());
             stmt.setString(8, nv.getSdt());
             stmt.setBoolean(9, nv.isTrangThai());
-            stmt.setString(10, nv.getChucVu());
+            stmt.setInt(10, nv.getChucVu());
             
             n = stmt.executeUpdate();
         } catch (SQLException e) { 
@@ -118,7 +120,7 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getEmail());
             stmt.setString(7, nv.getSdt());
             stmt.setBoolean(8, nv.isTrangThai());
-            stmt.setString(9, nv.getChucVu());
+            stmt.setInt(9, nv.getChucVu());
             stmt.setString(10, nv.getMaNV());
             
             n = stmt.executeUpdate(); 

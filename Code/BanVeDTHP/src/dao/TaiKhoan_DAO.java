@@ -14,6 +14,7 @@ import entity.NhanVien;
 public class TaiKhoan_DAO {
 
     ArrayList<TaiKhoan> dsTaiKhoan;
+	private NhanVien_DAO nv = new NhanVien_DAO();
 
     public TaiKhoan_DAO() {
         dsTaiKhoan = new ArrayList<TaiKhoan>();
@@ -32,8 +33,8 @@ public class TaiKhoan_DAO {
                 int phanQuyen = rs.getInt("phanQuyen");
                 String maNV = rs.getString("nhanVien");
 
-                // Sử dụng constructor copy của NhanVien
-                NhanVien nhanVien = new NhanVien(maNV);
+                // Sử dụng getNhanVienByMaNV của NhanVien để lấy thẳng dữ liệu từ CSDL
+                NhanVien nhanVien = nv.getNhanVienByMaNV(maNV);
 
                 TaiKhoan taiKhoan = new TaiKhoan(maTaiKhoan, matKhau, phanQuyen, nhanVien);
                 dsTaiKhoan.add(taiKhoan);
@@ -114,8 +115,8 @@ public class TaiKhoan_DAO {
                 int phanQuyen = rs.getInt("phanQuyen");
                 String maNV = rs.getString("nhanVien");
 
-                // Sử dụng constructor copy của NhanVien
-                NhanVien nhanVien = new NhanVien(maNV);
+             // Sử dụng getNhanVienByMaNV của NhanVien để lấy thẳng dữ liệu từ CSDL
+                NhanVien nhanVien = nv.getNhanVienByMaNV(maNV);
 
                 taiKhoan = new TaiKhoan(maTaiKhoan, matKhau, phanQuyen, nhanVien);
             }
