@@ -80,4 +80,5 @@ public class Ca {
 		return "Ca [maCa=" + maCa + ", tenCa=" + tenCa + ", thoiGianBatDau=" + thoiGianBatDau + ", thoiGianKetThuc="
 				+ thoiGianKetThuc + "]";
 	}
+	///update
 }
