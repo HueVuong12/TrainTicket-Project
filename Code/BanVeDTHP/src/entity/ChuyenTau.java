@@ -8,13 +8,13 @@ import java.util.Objects;
 
 public class ChuyenTau {
 	private String maTau;
-	private String gaDen;
+	private Ga gaDen;
 	private ArrayList<Ga> tramDung;
 	private LocalDate ngayDi;
 	private LocalTime gioDi;
 	private ArrayList<Toa> dsToa;
 
-	public ChuyenTau(String maTau, String gaDen, ArrayList<Ga> tramDung, LocalDate ngayDi, LocalTime gioDi,
+	public ChuyenTau(String maTau, Ga gaDen, ArrayList<Ga> tramDung, LocalDate ngayDi, LocalTime gioDi,
 			ArrayList<Toa> dsToa) {
 		super();
 		this.setMaTau(maTau);
@@ -42,11 +42,11 @@ public class ChuyenTau {
 			throw new IllegalArgumentException("Mã tàu không hợp lệ. Mã tàu phải có định dạng 'TA' theo sau bởi 3 chữ số.");
 	}
 
-	public String getGaDen() {
+	public Ga getGaDen() {
 		return gaDen;
 	}
 
-	public void setGaDen(String gaDen) {
+	public void setGaDen(Ga gaDen) {
 		this.gaDen = gaDen;
 		//Kiểm tra tồn tại
 	}

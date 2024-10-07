@@ -19,6 +19,9 @@ import entity.NhanVien;
 
 public class HoaDon_DAO {
 	ArrayList<HoaDon> dsHoaDon;
+	NhanVien_DAO nhanVien_Dao = new NhanVien_DAO();
+    KhachHang_DAO khachHang_Dao = new KhachHang_DAO();
+    ChiTietHoaDon_DAO chiTietHoaDon_Dao = new ChiTietHoaDon_DAO();
     
     public HoaDon_DAO(){ 
         dsHoaDon = new ArrayList<HoaDon>();  
@@ -26,7 +29,7 @@ public class HoaDon_DAO {
     
     public ArrayList<HoaDon> docTuBang()  { 
         try { 
-            Connection con = ConnectDB.getInstance().getConnection(); 
+            Connection con = ConnectDB.getInstance().getConnection();
             String sql = "Select * from HoaDon"; 
             Statement statement = con.createStatement(); 
             ResultSet rs = statement.executeQuery(sql); 
@@ -38,7 +41,12 @@ public class HoaDon_DAO {
                 String maChiTiet=rs.getString("chiTiet");
                 boolean daHoanVe = rs.getBoolean("daHoanVe");
                 boolean daHoanTien = rs.getBoolean("daHoanTien");
-                HoaDon hoaDon = new HoaDon(maHoaDon, ngayLapHoaDon,new NhanVien(maNV), new KhachHang(maKH), new ChiTietHoaDon(maChiTiet), daHoanVe, daHoanTien);
+                
+                //Lấy thông tin từ CSDL qua các DAO
+                NhanVien nhanVien = nhanVien_Dao.getNhanVienTheoMaNV(maNV);
+                KhachHang khachHang = khachHang_Dao.getKhachHangTheoMaKH(maKH);
+                ChiTietHoaDon chiTiet = chiTietHoaDon_Dao.getCTHDTheoMaChiTiet(maChiTiet);
+                HoaDon hoaDon = new HoaDon(maHoaDon, ngayLapHoaDon, nhanVien, khachHang, chiTiet, daHoanVe, daHoanTien);
                 dsHoaDon.add(hoaDon);
            } 
         } catch (SQLException e) { 
@@ -46,31 +54,6 @@ public class HoaDon_DAO {
         } 
         return dsHoaDon; 
     }
-    
-    public ArrayList<HoaDon> getHoaDonByMaHoaDon(String maHoaDon) { 
-        Connection con = ConnectDB.getInstance().getConnection(); 
-        PreparedStatement stmt = null; 
-        try {       
-            String sql = "Select * from HoaDon where maHoaDon = ?"; 
-            stmt = con.prepareStatement(sql); 
-            stmt.setString(1, maHoaDon); 
-            ResultSet rs = stmt.executeQuery(); 
-            while (rs.next()) {
-                 LocalDateTime ngayLapHoaDon = rs.getTimestamp("ngayLapHoaDon").toLocalDateTime();
-                 String maNV = rs.getString("maNV");
-                 String maKH = rs.getString("maKH");
-                 String maChiTiet=rs.getString("chiTiet");
-                 boolean daHoanVe = rs.getBoolean("daHoanVe");
-                 boolean daHoanTien = rs.getBoolean("daHoanTien");
-                 HoaDon hoaDon = new HoaDon(maHoaDon, ngayLapHoaDon,new NhanVien(maNV), new KhachHang(maKH), new ChiTietHoaDon(maChiTiet), daHoanVe, daHoanTien);
-                 dsHoaDon.add(hoaDon);
-            } 
-        } catch (SQLException e) { 
-            e.printStackTrace();     
-        } 
-        
-        return dsHoaDon; 
-    } 
     
     public boolean create(HoaDon HoaDon) { 
         Connection con = ConnectDB.getInstance().getConnection();
@@ -129,6 +112,36 @@ public class HoaDon_DAO {
         return n > 0;
     }
 
+    public HoaDon getHoaDonTheoMaHoaDon(String maHoaDon) { 
+        Connection con = ConnectDB.getInstance().getConnection(); 
+        PreparedStatement stmt = null; 
+        HoaDon hoaDon = null;
+		try {       
+            String sql = "Select * from HoaDon where maHoaDon = ?"; 
+            stmt = con.prepareStatement(sql); 
+            stmt.setString(1, maHoaDon); 
+            ResultSet rs = stmt.executeQuery(); 
+            while (rs.next()) {
+                 LocalDateTime ngayLapHoaDon = rs.getTimestamp("ngayLapHoaDon").toLocalDateTime();
+                 String maNV = rs.getString("maNV");
+                 String maKH = rs.getString("maKH");
+                 String maChiTiet=rs.getString("chiTiet");
+                 boolean daHoanVe = rs.getBoolean("daHoanVe");
+                 boolean daHoanTien = rs.getBoolean("daHoanTien");
+                 
+                 //Lấy thông tin từ CSDL qua các DAO
+                 NhanVien nhanVien = nhanVien_Dao.getNhanVienTheoMaNV(maNV);
+                 KhachHang khachHang = khachHang_Dao.getKhachHangTheoMaKH(maKH);
+                 ChiTietHoaDon chiTiet = chiTietHoaDon_Dao.getCTHDTheoMaChiTiet(maChiTiet);
+                 hoaDon  = new HoaDon(maHoaDon, ngayLapHoaDon, nhanVien, khachHang, chiTiet, daHoanVe, daHoanTien);
+            } 
+        } catch (SQLException e) { 
+            e.printStackTrace();     
+        } 
+        
+        return hoaDon; 
+    } 
+    
     public void reset() {
         dsHoaDon.removeAll(dsHoaDon);
     }

@@ -14,7 +14,8 @@ import entity.Toa;
 public class Toa_DAO {
 
     ArrayList<Toa> dsToa;
-    Ghe_DAO gheDAO;
+    Ghe_DAO gheDAO = new Ghe_DAO();
+    ChuyenTau_DAO chuyenTau_DAO = new ChuyenTau_DAO();
 
     public Toa_DAO() {
         dsToa = new ArrayList<Toa>();
@@ -149,7 +150,7 @@ public class Toa_DAO {
     }
 
     // Phương thức lấy toa theo mã
-    public Toa getToaByMa(String maToa) {
+    public Toa getToaTheoMaToa(String maToa) {
         Toa toa = null;
         try {
             Connection con = ConnectDB.getInstance().getConnection();
@@ -163,7 +164,7 @@ public class Toa_DAO {
                 String maTauStr = rs.getString("maTau");
 
                 // Sử dụng constructor copy để tạo đối tượng ChuyenTau
-                ChuyenTau maTau = new ChuyenTau(maTauStr);
+                ChuyenTau maTau = chuyenTau_DAO.getChuyenTauTheoMaTau(maTauStr);
 
                 // Tạo danh sách ghế dựa trên loại toa
                 ArrayList<Ghe> dsGhe = taoDsGhe(maToa, loaiToa);
@@ -174,6 +175,35 @@ public class Toa_DAO {
             e.printStackTrace();
         }
         return toa;
+    }
+    
+    // Phương thức lấy danh sách toa theo mã chuyến tàu
+    public ArrayList<Toa> getDsToaTheoMaTau(String maTauStr) {
+        ArrayList<Toa> ds = new ArrayList<Toa>();
+        try {
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "SELECT * FROM Toa WHERE maTau = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, maTauStr);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String maToa = rs.getString("maToa");
+                String loaiToa = rs.getString("loaiToa");
+
+                // Tạo danh sách ghế dựa trên loại toa
+                ArrayList<Ghe> dsGhe = taoDsGhe(maToa, loaiToa);
+                
+                ChuyenTau maTau = chuyenTau_DAO.getChuyenTauTheoMaTau(maTauStr);
+
+                Toa toa = new Toa(maToa, loaiToa, maTau, dsGhe);
+                
+                ds.add(toa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsToa;
     }
     
 	public void reset() {

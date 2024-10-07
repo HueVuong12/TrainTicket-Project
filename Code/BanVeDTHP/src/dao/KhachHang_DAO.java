@@ -43,34 +43,7 @@ public class KhachHang_DAO {
 	    } 
 	    return dsKH; 
 	}
-	
-	public KhachHang getKHTheoMaKH(String mKH) { 
-		Connection con = ConnectDB.getInstance().getConnection(); 
-		PreparedStatement stmt =null; 
-		KhachHang kh = null;
-		
-		try {       
-			String sql = "Select * from KhachHang where maKH = ?"; 
-			stmt = con.prepareStatement(sql); 
-			stmt.setString(1, mKH); 
-			ResultSet rs = stmt.executeQuery(); 
-			
-			if (rs.next()) {
-				String maKH = rs.getString("maKH"); 
-	    		String tenKH = rs.getString("tenKH"); 
-	    		String email = rs.getString("email");
-	    		String sdt = rs.getString("sdt"); 
-	    		String cccd = rs.getString("cccd");
 
-	    		kh = new KhachHang(maKH, tenKH, email, sdt, cccd);
-			} 
-		} catch (SQLException e) { 
-			e.printStackTrace();     
-		} 
-
-		return kh; 
-	} 
-	
 	public boolean create(KhachHang p) { 
 		Connection con = ConnectDB.getInstance().getConnection();
 		PreparedStatement stmt = null; 
@@ -128,11 +101,7 @@ public class KhachHang_DAO {
 //		return n > 0;
 //	}
 	
-	public void reset() {
-		dsKH.removeAll(dsKH);
-	}
-	
-	public KhachHang getKhachHangByTen(String tenKhachHang){
+	public KhachHang getKhachHangTheoTenKH(String tenKhachHang){
 		KhachHang khachHang = null;
 		
 		Connection con = null;
@@ -161,7 +130,7 @@ public class KhachHang_DAO {
 		return khachHang;
 	}
 	
-	public KhachHang getKhachhangcapByma(String maKhachHang){
+	public KhachHang getKhachHangTheoMaKH(String maKhachHang){
 		KhachHang khachHang = null;
 		
 		Connection con = null;
@@ -188,5 +157,9 @@ public class KhachHang_DAO {
 		}
 
 		return khachHang;
+	}
+	
+	public void reset() {
+		dsKH.removeAll(dsKH);
 	}
 }

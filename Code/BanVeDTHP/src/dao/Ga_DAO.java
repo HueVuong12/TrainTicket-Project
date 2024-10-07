@@ -40,29 +40,6 @@ public class Ga_DAO {
         return dsGa; 
     }
     
-    public ArrayList<Ga> getGaBymaGa(String maGa) { 
-        Connection con = ConnectDB.getInstance().getConnection(); 
-        PreparedStatement stmt = null; 
-        try {       
-            String sql = "Select * from Ga where maGa = ?"; 
-            stmt = con.prepareStatement(sql); 
-            stmt.setString(1, maGa); 
-            ResultSet rs = stmt.executeQuery(); 
-            while (rs.next()) {
-                String tenGa = rs.getString("tenGa");
-                String diaChi = rs.getString("diaChi");
-                boolean trangThai = rs.getBoolean("trangThai");
-                int chiSoKm= rs.getInt("chiSoKm");
-                Ga Ga = new Ga(maGa, tenGa, diaChi, chiSoKm,trangThai);
-                dsGa.add(Ga);
-            } 
-        } catch (SQLException e) { 
-            e.printStackTrace();     
-        } 
-        
-        return dsGa; 
-    } 
-    
     public boolean create(Ga ga) { 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null; 
@@ -116,6 +93,49 @@ public class Ga_DAO {
         } 
         
         return n > 0;
+    }
+    
+    public Ga getGaTheoMaGa(String maGa) { 
+        Connection con = ConnectDB.getInstance().getConnection(); 
+        PreparedStatement stmt = null; 
+        Ga ga = null;
+        try {       
+            String sql = "Select * from Ga where maGa = ?"; 
+            stmt = con.prepareStatement(sql); 
+            stmt.setString(1, maGa); 
+            ResultSet rs = stmt.executeQuery(); 
+            while (rs.next()) {
+                String tenGa = rs.getString("tenGa");
+                String diaChi = rs.getString("diaChi");
+                boolean trangThai = rs.getBoolean("trangThai");
+                int chiSoKm= rs.getInt("chiSoKm");
+                ga = new Ga(maGa, tenGa, diaChi, chiSoKm,trangThai);
+            } 
+        } catch (SQLException e) { 
+            e.printStackTrace();     
+        } 
+        
+        return ga; 
+    }
+    
+    public ArrayList<Ga> getDsTramDung(String maChuyenTau) {
+    	Connection con = ConnectDB.getInstance().getConnection(); 
+        PreparedStatement stmt = null; 
+        ArrayList<Ga> ds = new ArrayList<Ga>();
+        try {       
+            String sql = "Select * from ChuyenTau_Ga where maTau = ?"; 
+            stmt = con.prepareStatement(sql); 
+            stmt.setString(1, maChuyenTau); 
+            ResultSet rs = stmt.executeQuery(); 
+            while (rs.next()) {
+                String maGa = rs.getString("maGa");
+                ds.add(getGaTheoMaGa(maGa));
+            } 
+        } catch (SQLException e) { 
+            e.printStackTrace();     
+        } 
+        
+        return ds; 
     }
 
     public void reset() {

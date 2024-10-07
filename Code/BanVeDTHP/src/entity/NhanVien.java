@@ -14,10 +14,10 @@ public class NhanVien {
 	private String email;
 	private String sdt;
 	private boolean trangThai;
-	private String chucVu;
+	private int chucVu;
 	
 	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, boolean gioiTinh, Ca maCa, String cccd, String email,
-			String sdt, boolean trangThai, String chucVu) {
+			String sdt, boolean trangThai, int chucVu) {
 		super();
 		this.setMaNV(maNV);
 		this.setTenNV(tenNV);
@@ -142,11 +142,11 @@ public class NhanVien {
 		this.trangThai = trangThai;
 	}
 
-	public String getChucVu() {
+	public int getChucVu() {
 		return chucVu;
 	}
 
-	public void setChucVu(String chucVu) {
+	public void setChucVu(int chucVu) {
 		this.chucVu = chucVu;
 	}
 

@@ -12,9 +12,13 @@ import java.util.ArrayList;
 
 import connectDB.ConnectDB;
 import entity.ChuyenTau;
+import entity.Ga;
+import entity.Toa;
 
 public class ChuyenTau_DAO {
 	ArrayList<ChuyenTau> dsChuyenTau;
+	Ga_DAO ga_Dao = new Ga_DAO();
+	Toa_DAO toa_Dao = new Toa_DAO();
     
     public ChuyenTau_DAO(){ 
         dsChuyenTau = new ArrayList<ChuyenTau>();  
@@ -30,9 +34,12 @@ public class ChuyenTau_DAO {
                 String maTau = rs.getString("maTau");
                 String gaDen = rs.getString("gaDen");
                 LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
-                Timestamp gioDiStamp = rs.getTimestamp("gioDi");
-	    		LocalTime gioDi =gioDiStamp.toLocalDateTime().toLocalTime();
-                ChuyenTau chuyenTau = new ChuyenTau(maTau, gaDen, ngayDi,gioDi);
+                LocalTime gioDi = rs.getTime("gioDi").toLocalTime();
+                
+                Ga ga = ga_Dao.getGaTheoMaGa(gaDen);
+                ArrayList<Toa> dsToa = toa_Dao.getDsToaTheoMaTau(maTau);
+                ArrayList<Ga> tramDung = ga_Dao.getDsTramDung(maTau);
+                ChuyenTau chuyenTau = new ChuyenTau(maTau, ga, tramDung, ngayDi,gioDi, dsToa);
                 dsChuyenTau.add(chuyenTau);
            } 
         } catch (SQLException e) { 
@@ -40,30 +47,7 @@ public class ChuyenTau_DAO {
         } 
         return dsChuyenTau; 
     }
-    
-    public ArrayList<ChuyenTau> getChuyenTauBymaTau(String maTau) { 
-        Connection con = ConnectDB.getInstance().getConnection(); 
-        PreparedStatement stmt = null; 
-        try {       
-            String sql = "Select * from ChuyenTau where maTau = ?"; 
-            stmt = con.prepareStatement(sql); 
-            stmt.setString(1, maTau); 
-            ResultSet rs = stmt.executeQuery(); 
-            while (rs.next()) {
-                String gaDen = rs.getString("gaDen");
-                LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
-                Timestamp gioDiStamp = rs.getTimestamp("gioDi");
-	    		LocalTime gioDi =gioDiStamp.toLocalDateTime().toLocalTime();
-                ChuyenTau chuyenTau = new ChuyenTau(maTau, gaDen, ngayDi,gioDi);
-                dsChuyenTau.add(chuyenTau);
-            } 
-        } catch (SQLException e) { 
-            e.printStackTrace();     
-        } 
         
-        return dsChuyenTau; 
-    } 
-    
     public boolean create(ChuyenTau chuyenTau) { 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null; 
@@ -71,7 +55,7 @@ public class ChuyenTau_DAO {
         try { 
             stmt = con.prepareStatement("insert into ChuyenTau values(?, ?, ?, ?)"); 
             stmt.setString(1, chuyenTau.getMaTau());
-            stmt.setString(2, chuyenTau.getGaDen());
+            stmt.setString(2, chuyenTau.getGaDen().getMaGa());
             stmt.setObject(3, chuyenTau.getNgayDi());
             stmt.setObject(4, chuyenTau.getGioDi());      
             n = stmt.executeUpdate();
@@ -89,7 +73,7 @@ public class ChuyenTau_DAO {
         try { 
             stmt = con.prepareStatement("update ChuyenTau set gaDen = ?, ngayDi = ?, gioDi = ? where maTau = ?"); 
             stmt.setString(4, chuyenTau.getMaTau());
-            stmt.setString(1, chuyenTau.getGaDen());
+            stmt.setString(1, chuyenTau.getGaDen().getMaGa());
             stmt.setObject(2, chuyenTau.getNgayDi());
             stmt.setObject(3, chuyenTau.getGioDi()); 
             n = stmt.executeUpdate(); 
@@ -114,6 +98,32 @@ public class ChuyenTau_DAO {
         
         return n > 0;
     }
+
+    public ChuyenTau getChuyenTauTheoMaTau(String maTau) { 
+        Connection con = ConnectDB.getInstance().getConnection(); 
+        PreparedStatement stmt = null; 
+        ChuyenTau chuyenTau = null;
+        try {       
+            String sql = "Select * from ChuyenTau where maTau = ?"; 
+            stmt = con.prepareStatement(sql); 
+            stmt.setString(1, maTau); 
+            ResultSet rs = stmt.executeQuery(); 
+            while (rs.next()) {
+                String gaDen = rs.getString("gaDen");
+                LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
+                LocalTime gioDi = rs.getTime("gioDi").toLocalTime();
+	    		
+                Ga ga = ga_Dao.getGaTheoMaGa(gaDen);
+                ArrayList<Toa> dsToa = toa_Dao.getDsToaTheoMaTau(maTau);
+                ArrayList<Ga> tramDung = ga_Dao.getDsTramDung(maTau);
+                chuyenTau = new ChuyenTau(maTau, ga, tramDung, ngayDi,gioDi, dsToa);
+            } 
+        } catch (SQLException e) { 
+            e.printStackTrace();     
+        } 
+        
+        return chuyenTau; 
+    } 
 
     public void reset() {
         dsChuyenTau.removeAll(dsChuyenTau);

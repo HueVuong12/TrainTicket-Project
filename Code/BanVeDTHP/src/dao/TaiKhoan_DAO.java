@@ -34,7 +34,7 @@ public class TaiKhoan_DAO {
                 String maNV = rs.getString("nhanVien");
 
                 // Sử dụng getNhanVienByMaNV của NhanVien để lấy thẳng dữ liệu từ CSDL
-                NhanVien nhanVien = nv.getNhanVienByMaNV(maNV);
+                NhanVien nhanVien = nv.getNhanVienTheoMaNV(maNV);
 
                 TaiKhoan taiKhoan = new TaiKhoan(maTaiKhoan, matKhau, phanQuyen, nhanVien);
                 dsTaiKhoan.add(taiKhoan);
@@ -98,7 +98,7 @@ public class TaiKhoan_DAO {
         return n > 0;
     }
 
-    public TaiKhoan getTaiKhoanByMa(String maTaiKhoan) {
+    public TaiKhoan getTaiKhoanTheoMaTK(String maTaiKhoan) {
         TaiKhoan taiKhoan = null;
 
         Connection con = ConnectDB.getInstance().getConnection();
@@ -116,7 +116,7 @@ public class TaiKhoan_DAO {
                 String maNV = rs.getString("nhanVien");
 
              // Sử dụng getNhanVienByMaNV của NhanVien để lấy thẳng dữ liệu từ CSDL
-                NhanVien nhanVien = nv.getNhanVienByMaNV(maNV);
+                NhanVien nhanVien = nv.getNhanVienTheoMaNV(maNV);
 
                 taiKhoan = new TaiKhoan(maTaiKhoan, matKhau, phanQuyen, nhanVien);
             }

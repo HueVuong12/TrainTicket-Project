@@ -125,7 +125,7 @@ public class LoaiVe_DAO {
 		return LoaiVe;
 	}
 	
-	public LoaiVe getLoaiVecapByma(String maLoaiVe){
+	public LoaiVe getLoaiVeTheoMaLoaiVe(String maLoaiVe){
 		LoaiVe LoaiVe = null;
 		
 		Connection con = null;

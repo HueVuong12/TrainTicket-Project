@@ -33,7 +33,7 @@ public class Ghe_DAO {
                 boolean trangThai = rs.getBoolean("trangThai");
 
                 // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
-                Toa maToa = toa.getToaByMa(maToaStr);
+                Toa maToa = toa.getToaTheoMaToa(maToaStr);
 
                 Ghe ghe = new Ghe(soGhe, maToa, trangThai);
                 dsGhe.add(ghe);
@@ -96,33 +96,7 @@ public class Ghe_DAO {
         }
         return n > 0;
     }
-
-    // Phương thức lấy danh sách ghế theo mã toa
-    public ArrayList<Ghe> getDsGheByMaToa(String maToaStr) {
-        ArrayList<Ghe> dsGheTheoToa = new ArrayList<Ghe>();
-        try {
-            Connection con = ConnectDB.getInstance().getConnection();
-            String sql = "SELECT * FROM Ghe WHERE maToa = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, maToaStr);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int soGhe = rs.getInt("soGhe");
-                boolean trangThai = rs.getBoolean("trangThai");
-
-                // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
-                Toa maToa = toa.getToaByMa(maToaStr);
-
-                Ghe ghe = new Ghe(soGhe, maToa, trangThai);
-                dsGheTheoToa.add(ghe);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dsGheTheoToa;
-    }
-
+    
 	public boolean deleteByMaToa(String maToa) {
 		Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
@@ -138,6 +112,59 @@ public class Ghe_DAO {
         return n > 0;
 		
 	}
+
+    // Phương thức lấy danh sách ghế theo mã toa
+    public ArrayList<Ghe> getDsGheTheoMaToa(String maToaStr) {
+        ArrayList<Ghe> dsGheTheoToa = new ArrayList<Ghe>();
+        try {
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "SELECT * FROM Ghe WHERE maToa = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, maToaStr);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int soGhe = rs.getInt("soGhe");
+                boolean trangThai = rs.getBoolean("trangThai");
+
+                // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
+                Toa maToa = toa.getToaTheoMaToa(maToaStr);
+
+                Ghe ghe = new Ghe(soGhe, maToa, trangThai);
+                dsGheTheoToa.add(ghe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsGheTheoToa;
+    }
+	
+	// Phương thức lấy danh sách ghế theo mã toa
+    public Ghe getGheTheoMaToaVaSoGhe(String maToaStr, int soGhe) {
+        ArrayList<Ghe> dsGheTheoToa = new ArrayList<Ghe>();
+        Ghe ghe = null;
+        try {
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "SELECT * FROM Ghe WHERE (maToa = ? AND soGhe = ?)\r\n";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, maToaStr);
+            stmt.setInt(2, soGhe);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                boolean trangThai = rs.getBoolean("trangThai");
+
+                // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
+                Toa maToa = toa.getToaTheoMaToa(maToaStr);
+
+                ghe = new Ghe(soGhe, maToa, trangThai);
+                dsGheTheoToa.add(ghe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ghe;
+    }
 	
 	public void reset() {
 		dsGhe.removeAll(dsGhe);
