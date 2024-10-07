@@ -14,6 +14,7 @@ public class ChiTietHoaDon {
 		this.setMaChiTiet(maChiTiet);
 		this.setHoaDon(hoaDon);
 		this.setSoLuong(soLuong);
+		this.setDsVe(dsVe);
 		this.setThue(thue);
 	}
 
@@ -55,6 +56,10 @@ public class ChiTietHoaDon {
 
 	public ArrayList<Ve> getDsVe() {
 		return dsVe;
+	}
+
+	public void setDsVe(ArrayList<Ve> dsVe) {
+		this.dsVe = dsVe;
 	}
 
 	public float getThue() {

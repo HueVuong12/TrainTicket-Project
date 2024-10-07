@@ -9,15 +9,20 @@ import java.util.Objects;
 public class ChuyenTau {
 	private String maTau;
 	private String gaDen;
+	private ArrayList<Ga> tramDung;
 	private LocalDate ngayDi;
 	private LocalTime gioDi;
+	private ArrayList<Toa> dsToa;
 
-	public ChuyenTau(String maTau, String gaDen, LocalDate ngayDi, LocalTime gioDi) {
+	public ChuyenTau(String maTau, String gaDen, ArrayList<Ga> tramDung, LocalDate ngayDi, LocalTime gioDi,
+			ArrayList<Toa> dsToa) {
 		super();
 		this.setMaTau(maTau);
 		this.setGaDen(gaDen);
+		this.setTramDung(tramDung);
 		this.setNgayDi(ngayDi);
 		this.setGioDi(gioDi);
+		this.setDsToa(dsToa);
 	}
 
 	public ChuyenTau(String maTau) {
@@ -44,7 +49,17 @@ public class ChuyenTau {
 	public void setGaDen(String gaDen) {
 		this.gaDen = gaDen;
 		//Kiểm tra tồn tại
-	} 
+	}
+
+	public ArrayList<Ga> getTramDung() {
+		return tramDung;
+	}
+
+	public void setTramDung(ArrayList<Ga> tramDung) {
+		this.tramDung = tramDung;
+		//Kiểm tra tồn tại tất cả các ga
+	}
+
 	public LocalDate getNgayDi() {
 		return ngayDi;
 	}
@@ -62,6 +77,14 @@ public class ChuyenTau {
 
 	public void setGioDi(LocalTime gioDi) {
 		this.gioDi = gioDi;
+	}
+
+	public ArrayList<Toa> getDsToa() {
+		return dsToa;
+	}
+
+	public void setDsToa(ArrayList<Toa> dsToa) {
+		this.dsToa = dsToa;
 	}
 
 	@Override
@@ -83,8 +106,8 @@ public class ChuyenTau {
 
 	@Override
 	public String toString() {
-		return "ChuyenTau [maTau=" + maTau + ", gaDen=" + gaDen + ", ngayDi=" + ngayDi
-				+ ", gioDi=" + gioDi + "]";
+		return "ChuyenTau [maTau=" + maTau + ", gaDen=" + gaDen + ", tramDung=" + tramDung + ", ngayDi=" + ngayDi
+				+ ", gioDi=" + gioDi + ", dsToa=" + dsToa + "]";
 	}
 	
 }

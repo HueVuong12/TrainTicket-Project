@@ -14,10 +14,10 @@ public class NhanVien {
 	private String email;
 	private String sdt;
 	private boolean trangThai;
-	private int chucVu;
+	private String chucVu;
 	
 	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, boolean gioiTinh, Ca maCa, String cccd, String email,
-			String sdt, boolean trangThai, int chucVu) {
+			String sdt, boolean trangThai, String chucVu) {
 		super();
 		this.setMaNV(maNV);
 		this.setTenNV(tenNV);
@@ -57,7 +57,7 @@ public class NhanVien {
 		if(tenNV.matches(regexTenNV))
 			this.tenNV = tenNV;
 		else
-			throw new IllegalArgumentException("Tên nhân viên không hợp lệ!");
+			throw new IllegalArgumentException("Tên nhân viên không hợp lê!");
 	}
 
 	public LocalDate getNgaySinh() {
@@ -107,7 +107,7 @@ public class NhanVien {
 		if(cccd.matches(regexCccd))
 			this.cccd = cccd;
 		else
-			throw new IllegalArgumentException("Căn cước công dân không hợp lệ!");
+			throw new IllegalArgumentException("Căn cước công dân không hợp lê!");
 	}
 
 	public String getEmail() {
@@ -119,7 +119,7 @@ public class NhanVien {
 		if(email.matches(regexEmail))
 			this.email = email;
 		else
-			throw new IllegalArgumentException("Email không hợp lệ!");
+			throw new IllegalArgumentException("Email không hợp lê!");
 	}
 
 	public String getSdt() {
@@ -142,11 +142,11 @@ public class NhanVien {
 		this.trangThai = trangThai;
 	}
 
-	public int getChucVu() {
+	public String getChucVu() {
 		return chucVu;
 	}
 
-	public void setChucVu(int chucVu) {
+	public void setChucVu(String chucVu) {
 		this.chucVu = chucVu;
 	}
 

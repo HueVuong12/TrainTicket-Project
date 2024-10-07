@@ -39,11 +39,11 @@ public class Toa {
 	}
 
 	public void setLoaiToa(String loaiToa) {
-		String ktLoaiToa = "^(loai1|loai2|loai3)$";
+		String ktLoaiToa = "^(VIP|ghế mềm|giường nằm)$";
 		if (loaiToa.matches(ktLoaiToa))
 			this.loaiToa = loaiToa;
 		else 
-			throw new IllegalArgumentException("Loại toa không hợp lệ. Loại toa phải thuộc (loai1|loai2|loai3)");
+			throw new IllegalArgumentException("Loại toa không hợp lệ. Loại toa phải thuộc (VIP|ghế mềm|giường nằm)");
 	}
 
 	public ChuyenTau getMaTau() {

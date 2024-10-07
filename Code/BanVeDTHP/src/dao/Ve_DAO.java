@@ -176,43 +176,6 @@ public class Ve_DAO {
         return ve;
     }
     
-    ////////////////////////////////
-    public ArrayList<Ve> getVeTheoChiTiet(String maChiTiet) { 
-        Connection con = ConnectDB.getInstance().getConnection(); 
-        PreparedStatement stmt = null; 
-        try {       
-            String sql = "Select * from Ga where chiTiet = ?"; 
-            stmt = con.prepareStatement(sql); 
-            stmt.setString(1, maChiTiet); 
-            ResultSet rs = stmt.executeQuery(); 
-            while (rs.next()) {
-            	String maVe = rs.getString("maVe");
-            	 String maTau = rs.getString("tau");
-                 String maToa = rs.getString("toa");
-                 int soGhe = rs.getInt("soGhe");
-                 String maKH = rs.getString("khachHang");
-                 LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
-                 LocalTime gioDi = rs.getTime("gioDi").toLocalTime();
-                 String maGaDen = rs.getString("gaDen");
-                 boolean trangThai = rs.getBoolean("trangThai");
-                 String maLoaiVe = rs.getString("loaiVe");
-
-                 // Sử dụng constructor copy để tạo đối tượng
-                 ChuyenTau tau = new ChuyenTau(maTau);
-                 Toa toa = new Toa(maToa);
-                 Ghe ghe = new Ghe(soGhe, toa, trangThai);
-                 KhachHang khachHang = new KhachHang(maKH);
-                 Ga gaDen = new Ga(maGaDen);
-                 LoaiVe loaiVe = new LoaiVe(maLoaiVe);
-                 Ve ve = new Ve(maVe, tau, toa, ghe, khachHang, ngayDi, gioDi, gaDen, trangThai, loaiVe,new ChiTietHoaDon(maChiTiet));
-                 dsVe.add(ve);
-            } 
-        } catch (SQLException e) { 
-            e.printStackTrace();     
-        } 
-        
-        return dsVe; 
-    } 
 	public void reset() {
 		dsVe.removeAll(dsVe);
 	}
