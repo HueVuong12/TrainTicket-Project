@@ -30,7 +30,7 @@ public class NhanVien_DAO {
             ResultSet rs = statement.executeQuery(sql); 
             while (rs.next()) { 
                 String maNV = rs.getString("maNV");
-                String tenNV = rs.getString("tenNV");
+                String tenNV = rs.getNString("tenNV");
                 LocalDate ngaySinh = rs.getDate("ngaySinh").toLocalDate();
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 String maCa = rs.getString("ca");
@@ -59,7 +59,7 @@ public class NhanVien_DAO {
         try { 
             stmt = con.prepareStatement("insert into NhanVien values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
             stmt.setString(1, nv.getMaNV());
-            stmt.setString(2, nv.getTenNV());
+            stmt.setNString(2, nv.getTenNV());
             stmt.setDate(3, java.sql.Date.valueOf(nv.getNgaySinh()));
             stmt.setBoolean(4, nv.isGioiTinh());
             stmt.setString(5, nv.getCa().getMaCa());
@@ -83,7 +83,7 @@ public class NhanVien_DAO {
         int n = 0; 
         try { 
             stmt = con.prepareStatement("update NhanVien set tenNV = ?, ngaySinh = ?, gioiTinh = ?, ca = ?, cccd = ?, email = ?, sdt = ?, trangThai = ?, chucVu = ? where maNV = ?"); 
-            stmt.setString(1, nv.getTenNV());
+            stmt.setNString(1, nv.getTenNV());
             stmt.setDate(2, java.sql.Date.valueOf(nv.getNgaySinh()));
             stmt.setBoolean(3, nv.isGioiTinh());
             stmt.setString(4, nv.getCa().getMaCa());
@@ -129,7 +129,7 @@ public class NhanVien_DAO {
             
             // Kiểm tra kết quả truy vấn
             if (rs.next()) { 
-                String tenNV = rs.getString("tenNV");
+                String tenNV = rs.getNString("tenNV");
                 LocalDate ngaySinh = rs.getDate("ngaySinh").toLocalDate();
                 boolean gioiTinh = rs.getBoolean("gioiTinh");
                 String maCa = rs.getString("ca");

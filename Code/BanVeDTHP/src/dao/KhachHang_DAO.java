@@ -28,7 +28,7 @@ public class KhachHang_DAO {
 	    	// Duyệt trên kết quả trả về. 
 	    	while (rs.next()) {// Di chuyển con trỏ xuống bản ghi kế tiếp. 
 	    		String maKH = rs.getString("maKH"); 
-	    		String tenKH = rs.getString("tenKH"); 
+	    		String tenKH = rs.getNString("tenKH"); 
 	    		String email = rs.getString("email");
 	    		String sdt = rs.getString("sdt"); 
 	    		String cccd = rs.getString("cccd"); 
@@ -51,7 +51,7 @@ public class KhachHang_DAO {
 		try { 
 			stmt = con.prepareStatement("insert into KhachHang values(?, ?, ?, ?, ?)"); 
 			stmt.setString(1,p.getMaKH());
-			stmt.setString(2,p.getTenKH());
+			stmt.setNString(2,p.getTenKH());
 			stmt.setString(3,p.getEmail());
 			stmt.setString(4,p.getSdt());
 			stmt.setString(5,p.getCccd());
@@ -71,7 +71,7 @@ public class KhachHang_DAO {
 		int n = 0; 
 		try { 
 			stmt = con.prepareStatement("update KhachHang set tenKH = ?, email = ?, sdt = ?, cccd = ? where maKH = ?"); 
-			stmt.setString(1,p.getTenKH());
+			stmt.setNString(1,p.getTenKH());
 			stmt.setString(2,p.getEmail());
 			stmt.setString(3,p.getSdt());
 			stmt.setString(3,p.getCccd());
@@ -116,7 +116,7 @@ public class KhachHang_DAO {
 
 			if (rs.next()) {
 				String maKH = rs.getString("maKH"); 
-	    		String tenKH = rs.getString("tenKH"); 
+	    		String tenKH = rs.getNString("tenKH"); 
 	    		String email = rs.getString("email");
 	    		String sdt = rs.getString("sdt"); 
 	    		String cccd = rs.getString("cccd"); 
@@ -145,7 +145,7 @@ public class KhachHang_DAO {
 
 			if (rs.next()) {
 				String maKH = rs.getString("maKH"); 
-	    		String tenKH = rs.getString("tenKH"); 
+	    		String tenKH = rs.getNString("tenKH"); 
 	    		String email = rs.getString("email");
 	    		String sdt = rs.getString("sdt"); 
 	    		String cccd = rs.getString("cccd"); 

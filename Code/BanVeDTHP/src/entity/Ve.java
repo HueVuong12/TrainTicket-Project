@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -153,22 +154,54 @@ public class Ve {
 	}
 
 	public float tinhGiaVe() {
-		return Math.abs(gaDen.getChiSoKm()-836)*loaiVe.tinhTiGia();
+		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
+		
+		if (quangDuong <= 50)
+			return quangDuong*2000*loaiVe.tinhTiGia();
+		else if (quangDuong <= 400)
+			return quangDuong*800*loaiVe.tinhTiGia();
+		return quangDuong*600*loaiVe.tinhTiGia();
 	}
 	
 	public boolean xuatVe() {
-		return true;
+		LocalDate ngayHienTai = LocalDate.now();
+		LocalTime gioHienTai = LocalTime.now();
+		
+		if (ngayHienTai.isBefore(ngayDi) && gioHienTai.isBefore(gioDi)) {
+			setTrangThai(false);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean datVe() {
-		return true;
+		if (gaDen.isTrangThai())
+			return true;
+		return false;
 	}
 	
 	public boolean doiVe() {
-		return true;
+	    LocalDateTime now = LocalDateTime.now();
+	    LocalDateTime thoiGianDi = LocalDateTime.of(ngayDi, gioDi);
+	    
+	    if (now.isBefore(thoiGianDi.minusHours(24))) {
+	        setTrangThai(false);
+	        return true;
+	    }
+	    return false;
 	}
 	
-	public boolean hoanVe() {
-		return true;
+	public boolean hoanVe(Boolean isTapThe) {
+	    LocalDateTime now = LocalDateTime.now();
+	    LocalDateTime thoiGianDi = LocalDateTime.of(ngayDi, gioDi);
+	    
+	    if (isTapThe) {
+	    	if (now.isBefore(thoiGianDi.minusHours(72)))
+	    		return true;
+	    } else {
+	    	if (now.isBefore(thoiGianDi.minusHours(24)))
+	    		return true;
+	    }
+	    return false;
 	}
 }

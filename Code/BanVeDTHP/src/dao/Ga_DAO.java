@@ -27,8 +27,8 @@ public class Ga_DAO {
             ResultSet rs = statement.executeQuery(sql); 
             while (rs.next()) { 
                 String maGa = rs.getString("maGa");
-                String tenGa = rs.getString("tenGa");
-                String diaChi = rs.getString("diaChi");
+                String tenGa = rs.getNString("tenGa");
+                String diaChi = rs.getNString("diaChi");
                 boolean trangThai = rs.getBoolean("trangThai");
                 int chiSoKm= rs.getInt("chiSoKm");
                 Ga Ga = new Ga(maGa, tenGa, diaChi, chiSoKm,trangThai);
@@ -47,8 +47,8 @@ public class Ga_DAO {
         try { 
             stmt = con.prepareStatement("insert into Ga values(?, ?, ?, ?, ?)"); 
             stmt.setString(1, ga.getMaGa());
-            stmt.setString(2, ga.getTenGa());
-            stmt.setString(3, ga.getDiaChi());
+            stmt.setNString(2, ga.getTenGa());
+            stmt.setNString(3, ga.getDiaChi());
             stmt.setInt(4, ga.getChiSoKm());
             stmt.setBoolean(5, ga.isTrangThai());
             
@@ -67,8 +67,8 @@ public class Ga_DAO {
         int n = 0; 
         try { 
             stmt = con.prepareStatement("update Ga set tenGa = ?, diaChi = ?, chiSoKm = ?, trangThai = ? where maGa = ?"); 
-            stmt.setString(1, ga.getTenGa());
-            stmt.setString(2, ga.getDiaChi());
+            stmt.setNString(1, ga.getTenGa());
+            stmt.setNString(2, ga.getDiaChi());
             stmt.setInt(3, ga.getChiSoKm());
             stmt.setBoolean(4, ga.isTrangThai());
             stmt.setString(5, ga.getMaGa());
@@ -105,8 +105,8 @@ public class Ga_DAO {
             stmt.setString(1, maGa); 
             ResultSet rs = stmt.executeQuery(); 
             while (rs.next()) {
-                String tenGa = rs.getString("tenGa");
-                String diaChi = rs.getString("diaChi");
+                String tenGa = rs.getNString("tenGa");
+                String diaChi = rs.getNString("diaChi");
                 boolean trangThai = rs.getBoolean("trangThai");
                 int chiSoKm= rs.getInt("chiSoKm");
                 ga = new Ga(maGa, tenGa, diaChi, chiSoKm,trangThai);

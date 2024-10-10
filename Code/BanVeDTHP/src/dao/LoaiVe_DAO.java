@@ -29,8 +29,8 @@ public class LoaiVe_DAO {
 	    	// Duyệt trên kết quả trả về. 
 	    	while (rs.next()) {// Di chuyển con trỏ xuống bản ghi kế tiếp. 
 	    		String maLoai = rs.getString("maLoai"); 
-	    		String hang = rs.getString("hang"); 
-	    		String loai = rs.getString("loai");
+	    		String hang = rs.getNString("hang"); 
+	    		String loai = rs.getNString("loai");
 
 	    		LoaiVe loaiVe = new LoaiVe(maLoai, hang, loai);
 	    		
@@ -50,8 +50,8 @@ public class LoaiVe_DAO {
 		try { 
 			stmt = con.prepareStatement("insert into LoaiVe values(?, ?, ?)"); 
 			stmt.setString(1,p.getMaLoai());
-			stmt.setString(2,p.getHang());
-			stmt.setString(3,p.getLoai());
+			stmt.setNString(2,p.getHang());
+			stmt.setNString(3,p.getLoai());
 			
 			n = stmt.executeUpdate();
 		} catch (SQLException e) { 
@@ -67,8 +67,8 @@ public class LoaiVe_DAO {
 		int n = 0; 
 		try { 
 			stmt = con.prepareStatement("update LoaiVe set hang = ?, loai = ? where maLoai = ?"); 
-			stmt.setString(1,p.getHang());
-			stmt.setString(2,p.getLoai());
+			stmt.setNString(1,p.getHang());
+			stmt.setNString(2,p.getLoai());
 		     
 		    n = stmt.executeUpdate(); 
 		} catch (SQLException e) { 
@@ -94,10 +94,6 @@ public class LoaiVe_DAO {
 //		return n > 0;
 //	}
 	
-	public void reset() {
-		dsLoaiVe.removeAll(dsLoaiVe);
-	}
-	
 	public LoaiVe getLoaiVeByTen(String tenLoaiVe){
 		LoaiVe LoaiVe = null;
 		
@@ -113,8 +109,8 @@ public class LoaiVe_DAO {
 
 			if (rs.next()) {
 				String maLoai = rs.getString("maLoai"); 
-	    		String hang = rs.getString("hang"); 
-	    		String loai = rs.getString("loai");
+	    		String hang = rs.getNString("hang"); 
+	    		String loai = rs.getNString("loai");
 	        	LoaiVe = new LoaiVe(maLoai, hang, loai);
 						
 			}
@@ -140,8 +136,8 @@ public class LoaiVe_DAO {
 
 			if (rs.next()) {
 				String maLoai = rs.getString("maLoai"); 
-	    		String hang = rs.getString("hang"); 
-	    		String loai = rs.getString("loai"); 
+	    		String hang = rs.getNString("hang"); 
+	    		String loai = rs.getNString("loai"); 
 				LoaiVe=new LoaiVe(maLoai, hang, loai);
 						
 			}
@@ -150,5 +146,10 @@ public class LoaiVe_DAO {
 		}
 
 		return LoaiVe;
+	}
+	
+	
+	public void reset() {
+		dsLoaiVe.removeAll(dsLoaiVe);
 	}
 }

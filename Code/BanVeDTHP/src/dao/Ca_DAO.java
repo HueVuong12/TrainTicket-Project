@@ -28,7 +28,7 @@ public class Ca_DAO {
 	    	ResultSet rs = statement.executeQuery(sql); 
 	    	while (rs.next()) {
 	    		String maCa = rs.getString(1); 
-	    		String tenCa = rs.getString(2);  
+	    		String tenCa = rs.getNString(2);  
 	    		LocalTime thoiGianBatDau = rs.getTime(3).toLocalTime();
 	    		LocalTime thoiGianKetThuc = rs.getTime(4).toLocalTime();
 	    		Ca ca = new Ca(maCa, tenCa, thoiGianBatDau,thoiGianKetThuc);
@@ -47,7 +47,7 @@ public class Ca_DAO {
 		try { 
 			stmt = con.prepareStatement("insert into KhachHang values(?, ?, ?, ?)"); 
 			stmt.setString(1,ca.getMaCa());
-			stmt.setString(2,ca.getTenCa());
+			stmt.setNString(2,ca.getTenCa());
 			stmt.setObject(3,ca.getThoiGianBatDau());
 			stmt.setObject(4,ca.getThoiGianKetThuc());
 			n = stmt.executeUpdate();
@@ -64,7 +64,7 @@ public class Ca_DAO {
 		try { 
 			stmt = con.prepareStatement("update Ca set maCa = ?, tenCa = ?, thoiGianBatDau = ?, thoiGianKetThuc = ? where maCa = ?"); 
 			stmt.setString(1,ca.getMaCa());
-			stmt.setString(2,ca.getTenCa());
+			stmt.setNString(2,ca.getTenCa());
 			stmt.setObject(3,ca.getThoiGianBatDau());
 			stmt.setObject(4,ca.getThoiGianKetThuc());
 		     
@@ -89,7 +89,7 @@ public class Ca_DAO {
 
 				if (rs.next()) {
 					String maCA = rs.getString(1); 
-		    		String tenCA = rs.getString(2);  
+		    		String tenCA = rs.getNString(2);  
 		    		LocalTime thoiGianBatDau = rs.getTime(3).toLocalTime();
 		    		LocalTime thoiGianKetThuc = rs.getTime(4).toLocalTime();
 		    		ca = new Ca(maCA, tenCA, thoiGianBatDau,thoiGianKetThuc);
