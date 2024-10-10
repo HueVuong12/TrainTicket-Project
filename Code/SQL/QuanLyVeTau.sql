@@ -106,8 +106,8 @@ CREATE TABLE ChiTietHoaDon (
 -- Tạo bảng LoaiVe
 CREATE TABLE LoaiVe (
     maLoai VARCHAR(50) PRIMARY KEY,
-    hang VARCHAR(100),
-    loai VARCHAR(100)
+    hang NVARCHAR(100),
+    loai NVARCHAR(100)
 );
 
 -- Tạo bảng Ve
@@ -143,9 +143,9 @@ CREATE TABLE TaiKhoan (
 
 -- Thêm 3 ca vào bảng Ca
 INSERT INTO Ca (maCa, tenCa, thoiGianBatDau, thoiGianKetThuc) VALUES
-('CA01', 'Ca 1', '06:00:00', '13:59:00'),
-('CA02', 'Ca 2', '14:00:00', '21:59:00'),
-('CA03', 'Ca 3', '22:00:00', '05:59:00');
+('CA01', N'Ca 1', '06:00:00', '13:59:00'),
+('CA02', N'Ca 2', '14:00:00', '21:59:00'),
+('CA03', N'Ca 3', '22:00:00', '05:59:00');
 
 -- Thêm 3 nhân viên vào bảng NhanVien
 INSERT INTO NhanVien (maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu) VALUES
@@ -156,3 +156,4 @@ INSERT INTO NhanVien (maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, tra
 INSERT INTO TaiKhoan (maTaiKhoan, matKhau, phanQuyen, nhanVien) VALUES
 ('TKQL001', 'password1', 1, 'NV001'), 
 ('TKNV001', 'password2', 2, 'NV002');
+
