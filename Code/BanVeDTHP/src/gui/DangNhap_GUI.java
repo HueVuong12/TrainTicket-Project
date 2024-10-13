@@ -97,7 +97,7 @@ public class DangNhap_GUI extends JFrame {
         contentPane.add(passIconLabel);
         
         // Tên người dùng
-        txtUser = new JTextField("User name");
+        txtUser = new JTextField("Mã đăng nhập");
         txtUser.setBounds(284, 246, 409, 54);
         txtUser.setFont(new Font("Arial", Font.PLAIN, 24));
         txtUser.setBorder(new MatteBorder(0, 0, 0, 0, Color.WHITE));
@@ -109,7 +109,7 @@ public class DangNhap_GUI extends JFrame {
         txtUser.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtUser.getText().equals("User name")) {
+                if (txtUser.getText().equals("Mã đăng nhập")) {
                     txtUser.setText("");
                     txtUser.setForeground(Color.WHITE);
                 }
@@ -119,14 +119,14 @@ public class DangNhap_GUI extends JFrame {
             public void focusLost(FocusEvent e) {
                 if (txtUser.getText().isEmpty()) {
                     txtUser.setForeground(Color.GRAY);
-                    txtUser.setText("User name");
+                    txtUser.setText("Mã đăng nhập");
                 }
             }
         });
         contentPane.add(txtUser);
 
         // Mật khẩu
-        txtPassword = new JPasswordField("Password");
+        txtPassword = new JPasswordField("Mật khẩu");
         txtPassword.setBounds(284, 306, 409, 54);
         txtPassword.setFont(new Font("Arial", Font.PLAIN, 24));
         txtPassword.setForeground(Color.GRAY);
@@ -139,7 +139,7 @@ public class DangNhap_GUI extends JFrame {
         txtPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (new String(txtPassword.getPassword()).equals("Password")) {
+                if (new String(txtPassword.getPassword()).equals("Mật khẩu")) {
                     txtPassword.setText("");
                     txtPassword.setForeground(Color.WHITE);
                 }
@@ -149,13 +149,13 @@ public class DangNhap_GUI extends JFrame {
             public void focusLost(FocusEvent e) {
                 if (txtPassword.getPassword().length == 0) {
                     txtPassword.setForeground(Color.GRAY);
-                    txtPassword.setText("Password");
+                    txtPassword.setText("Mật khẩu");
                 }
             }
         });
 
      // Nút Đăng Nhập
-        btnLogin = new JButton("Login") {
+        btnLogin = new JButton("Đăng nhập") {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
@@ -247,11 +247,18 @@ public class DangNhap_GUI extends JFrame {
 
 
         // Liên kết liên hệ với quản lý
-        JLabel lblContact = new JLabel("Contact with manager?");
-        lblContact.setBounds(503, 430, 190, 30);
+        JLabel lblContact = new JLabel("Liên hệ với người quản lý?");
+        lblContact.setBounds(467, 430, 226, 30);
         lblContact.setForeground(Color.WHITE);
         lblContact.setFont(new Font("Arial", Font.PLAIN, 18));
         contentPane.add(lblContact);
+        
+        // Footer
+        JLabel lblFooter = new JLabel("ĐTHP | Group 5 | DHKTPM18ATT - 422000422703");
+        lblFooter.setBounds(305, 532, 316, 21);
+        lblFooter.setForeground(Color.WHITE);
+        lblFooter.setFont(new Font("Arial", Font.PLAIN, 13));
+        contentPane.add(lblFooter);
 
         // Màu mặc định và màu khi đưa chuột qua
         Color defaultLabelColor = Color.WHITE;
@@ -306,5 +313,7 @@ public class DangNhap_GUI extends JFrame {
         EventQueue.invokeLater(() -> {
             this.setFocusableWindowState(true); // Bật lại focus sau khi cửa sổ hiển thị
         });
+        
+        
     }
 }
