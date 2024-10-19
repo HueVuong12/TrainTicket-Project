@@ -19,6 +19,7 @@ CREATE TABLE Ga (
 -- Tạo bảng ChuyenTau
 CREATE TABLE ChuyenTau (
     maTau VARCHAR(50) PRIMARY KEY,
+	gaDi VARCHAR(50) NOT NULL,
     gaDen VARCHAR(50) NOT NULL,
     ngayDi DATE NOT NULL,
     gioDi TIME NOT NULL,
@@ -103,13 +104,6 @@ CREATE TABLE ChiTietHoaDon (
     FOREIGN KEY (hoaDon) REFERENCES HoaDon(maHoaDon)
 );
 
--- Tạo bảng LoaiVe
-CREATE TABLE LoaiVe (
-    maLoai VARCHAR(50) PRIMARY KEY,
-    hang NVARCHAR(100),
-    loai NVARCHAR(100)
-);
-
 -- Tạo bảng Ve
 CREATE TABLE Ve (
     maVe VARCHAR(50) PRIMARY KEY,
@@ -119,15 +113,16 @@ CREATE TABLE Ve (
     khachHang VARCHAR(50) NOT NULL,
     ngayDi DATE NOT NULL,
     gioDi TIME NOT NULL,
+	gaDi VARCHAR(50) NOT NULL,
     gaDen VARCHAR(50) NOT NULL,
+	hang VARCHAR(100) NOT NULL,
+	khuyenMai VARCHAR(100) NOT NULL,
     trangThai BIT,
-    loaiVe VARCHAR(50) NOT NULL,
 	chiTiet VARCHAR(50) NOT NULL,
     FOREIGN KEY (tau) REFERENCES ChuyenTau(maTau),
     FOREIGN KEY (toa) REFERENCES Toa(maToa),
     FOREIGN KEY (soGhe, toa) REFERENCES Ghe(soGhe, maToa),
     FOREIGN KEY (khachHang) REFERENCES KhachHang(maKH),
-    FOREIGN KEY (loaiVe) REFERENCES LoaiVe(maLoai),
     FOREIGN KEY (gaDen) REFERENCES Ga(maGa),
 	FOREIGN KEY (chiTiet) REFERENCES ChiTietHoaDon(maChiTiet)
 );
