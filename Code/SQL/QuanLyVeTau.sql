@@ -19,6 +19,7 @@ CREATE TABLE Ga (
 -- Tạo bảng ChuyenTau
 CREATE TABLE ChuyenTau (
     maTau VARCHAR(50) PRIMARY KEY,
+	gaDi VARCHAR(50) NOT NULL,
     gaDen VARCHAR(50) NOT NULL,
     ngayDi DATE NOT NULL,
     gioDi TIME NOT NULL,
@@ -103,13 +104,6 @@ CREATE TABLE ChiTietHoaDon (
     FOREIGN KEY (hoaDon) REFERENCES HoaDon(maHoaDon)
 );
 
--- Tạo bảng LoaiVe
-CREATE TABLE LoaiVe (
-    maLoai VARCHAR(50) PRIMARY KEY,
-    hang VARCHAR(100),
-    loai VARCHAR(100)
-);
-
 -- Tạo bảng Ve
 CREATE TABLE Ve (
     maVe VARCHAR(50) PRIMARY KEY,
@@ -119,15 +113,16 @@ CREATE TABLE Ve (
     khachHang VARCHAR(50) NOT NULL,
     ngayDi DATE NOT NULL,
     gioDi TIME NOT NULL,
+	gaDi VARCHAR(50) NOT NULL,
     gaDen VARCHAR(50) NOT NULL,
+	hang VARCHAR(100) NOT NULL,
+	khuyenMai VARCHAR(100) NOT NULL,
     trangThai BIT,
-    loaiVe VARCHAR(50) NOT NULL,
 	chiTiet VARCHAR(50) NOT NULL,
     FOREIGN KEY (tau) REFERENCES ChuyenTau(maTau),
     FOREIGN KEY (toa) REFERENCES Toa(maToa),
     FOREIGN KEY (soGhe, toa) REFERENCES Ghe(soGhe, maToa),
     FOREIGN KEY (khachHang) REFERENCES KhachHang(maKH),
-    FOREIGN KEY (loaiVe) REFERENCES LoaiVe(maLoai),
     FOREIGN KEY (gaDen) REFERENCES Ga(maGa),
 	FOREIGN KEY (chiTiet) REFERENCES ChiTietHoaDon(maChiTiet)
 );
@@ -143,9 +138,9 @@ CREATE TABLE TaiKhoan (
 
 -- Thêm 3 ca vào bảng Ca
 INSERT INTO Ca (maCa, tenCa, thoiGianBatDau, thoiGianKetThuc) VALUES
-('CA01', 'Ca 1', '06:00:00', '13:59:00'),
-('CA02', 'Ca 2', '14:00:00', '21:59:00'),
-('CA03', 'Ca 3', '22:00:00', '05:59:00');
+('CA01', N'Ca 1', '06:00:00', '13:59:00'),
+('CA02', N'Ca 2', '14:00:00', '21:59:00'),
+('CA03', N'Ca 3', '22:00:00', '05:59:00');
 
 -- Thêm 3 nhân viên vào bảng NhanVien
 INSERT INTO NhanVien (maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu) VALUES
@@ -156,3 +151,4 @@ INSERT INTO NhanVien (maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, tra
 INSERT INTO TaiKhoan (maTaiKhoan, matKhau, phanQuyen, nhanVien) VALUES
 ('TKQL001', 'password1', 1, 'NV001'), 
 ('TKNV001', 'password2', 2, 'NV002');
+
