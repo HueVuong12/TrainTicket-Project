@@ -8,16 +8,18 @@ import java.util.Objects;
 
 public class ChuyenTau {
 	private String maTau;
+	private Ga gaDi;
 	private Ga gaDen;
 	private ArrayList<Ga> tramDung;
 	private LocalDate ngayDi;
 	private LocalTime gioDi;
 	private ArrayList<Toa> dsToa;
 
-	public ChuyenTau(String maTau, Ga gaDen, ArrayList<Ga> tramDung, LocalDate ngayDi, LocalTime gioDi,
+	public ChuyenTau(String maTau,Ga gaDi, Ga gaDen, ArrayList<Ga> tramDung, LocalDate ngayDi, LocalTime gioDi,
 			ArrayList<Toa> dsToa) {
 		super();
 		this.setMaTau(maTau);
+		this.setGaDi(gaDi);
 		this.setGaDen(gaDen);
 		this.setTramDung(tramDung);
 		this.setNgayDi(ngayDi);
@@ -40,6 +42,15 @@ public class ChuyenTau {
 			this.maTau = maTau;
 		else
 			throw new IllegalArgumentException("Mã tàu không hợp lệ. Mã tàu phải có định dạng 'TA' theo sau bởi 3 chữ số.");
+	}
+
+	public Ga getGaDi() {
+		return gaDi;
+	}
+
+	public void setGaDi(Ga gaDi) {
+		this.gaDi = gaDi;
+		//Kiểm tra tồn tại
 	}
 
 	public Ga getGaDen() {
@@ -106,7 +117,7 @@ public class ChuyenTau {
 
 	@Override
 	public String toString() {
-		return "ChuyenTau [maTau=" + maTau + ", gaDen=" + gaDen + ", tramDung=" + tramDung + ", ngayDi=" + ngayDi
+		return "ChuyenTau [maTau=" + maTau + ", gaDi=" + gaDi +", gaDen=" + gaDen + ", tramDung=" + tramDung + ", ngayDi=" + ngayDi
 				+ ", gioDi=" + gioDi + ", dsToa=" + dsToa + "]";
 	}
 	

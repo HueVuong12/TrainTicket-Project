@@ -130,4 +130,59 @@ public class TaiKhoan_DAO {
     public void reset() {
         dsTaiKhoan.removeAll(dsTaiKhoan);
     }
+    
+    //////////Toan
+    public ArrayList<TaiKhoan> getListQL() {
+    	try {
+            Connection con = ConnectDB.getInstance().getConnection();  // Lấy kết nối CSDL
+            String sql = "SELECT * FROM TaiKhoan WHERE phanQuyen = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);  // Khởi tạo PreparedStatement với câu truy vấn
+            stmt.setInt(1, 1);  // Thiết lập giá trị cho tham số phanQuyen
+            
+            ResultSet rs = stmt.executeQuery();  // Thực thi truy vấn
+
+            while (rs.next()) {
+                String maDangNhap = rs.getString("maDangNhap");
+                String matKhau = rs.getString("matKhau");
+                int phanQuyen = rs.getInt("phanQuyen");
+                String maNV = rs.getString("nhanVien");
+
+                // Sử dụng getNhanVienByMaNV của NhanVien để lấy dữ liệu từ CSDL
+                NhanVien nhanVien = nv.getNhanVienTheoMaNV(maNV);
+
+                TaiKhoan taiKhoan = new TaiKhoan(maDangNhap, matKhau, phanQuyen, nhanVien);
+                dsTaiKhoan.add(taiKhoan);  // Thêm tài khoản vào danh sách
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsTaiKhoan;  // Trả về danh sách tài khoản
+    }
+    
+    public ArrayList<TaiKhoan> getLisNV() {
+    	try {
+            Connection con = ConnectDB.getInstance().getConnection();  // Lấy kết nối CSDL
+            String sql = "SELECT * FROM TaiKhoan WHERE phanQuyen = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);  // Khởi tạo PreparedStatement với câu truy vấn
+            stmt.setInt(1, 2);  // Thiết lập giá trị cho tham số phanQuyen
+            
+            ResultSet rs = stmt.executeQuery();  // Thực thi truy vấn
+
+            while (rs.next()) {
+                String maDangNhap = rs.getString("maDangNhap");
+                String matKhau = rs.getString("matKhau");
+                int phanQuyen = rs.getInt("phanQuyen");
+                String maNV = rs.getString("nhanVien");
+
+                // Sử dụng getNhanVienByMaNV của NhanVien để lấy dữ liệu từ CSDL
+                NhanVien nhanVien = nv.getNhanVienTheoMaNV(maNV);
+
+                TaiKhoan taiKhoan = new TaiKhoan(maDangNhap, matKhau, phanQuyen, nhanVien);
+                dsTaiKhoan.add(taiKhoan);  // Thêm tài khoản vào danh sách
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsTaiKhoan;  // Trả về danh sách tài khoản
+    }
 }

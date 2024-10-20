@@ -13,13 +13,15 @@ public class Ve {
 	private KhachHang khachHang;
 	private LocalDate ngayDi;
 	private LocalTime gioDi;
+	private Ga gaDi;
 	private Ga gaDen;
+	private String khuyenMai;
+	private String hang;
 	private boolean trangThai;
-	private LoaiVe loaiVe;
 	private ChiTietHoaDon chiTiet;
 	
 	public Ve(String maVe, ChuyenTau chuyenTau, Toa toa, Ghe soGhe, KhachHang khachHang, LocalDate ngayDi, LocalTime gioDi,
-			Ga gaDen, boolean trangThai, LoaiVe loaiVe, ChiTietHoaDon chiTiet) {
+			Ga gaDi,Ga gaDen, String hang, String khuyenMai,boolean trangThai, ChiTietHoaDon chiTiet) {
 		super();
 		this.setMaVe(maVe);
 		this.setChuyenTau(chuyenTau);
@@ -29,8 +31,8 @@ public class Ve {
 		this.ngayDi = chuyenTau.getNgayDi();
 		this.gioDi = chuyenTau.getGioDi();
 		this.setGaDen(gaDen);
+		this.setGaDi(gaDi);
 		this.setTrangThai(trangThai);
-		this.setLoaiVe(loaiVe);
 		this.setChiTiet(chiTiet);
 	}
 
@@ -94,7 +96,28 @@ public class Ve {
 	public LocalTime getGioDi() {
 		return gioDi;
 	}
+	public Ga getGaDi() {
+		return gaDi;
+	}
 
+	public void setGaDi(Ga gaDi) {
+		this.gaDi = gaDi;
+		//Kiểm tra tồn tại
+	}
+	public String getKhuyenMai() {
+		return khuyenMai;
+	}
+	public void setKhuyenMai(String khuyenMai) {
+		this.khuyenMai = khuyenMai;
+		//Kiểm tra tồn tại
+	}
+	public String getHang() {
+		return hang;
+	}
+	public void setHang(String hang) {
+		this.hang = hang;
+		//Kiểm tra tồn tại
+	}
 	public Ga getGaDen() {
 		return gaDen;
 	}
@@ -110,15 +133,6 @@ public class Ve {
 
 	public void setTrangThai(boolean trangThai) {
 		this.trangThai = trangThai;
-	}
-
-	public LoaiVe getLoaiVe() {
-		return loaiVe;
-	}
-
-	public void setLoaiVe(LoaiVe loaiVe) {
-		this.loaiVe = loaiVe;
-		//Kiểm tra tồn tại
 	}
 
 	public ChiTietHoaDon getChiTiet() {
@@ -146,22 +160,25 @@ public class Ve {
 		return Objects.equals(maVe, other.maVe);
 	}
 	
+
 	@Override
 	public String toString() {
 		return "Ve [maVe=" + maVe + ", chuyenTau=" + chuyenTau + ", toa=" + toa + ", soGhe=" + soGhe + ", khachHang="
-				+ khachHang + ", ngayDi=" + ngayDi + ", gioDi=" + gioDi + ", gaDen=" + gaDen + ", trangThai="
-				+ trangThai + ", loaiVe=" + loaiVe + "]";
+				+ khachHang + ", ngayDi=" + ngayDi + ", gioDi=" + gioDi + ", gaDi=" + gaDi + ", gaDen=" + gaDen
+				+ ", khuyenMai=" + khuyenMai + ", hang=" + hang + ", trangThai=" + trangThai + ", chiTiet=" + chiTiet
+				+ "]";
 	}
 
-	public float tinhGiaVe() {
-		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
-		
-		if (quangDuong <= 50)
-			return quangDuong*2000*loaiVe.tinhTiGia();
-		else if (quangDuong <= 400)
-			return quangDuong*800*loaiVe.tinhTiGia();
-		return quangDuong*600*loaiVe.tinhTiGia();
-	}
+	
+//	public float tinhGiaVe() {
+//		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
+//		
+//		if (quangDuong <= 50)
+//			return quangDuong*2000*loaiVe.tinhTiGia();
+//		else if (quangDuong <= 400)
+//			return quangDuong*800*loaiVe.tinhTiGia();
+//		return quangDuong*600*loaiVe.tinhTiGia();
+//	}
 	
 	public boolean xuatVe() {
 		LocalDate ngayHienTai = LocalDate.now();

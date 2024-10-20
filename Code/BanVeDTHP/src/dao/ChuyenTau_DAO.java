@@ -32,14 +32,15 @@ public class ChuyenTau_DAO {
             ResultSet rs = statement.executeQuery(sql); 
             while (rs.next()) { 
                 String maTau = rs.getString("maTau");
+                String gaDi = rs.getString("gaDi");
                 String gaDen = rs.getString("gaDen");
                 LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
                 LocalTime gioDi = rs.getTime("gioDi").toLocalTime();
-                
-                Ga ga = ga_Dao.getGaTheoMaGa(gaDen);
+                Ga gaDi1 = ga_Dao.getGaTheoMaGa(gaDi);
+                Ga gaDen1 = ga_Dao.getGaTheoMaGa(gaDen);
                 ArrayList<Toa> dsToa = toa_Dao.getDsToaTheoMaTau(maTau);
                 ArrayList<Ga> tramDung = ga_Dao.getDsTramDung(maTau);
-                ChuyenTau chuyenTau = new ChuyenTau(maTau, ga, tramDung, ngayDi,gioDi, dsToa);
+                ChuyenTau chuyenTau = new ChuyenTau(maTau, gaDi1,gaDen1, tramDung, ngayDi,gioDi, dsToa);
                 dsChuyenTau.add(chuyenTau);
            } 
         } catch (SQLException e) { 
@@ -109,14 +110,17 @@ public class ChuyenTau_DAO {
             stmt.setString(1, maTau); 
             ResultSet rs = stmt.executeQuery(); 
             while (rs.next()) {
+            	String maTau1 = rs.getString("maTau");
+                String gaDi = rs.getString("gaDi");
                 String gaDen = rs.getString("gaDen");
                 LocalDate ngayDi = rs.getDate("ngayDi").toLocalDate();
                 LocalTime gioDi = rs.getTime("gioDi").toLocalTime();
-	    		
-                Ga ga = ga_Dao.getGaTheoMaGa(gaDen);
+                Ga gaDi1 = ga_Dao.getGaTheoMaGa(gaDi);
+                Ga gaDen1 = ga_Dao.getGaTheoMaGa(gaDen);
                 ArrayList<Toa> dsToa = toa_Dao.getDsToaTheoMaTau(maTau);
                 ArrayList<Ga> tramDung = ga_Dao.getDsTramDung(maTau);
-                chuyenTau = new ChuyenTau(maTau, ga, tramDung, ngayDi,gioDi, dsToa);
+                chuyenTau = new ChuyenTau(maTau1, gaDi1,gaDen1, tramDung, ngayDi,gioDi, dsToa);
+              
             } 
         } catch (SQLException e) { 
             e.printStackTrace();     
