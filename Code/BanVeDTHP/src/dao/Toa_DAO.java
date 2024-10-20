@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import connectDB.ConnectDB;
 import entity.ChuyenTau;
+import entity.Ga;
 import entity.Ghe;
 import entity.Toa;
 
@@ -15,11 +16,9 @@ public class Toa_DAO {
 
     ArrayList<Toa> dsToa;
     Ghe_DAO gheDAO = new Ghe_DAO();
-    ChuyenTau_DAO chuyenTau_DAO = new ChuyenTau_DAO();
 
     public Toa_DAO() {
         dsToa = new ArrayList<Toa>();
-        gheDAO = new Ghe_DAO();  // Khởi tạo đối tượng Ghe_DAO để quản lý ghế
     }
 
     // Phương thức đọc tất cả các toa từ bảng Toa
@@ -39,7 +38,7 @@ public class Toa_DAO {
                 ChuyenTau maTau = new ChuyenTau(maTauStr);
 
                 // Tạo danh sách ghế dựa vào loại toa
-                ArrayList<Ghe> dsGhe = taoDsGhe(maToa, loaiToa);
+                ArrayList<Ghe> dsGhe = gheDAO.getDsGheTheoMaToa(maToa);
 
                 Toa toa = new Toa(maToa, loaiToa, maTau, dsGhe);
                 dsToa.add(toa);
@@ -57,13 +56,13 @@ public class Toa_DAO {
 
         // Xác định số lượng ghế theo loại toa
         switch (loaiToa) {
-            case "loai1":
+            case "Ghế mềm":
                 soLuongGhe = 64;
                 break;
-            case "loai2":
+            case "Giường nằm":
                 soLuongGhe = 32;
                 break;
-            case "loai3":
+            case "VIP":
                 soLuongGhe = 20;
                 break;
             default:
@@ -164,7 +163,7 @@ public class Toa_DAO {
                 String maTauStr = rs.getString("maTau");
 
                 // Sử dụng constructor copy để tạo đối tượng ChuyenTau
-                ChuyenTau maTau = chuyenTau_DAO.getChuyenTauTheoMaTau(maTauStr);
+                ChuyenTau maTau = new ChuyenTau(maTauStr);
 
                 // Tạo danh sách ghế dựa trên loại toa
                 ArrayList<Ghe> dsGhe = taoDsGhe(maToa, loaiToa);
@@ -179,22 +178,23 @@ public class Toa_DAO {
     
     // Phương thức lấy danh sách toa theo mã chuyến tàu
     public ArrayList<Toa> getDsToaTheoMaTau(String maTauStr) {
+    	Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null; 
         ArrayList<Toa> ds = new ArrayList<Toa>();
         try {
-            Connection con = ConnectDB.getInstance().getConnection();
             String sql = "SELECT * FROM Toa WHERE maTau = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt = con.prepareStatement(sql);
             stmt.setString(1, maTauStr);
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 String maToa = rs.getString("maToa");
                 String loaiToa = rs.getString("loaiToa");
 
                 // Tạo danh sách ghế dựa trên loại toa
-                ArrayList<Ghe> dsGhe = taoDsGhe(maToa, loaiToa);
+                ArrayList<Ghe> dsGhe = gheDAO.getDsGheTheoMaToa(maToa);
                 
-                ChuyenTau maTau = chuyenTau_DAO.getChuyenTauTheoMaTau(maTauStr);
+                ChuyenTau maTau = new ChuyenTau(maTauStr);
 
                 Toa toa = new Toa(maToa, loaiToa, maTau, dsGhe);
                 
@@ -203,7 +203,7 @@ public class Toa_DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return dsToa;
+        return ds;
     }
     
 	public void reset() {

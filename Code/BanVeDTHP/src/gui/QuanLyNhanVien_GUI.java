@@ -92,7 +92,7 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 	private Color hoverLabelColor = new Color(0, 153, 255);
 	private DefaultTableModel model;
 
-	public QuanLyNhanVien_GUI() {
+	public QuanLyNhanVien_GUI(TrangChu_GUI trangChu) {
 		setBackground(SystemColor.text);
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 170, 1460, 570);

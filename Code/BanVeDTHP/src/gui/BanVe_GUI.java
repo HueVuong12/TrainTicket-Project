@@ -4,42 +4,50 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
+import java.awt.TextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.toedter.calendar.JDateChooser;
+
+import dao.ChuyenTau_DAO;
+import dao.Ga_DAO;
+import entity.ChuyenTau;
+import entity.Ga;
+
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import java.awt.GridLayout;
 import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
+import javax.swing.ButtonGroup;
 
 public class BanVe_GUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel jp_timKiem;
-	private JPanel jp_content;
-	private JButton btnTim;
-	private JTextField textField_GaDi;
-	private JPanel jp_header;
-	private JLabel lbl_tieuDeTK;
-	private JLabel downIconLabel;
-	private JTextField textField_GaDen;
-	private JTextField textField_NgayDi;
-	private JTextField textField_NgayDen;
-	private JPanel jp_GioVe;
-	private JPanel jp_content_1;
-	private JLabel lbl_Chieu;
-	private JPanel jp_header_GioVe;
-	private JLabel lbl_tieuDeTK_GioVe;
-	private JLabel downIconLabel_1;
-	private JButton btnTim_1;
-	private JButton btnTim_2;
 	private JPanel jp_title;
 	private JLabel downIconLabel_2;
 	private JLabel lbl_Chieu_1;
@@ -52,8 +60,6 @@ public class BanVe_GUI extends JPanel {
 	private JPanel panel_8;
 	private JPanel panel_9;
 	private JPanel panel_10;
-	private JPanel panel_11;
-	private JPanel panel_13;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_17;
 	private JLabel lblNewLabel_18;
@@ -119,80 +125,34 @@ public class BanVe_GUI extends JPanel {
 	private JLabel lblNewLabel_14;
 	private JLabel lblNewLabel_15;
 	private JLabel lblNewLabel_16;
-	private JPanel jp_DanhSachVe;
 	private JPanel panel_12;
 	private JPanel jp_Ve;
-	private JPanel jp_VeMua;
-
+	private JTextField txt_GaDi;
+	private JTextField txt_GaDen;
+	private JDateChooser chooserNgayDi;
+	private JDateChooser chooserNgayVe;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtn_MotChieu;
+	private JRadioButton rdbtn_KhuHoi;
+	
+	//Khai bao DAO
+	Ga_DAO ga_dao = new Ga_DAO();
+	ArrayList<Ga> dsGa = ga_dao.docTuBang();
+	ChuyenTau_DAO chuyenTau_dao = new ChuyenTau_DAO();
+	ArrayList<ChuyenTau> dsChuyenTau = chuyenTau_dao.docTuBang();
 	/**
 	 * Create the panel.
 	 */
-	public BanVe_GUI() {
+	public BanVe_GUI(TrangChu_GUI trangChu) {
 		setBackground(SystemColor.window);
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 170, 1460, 570);
 		setLayout(null);
-
+		
 		//Icon xổ xuống
 		ImageIcon downIcon = new ImageIcon(getClass().getResource("/img/Polygon_20.png"));
-		Image scaledDown = downIcon.getImage().getScaledInstance(20 ,20, Image.SCALE_SMOOTH); // Thay đổi kích thước logo
-		
-		jp_GioVe = new JPanel();
-		jp_GioVe.setLayout(null);
-		jp_GioVe.setBackground(Color.WHITE);
-		jp_GioVe.setBounds(10, 10, 244, 191);
-		add(jp_GioVe);
-		
-		jp_content_1 = new JPanel();
-		jp_content_1.setBounds(0, 31, 244, 160);
-		jp_GioVe.add(jp_content_1);
-		jp_content_1.setLayout(null);
-		jp_content_1.setBackground(SystemColor.controlHighlight);
-		
-		JButton btnMua = new JButton("Mua");
-		btnMua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnMua.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnMua.setBounds(149, 123, 85, 27);
-		jp_content_1.add(btnMua);
-		
-		jp_DanhSachVe = new JPanel();
-		jp_DanhSachVe.setBounds(0, 0, 244, 122);
-		jp_content_1.add(jp_DanhSachVe);
-		jp_DanhSachVe.setLayout(null);
-		
-		lbl_Chieu = new JLabel("Chiều đi");
-		lbl_Chieu.setBounds(93, 2, 51, 23);
-		jp_DanhSachVe.add(lbl_Chieu);
-		lbl_Chieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		jp_VeMua = new JPanel();
-		jp_VeMua.setBounds(0, 30, 244, 92);
-		jp_DanhSachVe.add(jp_VeMua);
-		jp_VeMua.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		Ve_JPanel veMua= new Ve_JPanel();
-		jp_VeMua.add(veMua);
+		Image scaledDown = downIcon.getImage().getScaledInstance(20 ,20, Image.SCALE_SMOOTH);
 		System.out.println("Them ve thanh cong");
-		
-		jp_header_GioVe = new JPanel();
-		jp_header_GioVe.setBounds(0, 0, 244, 32);
-		jp_GioVe.add(jp_header_GioVe);
-		jp_header_GioVe.setLayout(null);
-		jp_header_GioVe.setBackground(new Color(51, 102, 153));
-		
-		downIconLabel_1 = new JLabel((Icon) null);
-		downIconLabel_1.setBounds(0, 0, 30, 35);
-		jp_header_GioVe.add(downIconLabel_1);
-		
-		lbl_tieuDeTK_GioVe = new JLabel("Giỏ Vé");
-		lbl_tieuDeTK_GioVe.setBounds(61, 0, 121, 32);
-		jp_header_GioVe.add(lbl_tieuDeTK_GioVe);
-		lbl_tieuDeTK_GioVe.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_tieuDeTK_GioVe.setForeground(Color.WHITE);
-		lbl_tieuDeTK_GioVe.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		jp_title = new JPanel();
 		jp_title.setLayout(null);
@@ -218,26 +178,27 @@ public class BanVe_GUI extends JPanel {
 		jp_title.add(lbl_Ga_1);
 		
 		JPanel jp_ThongTinChuyenTau = new JPanel();
-		jp_ThongTinChuyenTau.setBounds(264, 56, 931, 118);
+		jp_ThongTinChuyenTau.setBounds(264, 56, 1186, 118);
 		add(jp_ThongTinChuyenTau);
-		jp_ThongTinChuyenTau.setLayout(new GridLayout(1, 0, 0, 0));
+		jp_ThongTinChuyenTau.setLayout(null);
 		
-		ChuyenTau_JPanel jptau= new ChuyenTau_JPanel();
+		ChuyenTau chuyenTau = new ChuyenTau("");
+		ChuyenTau_JPanel jptau= new ChuyenTau_JPanel(chuyenTau,true);
 		jp_ThongTinChuyenTau.add(jptau);
 		
-		ChuyenTau_JPanel jptau1= new ChuyenTau_JPanel();
+		ChuyenTau_JPanel jptau1= new ChuyenTau_JPanel(chuyenTau,true);
 		jp_ThongTinChuyenTau.add(jptau1);
 		
-		ChuyenTau_JPanel jptau2= new ChuyenTau_JPanel();
+		ChuyenTau_JPanel jptau2= new ChuyenTau_JPanel(chuyenTau,true);
 		jp_ThongTinChuyenTau.add(jptau2);
 		
-		ChuyenTau_JPanel jptau3= new ChuyenTau_JPanel();
+		ChuyenTau_JPanel jptau3= new ChuyenTau_JPanel(chuyenTau,true);
 		jp_ThongTinChuyenTau.add(jptau3);
 		
 		
 		
 		JPanel jp_TinhTrangToa = new JPanel();
-		jp_TinhTrangToa.setBounds(264, 184, 1020, 65);
+		jp_TinhTrangToa.setBounds(264, 184, 1186, 65);
 		add(jp_TinhTrangToa);
 		jp_TinhTrangToa.setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -264,7 +225,7 @@ public class BanVe_GUI extends JPanel {
 		jp_TinhTrangToa.add(toa7);
 		
 		JPanel jp_TinhTrangGhe = new JPanel();
-		jp_TinhTrangGhe.setBounds(264, 270, 975, 290);
+		jp_TinhTrangGhe.setBounds(264, 270, 1186, 290);
 		add(jp_TinhTrangGhe);
 		jp_TinhTrangGhe.setLayout(null);
 		
@@ -530,129 +491,320 @@ public class BanVe_GUI extends JPanel {
 		lblNewLabel_16.setBounds(25, 222, 36, 42);
 		jp_TinhTrangGhe.add(lblNewLabel_16);
 		
-		panel_11 = new JPanel();
-		panel_11.setBounds(1289, 184, 131, 65);
-		add(panel_11);
-		
-		panel_13 = new JPanel();
-		panel_13.setBounds(1249, 270, 201, 290);
-		add(panel_13);
-		panel_13.setBackground(new Color(112, 128, 144));
-		panel_13.setLayout(null);
-		
-		//JPane tìm kiếm
-		jp_timKiem = new JPanel();
-		jp_timKiem.setBounds(10, 209, 244, 351);
-		add(jp_timKiem);
-		jp_timKiem.setBackground(Color.WHITE);
+		JPanel jp_timKiem = new JPanel();
 		jp_timKiem.setLayout(null);
+		jp_timKiem.setBackground(Color.WHITE);
+		jp_timKiem.setBounds(10, 10, 244, 351);
+		add(jp_timKiem);
 		
-		//JPane chứa content
-		jp_content = new JPanel();
+		JPanel jp_content = new JPanel();
+		jp_content.setLayout(null);
 		jp_content.setBackground(SystemColor.controlHighlight);
 		jp_content.setBounds(0, 32, 244, 319);
 		jp_timKiem.add(jp_content);
-		jp_content.setLayout(null);
 		
-		btnTim = new JButton("Tìm");
-//		btnTim.setBackground(Color.BLUE);
+		JButton btnTim = new JButton("Tìm");
 		btnTim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String gaDi = txt_GaDi.getText();
+				String gaDen = txt_GaDen.getText();
+				boolean isKhuHoi = rdbtn_KhuHoi.isSelected();
+				LocalDate ngayDi = chooserNgayDi.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate ngayVe;
+				if (isKhuHoi) {
+					ngayVe = chooserNgayVe.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				}
+				
+				ArrayList<ChuyenTau> dsTauHienThi = new ArrayList<ChuyenTau>();
+				for (ChuyenTau chuyenTau: dsChuyenTau) {
+					if ((ga_dao.getGaTheoMaGa(chuyenTau.getGaDi().getMaGa()).getDiaChi().equals(gaDi)) && (chuyenTau.getNgayDi().equals(ngayDi))) {
+						for (Ga gaDung: chuyenTau.getTramDung()) {
+							if (gaDen.equals(gaDung.getDiaChi()))
+								dsTauHienThi.add(chuyenTau);
+						}
+						if (gaDen.equals(ga_dao.getGaTheoMaGa(chuyenTau.getGaDen().getMaGa()).getDiaChi()))
+							dsTauHienThi.add(chuyenTau);
+					}
+				}
+				for (ChuyenTau chuyenTau: dsTauHienThi) {
+					System.out.println(chuyenTau.toString());
+				}
+				System.out.println("press!");
 			}
 		});
 		btnTim.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnTim.setBounds(73, 278, 85, 27);
 		jp_content.add(btnTim);
-
-		textField_GaDi = new JTextField();
-		textField_GaDi.setForeground(SystemColor.textInactiveText);
-		textField_GaDi.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_GaDi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_GaDi.setText("Theo mã nhân viên");
-		textField_GaDi.setBounds(21, 29, 165, 27);
-		jp_content.add(textField_GaDi);
-		textField_GaDi.setColumns(10);
-
-		textField_GaDen = new JTextField();
-		textField_GaDen.setText("Theo mã nhân viên");
-		textField_GaDen.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_GaDen.setForeground(SystemColor.textInactiveText);
-		textField_GaDen.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_GaDen.setColumns(10);
-		textField_GaDen.setBounds(21, 86, 165, 27);
-		jp_content.add(textField_GaDen);
-
-		JRadioButton rdbtn_MotChieu = new JRadioButton("Một Chiều");
-		rdbtn_MotChieu.setBounds(21, 145, 85, 21);
+		
+		txt_GaDi = new JTextField();
+		txt_GaDi.setText("Nhập ga đi");
+		txt_GaDi.setHorizontalAlignment(SwingConstants.LEFT);
+		txt_GaDi.setForeground(SystemColor.textInactiveText);
+		txt_GaDi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txt_GaDi.setColumns(10);
+		txt_GaDi.setBounds(21, 26, 202, 27);
+		jp_content.add(txt_GaDi);
+		chonGa(txt_GaDi);
+		focusTxtField(txt_GaDi, "Nhập ga đi");
+		
+		txt_GaDen = new JTextField();
+		txt_GaDen.setText("Nhập ga đến");
+		txt_GaDen.setHorizontalAlignment(SwingConstants.LEFT);
+		txt_GaDen.setForeground(SystemColor.textInactiveText);
+		txt_GaDen.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txt_GaDen.setColumns(10);
+		txt_GaDen.setBounds(21, 78, 202, 27);
+		jp_content.add(txt_GaDen);
+		chonGa(txt_GaDen);
+		focusTxtField(txt_GaDen, "Nhập ga đến");
+		
+		rdbtn_MotChieu = new JRadioButton("Một Chiều");
+		buttonGroup.add(rdbtn_MotChieu);
+		rdbtn_MotChieu.setBounds(21, 130, 85, 21);
 		jp_content.add(rdbtn_MotChieu);
-
-		JRadioButton rdbtn_KhuHoi = new JRadioButton("Khứ Hồi");
-		rdbtn_KhuHoi.setBounds(108, 145, 85, 21);
+		
+		rdbtn_KhuHoi = new JRadioButton("Khứ Hồi");
+		buttonGroup.add(rdbtn_KhuHoi);
+		rdbtn_KhuHoi.setBounds(108, 130, 85, 21);
 		jp_content.add(rdbtn_KhuHoi);
+		
+		rdbtn_MotChieu.setSelected(true);
+		
+		chooserNgayDi = new JDateChooser();
+		chooserNgayDi.setBounds(21, 180, 202, 27);
+		chooserNgayDi.setDateFormatString("dd/MM/yyyy");
+		jp_content.add(chooserNgayDi);
+		((JTextField) chooserNgayDi.getDateEditor().getUiComponent()).setEditable(false);
+		
+		// Thêm listener để kiểm tra ngày chọn đi
+		chooserNgayDi.getDateEditor().addPropertyChangeListener("date", new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				// Lấy ngày hôm nay với thời gian thiết lập là 00:00:00
+				Calendar todayCal = Calendar.getInstance();
+				todayCal.set(Calendar.HOUR_OF_DAY, 0);
+				todayCal.set(Calendar.MINUTE, 0);
+				todayCal.set(Calendar.SECOND, 0);
+				todayCal.set(Calendar.MILLISECOND, 0);
+				Date today = todayCal.getTime();
 
-		textField_NgayDi = new JTextField();
-		textField_NgayDi.setText("Theo mã nhân viên");
-		textField_NgayDi.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_NgayDi.setForeground(SystemColor.textInactiveText);
-		textField_NgayDi.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_NgayDi.setColumns(10);
-		textField_NgayDi.setBounds(21, 190, 142, 27);
-		jp_content.add(textField_NgayDi);
+				if (chooserNgayDi.getDate() != null && chooserNgayDi.getDate().before(today)) {
+					JOptionPane.showMessageDialog(null,
+							"Ngày không hợp lệ! Vui lòng chọn ngày không trước ngày hôm nay.", "Thông báo",
+							JOptionPane.WARNING_MESSAGE);
+					chooserNgayDi.setDate(null); // Xóa ngày đã chọn
+				}
+			}
+		});
+		
+		chooserNgayVe = new JDateChooser();
+		chooserNgayVe.setBounds(21, 240, 202, 27);
+		chooserNgayVe.setDateFormatString("dd/MM/yyyy");
+		chooserNgayVe.setEnabled(false);
+		jp_content.add(chooserNgayVe);
+		((JTextField) chooserNgayVe.getDateEditor().getUiComponent()).setEditable(false);
+		
+		// Thêm listener để thay đổi trạng thái của chooser ngày về
+        rdbtn_KhuHoi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooserNgayVe.setEnabled(true); // Kích hoạt chooser ngày về khi chọn Khứ Hồi
+            }
+        });
 
-		textField_NgayDen = new JTextField();
-		textField_NgayDen.setText("Theo mã nhân viên");
-		textField_NgayDen.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_NgayDen.setForeground(SystemColor.textInactiveText);
-		textField_NgayDen.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_NgayDen.setColumns(10);
-		textField_NgayDen.setBounds(21, 240, 142, 27);
-		jp_content.add(textField_NgayDen);
+        rdbtn_MotChieu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooserNgayVe.setEnabled(false); // Vô hiệu hóa chooser ngày về khi chọn Một Chiều
+                chooserNgayVe.setDate(null); // Xóa ngày đã chọn
+            }
+        });
+		
+     // Thêm listener để kiểm tra ngày chọn về
+        chooserNgayVe.getDateEditor().addPropertyChangeListener("date", new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                Date ngayDi = chooserNgayDi.getDate();
+
+                // Kiểm tra nếu chọn ngày về khi khứ hồi được chọn
+                if (chooserNgayVe.getDate() != null) {
+                    // Kiểm tra nếu ngày đi đã được chọn
+                    if (ngayDi == null) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng chọn ngày đi trước khi chọn ngày về.", 
+                                "Thông báo", JOptionPane.WARNING_MESSAGE);
+                        chooserNgayVe.setDate(null); // Xóa ngày đã chọn
+                        return; // Thoát khỏi phương thức
+                    }
+
+                    // Kiểm tra nếu ngày về trước ngày đi
+                    if (chooserNgayVe.getDate().before(ngayDi)) {
+                        JOptionPane.showMessageDialog(null, "Ngày không hợp lệ! Vui lòng chọn ngày sau ngày đi.", 
+                                "Thông báo", JOptionPane.WARNING_MESSAGE);
+                        chooserNgayVe.setDate(null); // Xóa ngày đã chọn
+                    }
+                }
+            }
+        });
 
 		JLabel lbl_GaDi = new JLabel("Ga Đi");
 		lbl_GaDi.setBounds(24, 10, 45, 13);
 		jp_content.add(lbl_GaDi);
-
+		
 		JLabel lbl_GaDen = new JLabel("Ga Đến");
 		lbl_GaDen.setBounds(21, 63, 45, 13);
 		jp_content.add(lbl_GaDen);
-
+		
 		JLabel lbl_LuaChon = new JLabel("Lựa chọn");
-		lbl_LuaChon.setBounds(24, 126, 58, 13);
+		lbl_LuaChon.setBounds(24, 111, 58, 13);
 		jp_content.add(lbl_LuaChon);
-
+		
 		JLabel lbl_ChonNgayDi = new JLabel("Ngày đi");
-		lbl_ChonNgayDi.setBounds(21, 176, 45, 13);
+		lbl_ChonNgayDi.setBounds(21, 157, 45, 13);
 		jp_content.add(lbl_ChonNgayDi);
-
+		
 		JLabel lbl_ChonNgayVe = new JLabel("Ngày về");
-		lbl_ChonNgayVe.setBounds(21, 227, 48, 13);
+		lbl_ChonNgayVe.setBounds(21, 217, 48, 13);
 		jp_content.add(lbl_ChonNgayVe);
-
-		btnTim_1 = new JButton("Tìm");
-		btnTim_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTim_1.setBounds(159, 190, 45, 27);
-		jp_content.add(btnTim_1);
-
-		btnTim_2 = new JButton("Tìm");
-		btnTim_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTim_2.setBounds(159, 240, 45, 27);
-		jp_content.add(btnTim_2);
-
-		//JPane header tiêu đề 
-		jp_header = new JPanel();
+		
+		JPanel jp_header = new JPanel();
+		jp_header.setLayout(null);
+		jp_header.setBackground(new Color(51, 102, 153));
 		jp_header.setBounds(0, 0, 244, 32);
 		jp_timKiem.add(jp_header);
-		jp_header.setBackground(new Color(51, 102, 153));
-		jp_header.setLayout(null);
-		downIconLabel = new JLabel(new ImageIcon(scaledDown));
+		
+		JLabel downIconLabel = new JLabel((Icon) null);
 		downIconLabel.setBounds(0, 0, 30, 35);
 		jp_header.add(downIconLabel);
-		//JLabel tiêu đề 
-		lbl_tieuDeTK = new JLabel("Thông tin chuyến tàu");
+		
+		JLabel lbl_tieuDeTK = new JLabel("Thông tin chuyến tàu");
+		lbl_tieuDeTK.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_tieuDeTK.setForeground(Color.WHITE);
+		lbl_tieuDeTK.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbl_tieuDeTK.setBounds(0, 0, 222, 35);
 		jp_header.add(lbl_tieuDeTK);
-		lbl_tieuDeTK.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_tieuDeTK.setForeground(new Color(255, 255, 255));
-		lbl_tieuDeTK.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JPanel jp_GioVe = new JPanel();
+		jp_GioVe.setLayout(null);
+		jp_GioVe.setBackground(Color.WHITE);
+		jp_GioVe.setBounds(10, 369, 244, 191);
+		add(jp_GioVe);
+		
+		JPanel jp_content_1 = new JPanel();
+		jp_content_1.setLayout(null);
+		jp_content_1.setBackground(SystemColor.controlHighlight);
+		jp_content_1.setBounds(0, 31, 244, 160);
+		jp_GioVe.add(jp_content_1);
+		
+		JButton btnMua = new JButton("Mua");
+		btnMua.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnMua.setBounds(149, 123, 85, 27);
+		jp_content_1.add(btnMua);
+		
+		JPanel jp_DanhSachVe = new JPanel();
+		jp_DanhSachVe.setLayout(null);
+		jp_DanhSachVe.setBounds(0, 0, 244, 122);
+		jp_content_1.add(jp_DanhSachVe);
+		
+		JLabel lbl_Chieu = new JLabel("Chiều đi");
+		lbl_Chieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_Chieu.setBounds(93, 2, 51, 23);
+		jp_DanhSachVe.add(lbl_Chieu);
+		
+		JPanel jp_VeMua = new JPanel();
+		jp_VeMua.setBounds(0, 30, 244, 92);
+		jp_DanhSachVe.add(jp_VeMua);
+		jp_VeMua.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		Ve_JPanel veMua = new Ve_JPanel();
+		jp_VeMua.add(veMua);
+		
+		JPanel jp_header_GioVe = new JPanel();
+		jp_header_GioVe.setLayout(null);
+		jp_header_GioVe.setBackground(new Color(51, 102, 153));
+		jp_header_GioVe.setBounds(0, 0, 244, 32);
+		jp_GioVe.add(jp_header_GioVe);
+		
+		JLabel downIconLabel_1 = new JLabel((Icon) null);
+		downIconLabel_1.setBounds(0, 0, 30, 35);
+		jp_header_GioVe.add(downIconLabel_1);
+		
+		JLabel lbl_tieuDeTK_GioVe = new JLabel("Giỏ Vé");
+		lbl_tieuDeTK_GioVe.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_tieuDeTK_GioVe.setForeground(Color.WHITE);
+		lbl_tieuDeTK_GioVe.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lbl_tieuDeTK_GioVe.setBounds(61, 0, 121, 32);
+		jp_header_GioVe.add(lbl_tieuDeTK_GioVe);
+
+		// Thêm MouseListener vào contentPane
+				this.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// Mất focus của txtUser và txtPassword khi nhấp chuột ra ngoài
+						txt_GaDi.transferFocus();
+						txt_GaDen.transferFocus();
+					}
+				});
+	}
+	
+	private void focusTxtField(JTextField txtField, String str) {
+		txtField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtField.getText().equals(str)) {
+					txtField.setText("");
+					txtField.setForeground(Color.BLACK);
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtField.getText().isEmpty()) {
+					txtField.setForeground(SystemColor.textInactiveText);
+					txtField.setText(str);
+				}
+			}
+		});
+	}
+	
+	private void chonGa(JTextField txt_Ga) {
+		// Tạo JPopupMenu để hiển thị gợi ý
+		JPopupMenu suggestionMenu = new JPopupMenu();
+
+		// Hàm cập nhật gợi ý khi người dùng nhập vào text field
+		txt_Ga.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String input = txt_Ga.getText();
+				suggestionMenu.removeAll(); // Xóa các gợi ý cũ
+
+				if (!input.isEmpty()) {
+					int count = 0; // Biến đếm số gợi ý đã thêm
+					// Lọc danh sách ga theo từ khóa người dùng nhập
+					for (Ga ga : dsGa) {
+						if (ga.getDiaChi().toLowerCase().startsWith(input.toLowerCase())) {
+							JMenuItem item = new JMenuItem(ga.getDiaChi());
+							item.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									txt_Ga.setText(item.getText());
+									suggestionMenu.setVisible(false); // Ẩn gợi ý sau khi chọn
+								}
+							});
+							suggestionMenu.add(item);
+							count++; // Tăng biến đếm
+						}
+						if (count >= 5) { // Kiểm tra nếu đã có 5 gợi ý
+							break; // Thoát vòng lặp nếu đã đủ 5 gợi ý
+						}
+					}
+				}
+
+				// Hiển thị danh sách gợi ý nếu có ít nhất một gợi ý
+				if (suggestionMenu.getComponentCount() > 0) {
+					suggestionMenu.show(txt_Ga, 0, txt_Ga.getHeight());
+					txt_Ga.requestFocus(); // Đặt lại focus cho JTextField
+				} else {
+					suggestionMenu.setVisible(false); // Ẩn nếu không có gợi ý
+				}
+			}
+		});
 	}
 }

@@ -39,7 +39,7 @@ public class Toa {
 	}
 
 	public void setLoaiToa(String loaiToa) {
-		String ktLoaiToa = "^(VIP|ghế mềm|giường nằm)$";
+		String ktLoaiToa = "^(VIP|Ghế mềm|Giường nằm)$";
 		if (loaiToa.matches(ktLoaiToa))
 			this.loaiToa = loaiToa;
 		else 

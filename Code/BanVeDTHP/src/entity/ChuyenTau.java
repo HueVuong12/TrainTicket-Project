@@ -76,10 +76,7 @@ public class ChuyenTau {
 	}
 
 	public void setNgayDi(LocalDate ngayDi) {
-		if (ChronoUnit.DAYS.between(ngayDi, LocalDate.now()) > 3)
 			this.ngayDi = ngayDi;
-		else 
-			throw new IllegalArgumentException("Ngày đi phải sau ngày hiện tại ít nhất 3 ngày");
 	}
 
 	public LocalTime getGioDi() {

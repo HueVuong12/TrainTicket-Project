@@ -15,7 +15,6 @@ import entity.ChiTietHoaDon;
 public class ChiTietHoaDon_DAO {
 	ArrayList<ChiTietHoaDon> dsCTHD;
 	Ve_DAO ve_Dao = new Ve_DAO();
-	HoaDon_DAO hoaDon_Dao = new HoaDon_DAO();
 	
 	public ChiTietHoaDon_DAO(){ 
 		dsCTHD = new ArrayList<ChiTietHoaDon>();  
@@ -34,7 +33,7 @@ public class ChiTietHoaDon_DAO {
                 int soLuong=rs.getInt("soLuong");
                 float thue=rs.getFloat("thue");
                 
-                HoaDon hoaDon = hoaDon_Dao.getHoaDonTheoMaHoaDon(maHD);
+                HoaDon hoaDon = new HoaDon(maHD);
                 ArrayList<Ve> danhSachVe = ve_Dao.getDsVeTheoMaChiTiet(maChiTiet);
                 
                 ChiTietHoaDon cthd= new ChiTietHoaDon(maChiTiet, hoaDon, soLuong, danhSachVe, thue);

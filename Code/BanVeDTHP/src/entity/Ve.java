@@ -169,16 +169,34 @@ public class Ve {
 				+ "]";
 	}
 
+	public float tinhTiGia() {
+		float tiGia = 0;
+		if (hang.equalsIgnoreCase("Ghe mem"))
+			tiGia += 1;
+		else if (hang.equalsIgnoreCase("Giuong nam"))
+			tiGia += 1.2;
+		else
+			tiGia += 1.8;
+		if (khuyenMai.equalsIgnoreCase("Sinh vien"))
+			tiGia += -0.1;
+		else if (khuyenMai.equalsIgnoreCase("Nguoi lon"))
+			tiGia += 0;
+		else if (khuyenMai.equalsIgnoreCase("Nguoi lon tuoi"))
+			tiGia += -0.15;
+		else if (khuyenMai.equalsIgnoreCase("Tre em 6 den 10 tuoi"))
+			tiGia += -0.25;
+		else tiGia = 0;
+		return tiGia;
+	}
 	
 	public float tinhGiaVe() {
-//		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
-//		
-//		if (quangDuong <= 50)
-//			return quangDuong*2000*loaiVe.tinhTiGia();
-//		else if (quangDuong <= 400)
-//			return quangDuong*800*loaiVe.tinhTiGia();
-//		return quangDuong*600*loaiVe.tinhTiGia();
-		return 0;
+		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
+		
+		if (quangDuong <= 50)
+			return quangDuong*2000*tinhTiGia();
+		else if (quangDuong <= 400)
+			return quangDuong*800*tinhTiGia();
+		return quangDuong*600*tinhTiGia();
 	}
 	
 	public boolean xuatVe() {

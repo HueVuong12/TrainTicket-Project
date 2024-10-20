@@ -54,11 +54,12 @@ public class ChuyenTau_DAO {
         PreparedStatement stmt = null; 
         int n = 0; 
         try { 
-            stmt = con.prepareStatement("insert into ChuyenTau values(?, ?, ?, ?)"); 
+            stmt = con.prepareStatement("insert into ChuyenTau values(?, ?, ?, ?, ?)"); 
             stmt.setString(1, chuyenTau.getMaTau());
-            stmt.setString(2, chuyenTau.getGaDen().getMaGa());
-            stmt.setObject(3, chuyenTau.getNgayDi());
-            stmt.setObject(4, chuyenTau.getGioDi());      
+            stmt.setString(2, chuyenTau.getGaDi().getMaGa());
+            stmt.setString(3, chuyenTau.getGaDen().getMaGa());
+            stmt.setObject(4, chuyenTau.getNgayDi());
+            stmt.setObject(5, chuyenTau.getGioDi());      
             n = stmt.executeUpdate();
         } catch (SQLException e) { 
             e.printStackTrace(); 
@@ -72,11 +73,12 @@ public class ChuyenTau_DAO {
         PreparedStatement stmt = null; 
         int n = 0; 
         try { 
-            stmt = con.prepareStatement("update ChuyenTau set gaDen = ?, ngayDi = ?, gioDi = ? where maTau = ?"); 
-            stmt.setString(4, chuyenTau.getMaTau());
-            stmt.setString(1, chuyenTau.getGaDen().getMaGa());
-            stmt.setObject(2, chuyenTau.getNgayDi());
-            stmt.setObject(3, chuyenTau.getGioDi()); 
+            stmt = con.prepareStatement("update ChuyenTau set gaDi = ?, gaDen = ?, ngayDi = ?, gioDi = ? where maTau = ?"); 
+            stmt.setString(1, chuyenTau.getGaDi().getMaGa());
+            stmt.setString(2, chuyenTau.getGaDen().getMaGa());
+            stmt.setObject(3, chuyenTau.getNgayDi());
+            stmt.setObject(4, chuyenTau.getGioDi()); 
+            stmt.setString(5, chuyenTau.getMaTau());
             n = stmt.executeUpdate(); 
         } catch (SQLException e) { 
             e.printStackTrace(); 

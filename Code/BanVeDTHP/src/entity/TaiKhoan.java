@@ -26,11 +26,12 @@ public class TaiKhoan {
 	}
 
 	public void setMaTaiKhoan(String maTaiKhoan) {
-		String regexMaTaiKhoan="^(TKQL|TKNV)\\d{3}$";
-		if(maTaiKhoan.matches(regexMaTaiKhoan))
-			this.maTaiKhoan = maTaiKhoan;
-		else
-			throw new IllegalArgumentException("Mã tài khoản không hợp lệ!");
+//		String regexMaTaiKhoan="^(TKQL|TKNV)\\d{3}$";
+//		if(maTaiKhoan.matches(regexMaTaiKhoan))
+//			this.maTaiKhoan = maTaiKhoan;
+//		else
+//			throw new IllegalArgumentException("Mã tài khoản không hợp lệ!");
+		this.maTaiKhoan = maTaiKhoan;
 	}
 
 	public String getMatKhau() {

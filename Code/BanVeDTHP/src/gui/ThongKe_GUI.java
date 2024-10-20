@@ -71,7 +71,7 @@ public class ThongKe_GUI extends JPanel {
 	private JTextField textField1;
 	private JTextField textField_2;
 	private Color hoverLabelColor = new Color(0, 153, 255);
-	public ThongKe_GUI() {
+	public ThongKe_GUI(TrangChu_GUI trangChu) {
 	    
 		setBackground(SystemColor.text);
 		setForeground(new Color(255, 255, 255));

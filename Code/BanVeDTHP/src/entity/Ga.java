@@ -40,12 +40,13 @@ public class Ga {
 	}
 
 	public void setTenGa(String tenGa) {
-		String ktTenGa = "^(?!\\s)[A-Z][a-z]*(\\s[A-Z][a-z]*)*$";
-		if (tenGa.matches(ktTenGa))
-			this.tenGa = tenGa;
-		else 
-			throw new IllegalArgumentException("Tên ga không hợp lệ! Chữ cái đầu của mỗi tiếng phải viết hoa");
-		//kt trong database
+//		String ktTenGa = "^(?!\\s)[A-Z][a-z]*(\\s[A-Z][a-z]*)*$";
+//		if (tenGa.matches(ktTenGa))
+//			this.tenGa = tenGa;
+//		else 
+//			throw new IllegalArgumentException("Tên ga không hợp lệ! Chữ cái đầu của mỗi tiếng phải viết hoa");
+//		//kt trong database
+		this.tenGa = tenGa;
 	}
 
 	public String getDiaChi() {

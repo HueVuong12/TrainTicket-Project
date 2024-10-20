@@ -16,7 +16,6 @@ import entity.NhanVien;
 public class NhanVien_DAO {
     
     ArrayList<NhanVien> dsNhanVien;
-    Ca_DAO ca_Dao = new Ca_DAO();
     
     public NhanVien_DAO(){ 
         dsNhanVien = new ArrayList<NhanVien>();  
@@ -40,7 +39,7 @@ public class NhanVien_DAO {
                 boolean trangThai = rs.getBoolean("trangThai");
                 int chucVu = rs.getInt("chucVu");
 
-                Ca ca = ca_Dao.getCaTheoMaCa(maCa);
+                Ca ca = new Ca(maCa);
                 
                 NhanVien nhanVien = new NhanVien(maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu);
                 
@@ -139,7 +138,7 @@ public class NhanVien_DAO {
                 boolean trangThai = rs.getBoolean("trangThai");
                 int chucVu = rs.getInt("chucVu");
 
-                Ca ca = ca_Dao.getCaTheoMaCa(maCa);
+                Ca ca = new Ca(maCa);
                 // Tạo đối tượng NhanVien
                 nhanVien = new NhanVien(maNV, tenNV, ngaySinh, gioiTinh, ca, cccd, email, sdt, trangThai, chucVu);
             } 

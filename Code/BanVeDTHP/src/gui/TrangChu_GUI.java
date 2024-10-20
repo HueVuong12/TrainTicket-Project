@@ -71,26 +71,29 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 	private boolean isSearching = false; // Trạng thái nhấp chuột
 	private Color hoverLabelColor = new Color(0, 153, 255);
 	private JMenuItem doiVe;
+	private DangNhap_GUI dangNhap;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TrangChu_GUI frame = new TrangChu_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TrangChu_GUI frame = new TrangChu_GUI();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TrangChu_GUI() {
+	public TrangChu_GUI(DangNhap_GUI dangNhap) {
+		this.dangNhap = dangNhap;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1481, 791);
 		setLocationRelativeTo(null);
@@ -116,7 +119,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 		ImageIcon originalLogo = new ImageIcon(getClass().getResource("/img/LogoDepHonTrang.png"));
 	    Image scaledLogo = originalLogo.getImage().getScaledInstance(300, 120, Image.SCALE_SMOOTH); // Thay đổi kích thước logo
 	    logoLabel = new JLabel(new ImageIcon(scaledLogo));
-	    logoLabel.setBounds(0, 0, 300, 125); // Cập nhật kích thước trên JLabel
+	    logoLabel.setBounds(84, 10, 300, 108); // Cập nhật kích thước trên JLabel
 	    title.add(logoLabel);
 	    
 	    //Tên Chương trình
@@ -217,7 +220,8 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 	    userIconLabel.setBounds(184 ,10 , 73 ,56); // Cập nhật kích thước trên JLabel
 	    jp_nhanVien.add(userIconLabel);
 	    
-	    lbl_ThongTinNV = new JLabel("QL0001 - Nhi");
+	    lbl_ThongTinNV = new JLabel();
+	    lbl_ThongTinNV.setText(dangNhap.getTaiKhoanLogined().getNhanVien().getTenNV());
 	    lbl_ThongTinNV.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	    lbl_ThongTinNV.setHorizontalAlignment(SwingConstants.CENTER);
 	    lbl_ThongTinNV.setBounds(96, 74, 247, 21);
@@ -237,8 +241,8 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 	    exitIconLabel.addMouseListener(new MouseAdapter() {
 	    	public void mouseClicked(MouseEvent e) {
 	    		DangNhap_GUI dn= new DangNhap_GUI();
-	    		dn.setVisible(true);
 	    		TrangChu_GUI.this.setVisible(false);
+	    		dn.setVisible(true);
 	    	}
 	    });
 	    exitIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -271,7 +275,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				BanVe_GUI banVe= new BanVe_GUI();
+				BanVe_GUI banVe= new BanVe_GUI(TrangChu_GUI.this);
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(banVe); // Sử dụng layout thích hợp
@@ -286,7 +290,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ThongKe_GUI jptkct= new ThongKe_GUI();
+				ThongKe_GUI jptkct= new ThongKe_GUI(TrangChu_GUI.this);
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(jptkct); // Sử dụng layout thích hợp
@@ -301,7 +305,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 			@Override
 			public void menuSelected(MenuEvent e) {
 				// TODO Auto-generated method stub
-				QuanLyNhanVien_GUI jpnv= new QuanLyNhanVien_GUI();
+				QuanLyNhanVien_GUI jpnv= new QuanLyNhanVien_GUI(TrangChu_GUI.this);
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(jpnv); // Sử dụng layout thích hợp
@@ -329,7 +333,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 			@Override
 			public void menuSelected(MenuEvent e) {
 				// TODO Auto-generated method stub
-				QuanLyTaiKhoan_GUI jptk = new QuanLyTaiKhoan_GUI();
+				QuanLyTaiKhoan_GUI jptk = new QuanLyTaiKhoan_GUI(TrangChu_GUI.this);
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(jptk); // Sử dụng layout thích hợp
@@ -404,4 +408,9 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 		// TODO Auto-generated method stub
 		
 	}
+
+	public DangNhap_GUI getDangNhap() {
+		return dangNhap;
+	}
+
 }

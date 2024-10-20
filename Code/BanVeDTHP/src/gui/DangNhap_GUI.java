@@ -4,12 +4,15 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import dao.NhanVien_DAO;
 import dao.TaiKhoan_DAO;
 import entity.TaiKhoan;
 
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -31,8 +34,10 @@ public class DangNhap_GUI extends JFrame {
     private JButton btnLogin;
     private Color hoverColor = new Color(0, 102, 204); // Màu khi di chuột qua
     private Color defaultColor = new Color(0, 153, 255); // Màu mặc định
-    public LocalTime thoiGianBatDau;
-    public TaiKhoan taiKhoanLogined;
+    private LocalTime thoiGianBatDau;
+    private TaiKhoan taiKhoanLogined;
+    
+    private NhanVien_DAO nhanVien_DAO = new NhanVien_DAO();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -74,6 +79,16 @@ public class DangNhap_GUI extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
         setContentPane(contentPane);
+        
+		// Thêm MouseListener vào contentPane
+		contentPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// Mất focus của txtUser và txtPassword khi nhấp chuột ra ngoài
+				txtUser.transferFocus();
+				txtPassword.transferFocus();
+			}
+		});
 
         // Logo
         ImageIcon originalLogo = new ImageIcon(getClass().getResource("/img/LogoDepHonTrang.png"));
@@ -190,12 +205,14 @@ public class DangNhap_GUI extends JFrame {
                         // Kiểm tra mật khẩu
                         if (taiKhoan.getMatKhau().equals(pass)) {
                         	// Kiểm tra trạng thái nhân viên
-                        	if (taiKhoan.getNhanVien().isTrangThai()) {
+                        	if (nhanVien_DAO.getNhanVienTheoMaNV(taiKhoan.getNhanVien().getMaNV()).isTrangThai()) {
                         		// Đăng nhập thành công
-                        		taiKhoanLogined = taiKhoan;
+                        		setTaiKhoanLogined(taiKhoan);
                         		thoiGianBatDau = LocalTime.now();
                         		setVisible(false);
-                        		return; // Kết thúc vòng lặp
+                        		TrangChu_GUI trangChu = new TrangChu_GUI(DangNhap_GUI.this);
+                        		trangChu.setVisible(true);
+                        		return;
                         	} else {
                         		// Trạng thái đã nghỉ việc
                         		JOptionPane.showMessageDialog(null, "Nhân viên đã nghỉ!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -313,7 +330,21 @@ public class DangNhap_GUI extends JFrame {
         EventQueue.invokeLater(() -> {
             this.setFocusableWindowState(true); // Bật lại focus sau khi cửa sổ hiển thị
         });
-        
-        
     }
+
+	public LocalTime getThoiGianBatDau() {
+		return thoiGianBatDau;
+	}
+
+	public void setThoiGianBatDau(LocalTime thoiGianBatDau) {
+		this.thoiGianBatDau = thoiGianBatDau;
+	}
+
+	public TaiKhoan getTaiKhoanLogined() {
+		return taiKhoanLogined;
+	}
+
+	public void setTaiKhoanLogined(TaiKhoan taiKhoanLogined) {
+		this.taiKhoanLogined = taiKhoanLogined;
+	}
 }

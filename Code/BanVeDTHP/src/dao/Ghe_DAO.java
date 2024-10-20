@@ -13,7 +13,6 @@ import entity.Toa;
 public class Ghe_DAO {
 
     ArrayList<Ghe> dsGhe;
-	private Toa_DAO toa = new Toa_DAO();
 
     public Ghe_DAO() {
         dsGhe = new ArrayList<Ghe>();
@@ -32,8 +31,8 @@ public class Ghe_DAO {
                 String maToaStr = rs.getString("maToa");
                 boolean trangThai = rs.getBoolean("trangThai");
 
-                // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
-                Toa maToa = toa.getToaTheoMaToa(maToaStr);
+                // Sử dụng constructor copy
+                Toa maToa = new Toa(maToaStr);
 
                 Ghe ghe = new Ghe(soGhe, maToa, trangThai);
                 dsGhe.add(ghe);
@@ -128,7 +127,7 @@ public class Ghe_DAO {
                 boolean trangThai = rs.getBoolean("trangThai");
 
                 // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
-                Toa maToa = toa.getToaTheoMaToa(maToaStr);
+                Toa maToa = new Toa(maToaStr);
 
                 Ghe ghe = new Ghe(soGhe, maToa, trangThai);
                 dsGheTheoToa.add(ghe);
@@ -155,7 +154,7 @@ public class Ghe_DAO {
                 boolean trangThai = rs.getBoolean("trangThai");
 
                 // Sử dụng getToaByMa để lấy dữ liệu từ CSDL
-                Toa maToa = toa.getToaTheoMaToa(maToaStr);
+                Toa maToa = new Toa(maToaStr);
 
                 ghe = new Ghe(soGhe, maToa, trangThai);
                 dsGheTheoToa.add(ghe);
