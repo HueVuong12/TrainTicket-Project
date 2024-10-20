@@ -170,7 +170,7 @@ public class Ve {
 	}
 
 	
-//	public float tinhGiaVe() {
+	public float tinhGiaVe() {
 //		int quangDuong = Math.abs(gaDen.getChiSoKm()-836);
 //		
 //		if (quangDuong <= 50)
@@ -178,7 +178,8 @@ public class Ve {
 //		else if (quangDuong <= 400)
 //			return quangDuong*800*loaiVe.tinhTiGia();
 //		return quangDuong*600*loaiVe.tinhTiGia();
-//	}
+		return 0;
+	}
 	
 	public boolean xuatVe() {
 		LocalDate ngayHienTai = LocalDate.now();
