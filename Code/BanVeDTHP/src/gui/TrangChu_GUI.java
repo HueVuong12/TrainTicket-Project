@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,11 +8,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import dao.NhanVien_DAO;
+import dao.TaiKhoan_DAO;
 
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -67,11 +66,11 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 	private JLabel lbl_ThoiGian;
 	private JLabel exitIconLabel;
 	private JPanel content;
-	private JLabel backGroundLabel;
-	private boolean isSearching = false; // Trạng thái nhấp chuột
 	private Color hoverLabelColor = new Color(0, 153, 255);
-	private JMenuItem doiVe;
 	private DangNhap_GUI dangNhap;
+	
+	private NhanVien_DAO nhanVien_DAO = new NhanVien_DAO();
+	private TaiKhoan_DAO taiKhoan_DAO = new TaiKhoan_DAO();
 	
 	/**
 	 * Launch the application.
@@ -221,7 +220,8 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 	    jp_nhanVien.add(userIconLabel);
 	    
 	    lbl_ThongTinNV = new JLabel();
-	    lbl_ThongTinNV.setText(dangNhap.getTaiKhoanLogined().getNhanVien().getTenNV());
+	    lbl_ThongTinNV.setText(nhanVien_DAO.getNhanVienTheoMaNV((taiKhoan_DAO.getTaiKhoanTheoMaTK(dangNhap.getTaiKhoanLogined().getMaTaiKhoan()))
+	    															.getNhanVien().getMaNV()).getTenNV());
 	    lbl_ThongTinNV.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	    lbl_ThongTinNV.setHorizontalAlignment(SwingConstants.CENTER);
 	    lbl_ThongTinNV.setBounds(96, 74, 247, 21);

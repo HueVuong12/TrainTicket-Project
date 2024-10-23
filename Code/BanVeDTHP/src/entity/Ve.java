@@ -15,8 +15,8 @@ public class Ve {
 	private LocalTime gioDi;
 	private Ga gaDi;
 	private Ga gaDen;
-	private String khuyenMai;
 	private String hang;
+	private String khuyenMai;
 	private boolean trangThai;
 	private ChiTietHoaDon chiTiet;
 	
@@ -32,6 +32,8 @@ public class Ve {
 		this.gioDi = chuyenTau.getGioDi();
 		this.setGaDen(gaDen);
 		this.setGaDi(gaDi);
+		this.setHang(hang);
+		this.setKhuyenMai(khuyenMai);
 		this.setTrangThai(trangThai);
 		this.setChiTiet(chiTiet);
 	}
