@@ -151,6 +151,18 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 		menuBar.add(ve);
 		
 		qlve = new JMenuItem("Quản lý vé");
+		qlve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuanLyVe_Gui quanLyVe_gui = new QuanLyVe_Gui();
+				content.removeAll();
+				System.out.println("thành công xóa");
+				content.add(quanLyVe_gui); // Sử dụng layout thích hợp
+				System.out.println("thành công thêm");
+				content.revalidate();
+				content.repaint();
+				System.out.println("thành công");
+			}
+		});
 		ve.add(qlve);
 		
 		datVe = new JMenuItem("Đặt vé");
@@ -163,9 +175,33 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 		menuBar.add(hoaDon);
 		
 		qlhd = new JMenuItem("Quản lý hóa đơn");
+		qlhd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuanLyHoaDon_GUI QLHoaDon= new QuanLyHoaDon_GUI();
+				content.removeAll();
+				System.out.println("thành công xóa");
+				content.add(QLHoaDon); // Sử dụng layout thích hợp
+				System.out.println("thành công thêm");
+				content.revalidate();
+				content.repaint();
+				System.out.println("thành công");
+			}
+		});
 		hoaDon.add(qlhd);
 		
 		xemcthd = new JMenuItem("Xem chi tiết hóa đơn");
+		xemcthd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ChiTietHoaDon_GUI ChiTietHD= new ChiTietHoaDon_GUI();
+				content.removeAll();
+				System.out.println("thành công xóa");
+				content.add(ChiTietHD); // Sử dụng layout thích hợp
+				System.out.println("thành công thêm");
+				content.revalidate();
+				content.repaint();
+				System.out.println("thành công");
+			}
+		});
 		hoaDon.add(xemcthd);
 		
 		traCuuKH = new JMenu("Tra cứu");
