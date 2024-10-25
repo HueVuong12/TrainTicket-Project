@@ -46,7 +46,7 @@ public class QuanLyKhachHang_GUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public QuanLyKhachHang_GUI(TrangChu_GUI trangChu) {
+	public QuanLyKhachHang_GUI() {
 		setBackground(SystemColor.text);
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 170, 1440, 570);
@@ -65,7 +65,7 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		panelTimKiem.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.decode("#016FA2"));
+		panel_1.setBackground(new Color(51, 102, 153));
 		panel_1.setBounds(0, 0, 337, 36);
 		panelTimKiem.add(panel_1);
 		panel_1.setLayout(null);
@@ -77,8 +77,6 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		panel_1.add(lbTimKiem);
 		
 		textField_5 = new JTextField();
-		textField_5 = new PlaceholderTextField("Nhập văn bản...");
-		textField_5.setBorder(new RoundedBorder(25));
 		textField_5.setBounds(34, 60, 250, 30);
 		panelTimKiem.add(textField_5);
 		textField_5.setColumns(10);
@@ -154,7 +152,7 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		panel_2.setBounds(0, 0, 337, 36);
 		
 		panelThongTinKhachHang.add(panel_2);
-		panel_2.setBackground(Color.decode("#016FA2"));
+		panel_2.setBackground(new Color(51, 102, 153));
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("Thông tin khách hàng");
@@ -170,62 +168,12 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		table_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"STT", "M\u00E3 kh\u00E1ch h\u00E0ng", "T\u00EAn kh\u00E1ch h\u00E0ng", "Email", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "C\u0103n c\u01B0\u1EDBc c\u00F4ng d\u00E2n"},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column"
+				"STT", "Mã khách hàng", "Tên khách hàng", "Email", "Số điện thoại", "Căn cước công dân"
 			}
 		));
-		table_1.getColumnModel().getColumn(0).setPreferredWidth(25);
-		table_1.getColumnModel().getColumn(1).setPreferredWidth(109);
-		table_1.getColumnModel().getColumn(2).setPreferredWidth(101);
-		table_1.getColumnModel().getColumn(3).setPreferredWidth(105);
-		table_1.getColumnModel().getColumn(4).setPreferredWidth(95);
-		table_1.getColumnModel().getColumn(5).setPreferredWidth(116);
+		scrollPane.setViewportView(table_1);
 		table_1.setBounds(347, 10, 1053, 517);
-		scrollPane.setColumnHeaderView(table_1);
-	}
-	class RoundedBorder extends AbstractBorder {
-	    private int radius;
-
-	    public RoundedBorder(int radius) {
-	        this.radius = radius;
-	    }
-	    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-	        g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
-	    }
-
-	    public Insets getBorderInsets(Component c) {
-	        return new Insets(radius + 1, radius + 1, radius + 1, radius + 1);
-	    }
-	}
-	class PlaceholderTextField extends JTextField {
-	    private String placeholder;
-
-	    public PlaceholderTextField(String placeholder) {
-	        this.placeholder = placeholder;
-	        setForeground(Color.GRAY); // Màu chữ mờ
-	        addFocusListener(new FocusAdapter() {
-	            @Override
-	            public void focusGained(FocusEvent e) {
-	                if (getText().isEmpty()) {
-	                    setForeground(Color.BLACK); // Đổi màu khi có chữ
-	                }
-	            }
-
-	            @Override
-	            public void focusLost(FocusEvent e) {
-	                if (getText().isEmpty()) {
-	                    setForeground(Color.GRAY); // Đổi màu về mờ khi không có chữ
-	                }
-	            }
-	        });
-	    }
 	}
 }
