@@ -10,6 +10,7 @@ import javax.swing.event.MenuListener;
 
 import dao.NhanVien_DAO;
 import dao.TaiKhoan_DAO;
+import entity.KhachHang;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -321,12 +322,13 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 				System.out.println("thành công");
 			}
 		});
-	    thongKeCT.addActionListener(new ActionListener() {
-			
+		thongKeCT.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ThongKe_GUI jptkct= new ThongKe_GUI(TrangChu_GUI.this);
+				jptkct.hienThiThongKeChuyenTau();
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(jptkct); // Sử dụng layout thích hợp
@@ -334,6 +336,65 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 				content.revalidate();
 				content.repaint();
 				System.out.println("thành công");
+			}
+		});
+	    thongKeDT.addActionListener(new ActionListener() {
+
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		// TODO Auto-generated method stub
+	    		ThongKe_GUI jptkct= new ThongKe_GUI(TrangChu_GUI.this);
+	    		jptkct.hienThiThongKeDoanhThu();;
+	    		content.removeAll();
+	    		System.out.println("thành công xóa");
+	    		content.add(jptkct); // Sử dụng layout thích hợp
+	    		System.out.println("thành công thêm");
+	    		content.revalidate();
+	    		content.repaint();
+	    		System.out.println("thành công");
+	    	}
+	    });
+	    thongKeTheoCa.addActionListener(new ActionListener() {
+
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		// TODO Auto-generated method stub
+	    		ThongKe_GUI jptkct= new ThongKe_GUI(TrangChu_GUI.this);
+	    		jptkct.hienThiThongKeDoanhThuTheoCa();
+	    		content.removeAll();
+	    		System.out.println("thành công xóa");
+	    		content.add(jptkct); // Sử dụng layout thích hợp
+	    		System.out.println("thành công thêm");
+	    		content.revalidate();
+	    		content.repaint();
+	    		System.out.println("thành công");
+	    	}
+	    });
+	    khachHang.addMenuListener(new MenuListener() {
+
+			@Override
+			public void menuSelected(MenuEvent e) {
+				// TODO Auto-generated method stub
+				QuanLyKhachHang_GUI jpkh= new QuanLyKhachHang_GUI(TrangChu_GUI.this);
+				content.removeAll();
+				System.out.println("thành công xóa");
+				content.add(jpkh); // Sử dụng layout thích hợp
+				System.out.println("thành công thêm");
+				content.revalidate();
+				content.repaint();
+				System.out.println("thành công");
+			}
+
+			@Override
+			public void menuDeselected(MenuEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void menuCanceled(MenuEvent e) {
+				// TODO Auto-generated method stub
+
 			}
 		});
 	    nhanVien.addMenuListener(new MenuListener() {

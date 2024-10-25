@@ -46,7 +46,7 @@ public class QuanLyKhachHang_GUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public QuanLyKhachHang_GUI() {
+	public QuanLyKhachHang_GUI(TrangChu_GUI trangChu) {
 		setBackground(SystemColor.text);
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 170, 1440, 570);

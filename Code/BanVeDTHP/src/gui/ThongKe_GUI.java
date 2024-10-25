@@ -674,5 +674,13 @@ public class ThongKe_GUI extends JPanel {
 			lbl_ThoiGian.setText(formattedTime);
 		}
 		
-		/// ham thong ke 
+		public void hienThiThongKeChuyenTau() {
+			tabbedPane.setSelectedIndex(2);
+		}
+		public void hienThiThongKeDoanhThu() {
+			tabbedPane.setSelectedIndex(1);
+		}
+		public void hienThiThongKeDoanhThuTheoCa() {
+			tabbedPane.setSelectedIndex(0);
+		}
 }
