@@ -242,10 +242,6 @@ public class BanVe_GUI extends JPanel {
 		rdbtn_MotChieu.setSelected(true);
 
 		chooserNgayDi = new JDateChooser();
-		chooserNgayDi.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		chooserNgayDi.setBounds(21, 180, 202, 27);
 		chooserNgayDi.setDateFormatString("dd/MM/yyyy");
 		jp_Content_ThongTin.add(chooserNgayDi);
@@ -272,10 +268,6 @@ public class BanVe_GUI extends JPanel {
 		});
 
 		chooserNgayVe = new JDateChooser();
-		chooserNgayVe.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		chooserNgayVe.setBounds(21, 240, 202, 27);
 		chooserNgayVe.setDateFormatString("dd/MM/yyyy");
 		chooserNgayVe.setEnabled(false);

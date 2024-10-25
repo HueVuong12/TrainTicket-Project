@@ -1,271 +1,207 @@
 package gui;
 
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
-import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import dao.NhanVien_DAO;
-import entity.Ca;
-import entity.NhanVien;
-
-import java.awt.Color;
-import java.awt.Cursor;
-
-import javax.swing.JTextField;
-
-public class QuanLyVe_Gui extends JPanel implements ActionListener,MouseListener {
-
-	private JTextField txtTenKH;
-	private JTextField txtGaDen;
+public class QuanLyVe_Gui extends JPanel {
 	private JTextField textField;
-	private JTextField txtLoaiVe;
-	private JTextField txtMaToa;
-	private JTextField txtMaSoGhe;
-	private JTextField txtMaVe;
-	private JTextField txtMaChuyenTau;
-	private JTextField txtGioDi;
-	private JTextField txtGia;
-	private JTextField txtTen;
-	private JTextField txtGDen;
-	private JTextField txtLVe;
-	private JTextField txtNgayDi;
-	private JTextField txtMToa;
-	private JTextField txtMaGhe;
-	private JTextField txtMVe;
-	private JTextField txtMChuyenTau;
-	private JTextField txtGDi;
-	private JTextField txtG_ia;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 	private JTable table;
-	private JButton btnDoiVe;
-	private JButton btnTraVe;
+	private JTable table_TTV;
 	public QuanLyVe_Gui() {
-		setBackground(new Color(255, 255, 255));
+		setBackground(SystemColor.window);
+		setForeground(new Color(255, 255, 255));
+		setBounds(0, 170, 1460, 570);
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(30, 42, 462, 523);
+		panel.setBounds(0, 0, 1460, 570);
 		add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(51, 102, 153));
-		panel_1.setBounds(0, 0, 489, 29);
+		panel_1.setBounds(10, 10, 124, 28);
 		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
-		JLabel lblThongTinVe = new JLabel("THÔNG TIN VÉ");
-		panel_1.add(lblThongTinVe);
-		lblThongTinVe.setForeground(new Color(255, 255, 255));
-		lblThongTinVe.setBackground(new Color(255, 255, 255));
-		lblThongTinVe.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel lb_quaylai = new JLabel("Quay lại");
+		lb_quaylai.setBounds(45, 0, 69, 27);
+		lb_quaylai.setFont(new Font("Tahoma", Font.BOLD, 15));
+		panel_1.add(lb_quaylai);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 29, 460, 496);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
+		ImageIcon goBackIcon = new ImageIcon(getClass().getResource("/img/9054423_bx_arrow_back_icon.png"));
+		Image scaledGoBack = goBackIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		JLabel goBackIconLabel = new JLabel(new ImageIcon(scaledGoBack));
+		goBackIconLabel.setBounds(10, 0, 39, 27);
+		goBackIconLabel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ConTent_JPanel jpct = new ConTent_JPanel();
+				jpct.setVisible(true);
+				QuanLyVe_Gui.this.setVisible(false);
+			}
+		});
+		panel_1.add(goBackIconLabel);
 		
-		JLabel lblTenKH = new JLabel("Tên khách hàng:");
-		lblTenKH.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTenKH.setBounds(10, 19, 136, 32);
-		panel_2.add(lblTenKH);
+		JPanel jp_TTV = new JPanel();
+		jp_TTV.setBounds(35, 65, 356, 416);
+		panel.add(jp_TTV);
+		jp_TTV.setLayout(null);
 		
-		txtTen = new JTextField();
-		txtTen.setBounds(147, 19, 295, 32);
-		panel_2.add(txtTen);
-		txtTen.setColumns(10);
+		JPanel jp_HeaderTTV = new JPanel();
+		jp_HeaderTTV.setBounds(0, 0, 356, 33);
+		jp_HeaderTTV.setBackground(new Color(51, 102, 153));
+		jp_TTV.add(jp_HeaderTTV);
+		jp_HeaderTTV.setLayout(null);
 		
-		txtGDen = new JTextField();
-		txtGDen.setColumns(10);
-		txtGDen.setBounds(147, 62, 295, 32);
-		panel_2.add(txtGDen);
+		JLabel lb_TTV = new JLabel("Thông tin vé");
+		lb_TTV.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lb_TTV.setBounds(0, 0, 356, 33);
+		jp_HeaderTTV.add(lb_TTV);
 		
-		txtLVe = new JTextField();
-		txtLVe.setColumns(10);
-		txtLVe.setBounds(147, 149, 295, 32);
-		panel_2.add(txtLVe);
+		JLabel lb_TenKH = new JLabel("Tên khách hàng:");
+		lb_TenKH.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lb_TenKH.setBounds(10, 43, 97, 22);
+		jp_TTV.add(lb_TenKH);
 		
-		txtNgayDi = new JTextField();
-		txtNgayDi.setColumns(10);
-		txtNgayDi.setBounds(147, 104, 295, 32);
-		panel_2.add(txtNgayDi);
+		JLabel lblGan = new JLabel("Ga đến:");
+		lblGan.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblGan.setBounds(10, 80, 97, 22);
+		jp_TTV.add(lblGan);
 		
-		JLabel lblNgayDi = new JLabel("Ngày đi:");
-		lblNgayDi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNgayDi.setBounds(10, 104, 136, 32);
-		panel_2.add(lblNgayDi);
+		JLabel lblNgyi = new JLabel("Ngày đi:");
+		lblNgyi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNgyi.setBounds(10, 117, 97, 22);
+		jp_TTV.add(lblNgyi);
 		
-		JLabel lblGaDen = new JLabel("Ga đến:");
-		lblGaDen.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGaDen.setBounds(10, 61, 136, 32);
-		panel_2.add(lblGaDen);
-		
-		JLabel lblLoaiVe = new JLabel("Loại vé:");
-		lblLoaiVe.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblLoaiVe.setBounds(10, 149, 136, 32);
-		panel_2.add(lblLoaiVe);
+		JLabel lblLoiV = new JLabel("Loại vé:");
+		lblLoiV.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblLoiV.setBounds(10, 154, 97, 22);
+		jp_TTV.add(lblLoiV);
 		
 		JLabel lblMToa = new JLabel("Mã toa:");
-		lblMToa.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMToa.setBounds(10, 191, 136, 32);
-		panel_2.add(lblMToa);
+		lblMToa.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMToa.setBounds(10, 191, 97, 22);
+		jp_TTV.add(lblMToa);
 		
 		JLabel lblMSGh = new JLabel("Mã số ghế:");
-		lblMSGh.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMSGh.setBounds(10, 233, 136, 32);
-		panel_2.add(lblMSGh);
+		lblMSGh.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMSGh.setBounds(10, 228, 97, 22);
+		jp_TTV.add(lblMSGh);
 		
 		JLabel lblMV = new JLabel("Mã vé:");
-		lblMV.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMV.setBounds(10, 275, 136, 32);
-		panel_2.add(lblMV);
+		lblMV.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMV.setBounds(10, 265, 97, 22);
+		jp_TTV.add(lblMV);
 		
-		txtMToa = new JTextField();
-		txtMToa.setColumns(10);
-		txtMToa.setBounds(147, 191, 295, 32);
-		panel_2.add(txtMToa);
+		JLabel lblMChuynTu = new JLabel("Mã chuyến tàu:");
+		lblMChuynTu.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMChuynTu.setBounds(10, 302, 97, 22);
+		jp_TTV.add(lblMChuynTu);
 		
-		txtMaGhe = new JTextField();
-		txtMaGhe.setColumns(10);
-		txtMaGhe.setBounds(147, 236, 295, 32);
-		panel_2.add(txtMaGhe);
+		JLabel lblGii = new JLabel("Giờ đi:");
+		lblGii.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblGii.setBounds(10, 339, 97, 22);
+		jp_TTV.add(lblGii);
 		
-		txtMVe = new JTextField();
-		txtMVe.setColumns(10);
-		txtMVe.setBounds(147, 278, 295, 32);
-		panel_2.add(txtMVe);
+		JLabel lblGi = new JLabel("Giá:");
+		lblGi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblGi.setBounds(10, 376, 97, 22);
+		jp_TTV.add(lblGi);
 		
-		JLabel lblMChuyenTau = new JLabel("Mã chuyến tàu:");
-		lblMChuyenTau.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMChuyenTau.setBounds(10, 319, 136, 29);
-		panel_2.add(lblMChuyenTau);
+		textField = new JTextField();
+		textField.setBounds(130, 43, 216, 22);
+		jp_TTV.add(textField);
+		textField.setColumns(10);
 		
-		txtMChuyenTau = new JTextField();
-		txtMChuyenTau.setColumns(10);
-		txtMChuyenTau.setBounds(147, 320, 295, 32);
-		panel_2.add(txtMChuyenTau);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(130, 83, 216, 22);
+		jp_TTV.add(textField_1);
 		
-		txtGDi = new JTextField();
-		txtGDi.setColumns(10);
-		txtGDi.setBounds(147, 362, 295, 32);
-		panel_2.add(txtGDi);
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(130, 120, 216, 22);
+		jp_TTV.add(textField_2);
 		
-		txtG_ia = new JTextField();
-		txtG_ia.setColumns(10);
-		txtG_ia.setBounds(147, 404, 295, 32);
-		panel_2.add(txtG_ia);
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(130, 157, 216, 22);
+		jp_TTV.add(textField_3);
 		
-		JLabel lblGioDi = new JLabel("Giờ đi:");
-		lblGioDi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGioDi.setBounds(10, 359, 136, 32);
-		panel_2.add(lblGioDi);
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(130, 194, 216, 22);
+		jp_TTV.add(textField_4);
 		
-		JLabel lblGia = new JLabel("Gía:");
-		lblGia.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGia.setBounds(10, 404, 136, 32);
-		panel_2.add(lblGia);
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(130, 231, 216, 22);
+		jp_TTV.add(textField_5);
 		
-		btnDoiVe = new JButton("Đổi vé");
-		btnDoiVe.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnDoiVe.setBounds(147, 452, 136, 32);
-		panel_2.add(btnDoiVe);
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(130, 268, 216, 22);
+		jp_TTV.add(textField_6);
 		
-		btnTraVe = new JButton("Trả vé");
-		btnTraVe.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTraVe.setBounds(299, 452, 143, 32);
-		panel_2.add(btnTraVe);
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(130, 302, 216, 22);
+		jp_TTV.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(130, 339, 216, 22);
+		jp_TTV.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(130, 376, 216, 22);
+		jp_TTV.add(textField_9);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(255, 255, 255));
-		panel_3.setBounds(44, 10, 209, 34);
-		add(panel_3);
+		panel_3.setBounds(401, 65, 1050, 477);
+		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/img/9054423_bx_arrow_back_icon.png")));
-		lblNewLabel.setBounds(10, 10, 35, 13);
-		panel_3.add(lblNewLabel);
-		
-		JLabel lblQuayLai = new JLabel("Quay lại");
-		lblQuayLai.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblQuayLai.setBounds(55, 2, 89, 24);
-		panel_3.add(lblQuayLai);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(502, 44, 958, 521);
-		add(panel_4);
-		panel_4.setLayout(null);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 938, 498);
-		panel_4.add(scrollPane);
-		btnDoiVe.addActionListener(this);
-		btnTraVe.addActionListener(this);
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		scrollPane.setBounds(0, 0, 1050, 477);
+		panel_3.add(scrollPane);
+		
+		table_TTV = new JTable();
+		scrollPane.setViewportView(table_TTV);
+		table_TTV.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"STT", "T\u00EAn kh\u00E1ch h\u00E0ng", "Ga \u0111\u1EBFn", "Ng\u00E0y \u0111i", "Lo\u1EA1i v\u00E9", "Toa", "Gh\u1EBF", "M\u00E3 v\u00E9", "M\u00E3 chuy\u1EBFn t\u00E0u", "Gi\u1EDD", "G\u00EDa"
+				"STT", "Tên khách hàng", "Ga đến", "Ngày đi", "Loại vé", "Toa", "Ghế", "Mã vé", "Mã chuyến tàu", "Giờ đi", "Giá"
 			}
 		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(21);
-		table.getColumnModel().getColumn(7).setPreferredWidth(15);
-		table.getColumnModel().getColumn(8).setPreferredWidth(15);
-		scrollPane.setViewportView(table);}
 		
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		JButton btnNewButton = new JButton("Đổi vé");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(145, 504, 85, 25);
+		panel.add(btnNewButton);
 	}
 }
