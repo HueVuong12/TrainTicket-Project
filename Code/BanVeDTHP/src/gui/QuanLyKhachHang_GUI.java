@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.SystemColor;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +27,8 @@ import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class QuanLyKhachHang_GUI extends JPanel {
@@ -58,8 +62,31 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
+		JPanel jp_QL = new JPanel();
+		jp_QL.setBounds(10, 10, 124, 28);
+		panel.add(jp_QL);
+		jp_QL.setLayout(null);
+		
+		JLabel lb_quaylai = new JLabel("Quay lại");
+		lb_quaylai.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lb_quaylai.setBounds(45, 0, 69, 27);
+		jp_QL.add(lb_quaylai);
+		
+		ImageIcon goBackIcon = new ImageIcon(getClass().getResource("/img/9054423_bx_arrow_back_icon.png"));
+		Image scaledGoBack = goBackIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		JLabel goBackIconLabel = new JLabel(new ImageIcon(scaledGoBack));
+		goBackIconLabel.setBounds(10, 0, 39, 27);
+		goBackIconLabel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ConTent_JPanel jpct = new ConTent_JPanel();
+				jpct.setVisible(true);
+				QuanLyKhachHang_GUI.this.setVisible(false);
+			}
+		});
+		jp_QL.add(goBackIconLabel);
+		
 		JPanel panelTimKiem = new JPanel();
-		panelTimKiem.setBounds(10, 10, 337, 100);
+		panelTimKiem.setBounds(10, 47, 337, 86);
 		panelTimKiem.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(panelTimKiem);
 		panelTimKiem.setLayout(null);
@@ -77,12 +104,12 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		panel_1.add(lbTimKiem);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(34, 60, 250, 30);
+		textField_5.setBounds(34, 46, 250, 30);
 		panelTimKiem.add(textField_5);
 		textField_5.setColumns(10);
 		
 		JPanel panelThongTinKhachHang = new JPanel();
-		panelThongTinKhachHang.setBounds(10, 120, 337, 407);
+		panelThongTinKhachHang.setBounds(10, 143, 337, 407);
 		panelThongTinKhachHang.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.add(panelThongTinKhachHang);
 		panelThongTinKhachHang.setLayout(null);
@@ -161,7 +188,7 @@ public class QuanLyKhachHang_GUI extends JPanel {
 		panel_2.add(lblNewLabel_4);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(357, 10, 1053, 517);
+		scrollPane.setBounds(357, 10, 1053, 540);
 		panel.add(scrollPane);
 		
 		table_1 = new JTable();
