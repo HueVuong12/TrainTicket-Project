@@ -367,9 +367,11 @@ public class BanVe_GUI extends JPanel {
 		JButton btnMua = new JButton("Mua");
 		btnMua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				BanVeNhapThongTin_Gui banVeNhapThongTin_Gui = new BanVeNhapThongTin_Gui(BanVe_GUI.this);
-				banVeNhapThongTin_Gui.setVisible(true);
+				BanVeNhapThongTin_Gui banVeNhapThongTin_Gui = new BanVeNhapThongTin_Gui(BanVe_GUI.this,trangChu);
+				trangChu.content.removeAll();
+				trangChu.content.add(banVeNhapThongTin_Gui);
+				trangChu.content.revalidate();
+				trangChu.content.repaint();
 			}
 		});
 		

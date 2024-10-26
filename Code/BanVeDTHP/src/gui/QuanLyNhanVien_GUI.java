@@ -51,9 +51,6 @@ import entity.NhanVien;
 public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel jp_quayLai;
-	private JPanel jp_timKiem;
-	private JPanel jp_content;
-	private JPanel jp_header;
 	private JPanel jp_headerThongTin;
 	private JPanel jp_thongTinNV;
 	private JPanel jp_contentThongTin;
@@ -72,8 +69,6 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 	private JLabel lbl_TrangThai;
 	private JLabel lbl_tieuDeTT;
 	private JLabel downIconLabel1;
-	private JLabel lbl_tieuDeTK;
-	private JTextField textField_TimMaNV;
 	private JTextField textField_MaNV;
 	private JTextField textField_HoTen;
 	private JTextField textField_NgaySinh;
@@ -95,13 +90,7 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 	private boolean isSearching = false; // Trạng thái nhấp chuột
 	private Color hoverLabelColor = new Color(0, 153, 255);
 	private DefaultTableModel model;
-	private JTextField textField_TìmTheoGioiTinh;
-	private JTextField textField_TimTenNV;
-	private JTextField textField_TimTheoCa;
-	private JTextField textField_TimCccd;
-	private JTextField textField_TimTheoEmail;
-	private JTextField textField_TimSDT;
-	private JTextField textField_TimTheoCV;
+	private JComboBox comboBox;
 
 	public QuanLyNhanVien_GUI(TrangChu_GUI trangChu) {
 		setBackground(SystemColor.text);
@@ -125,11 +114,10 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		goBackIconLabel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				ConTent_JPanel jpct = new ConTent_JPanel();
-  				QuanLyNhanVien_GUI.this.setVisible(false);
-  				trangChu.add(jpct);
-  				jpct.setVisible(true);
-  				trangChu.revalidate();
-  				trangChu.repaint();
+				trangChu.content.removeAll();
+  				trangChu.content.add(jpct);
+  				trangChu.content.revalidate();
+  				trangChu.content.repaint();
 				
 			}
 		});
@@ -158,139 +146,13 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		lbl_quayLai.setBounds(45, 0, 69, 27);
 		jp_quayLai.add(lbl_quayLai);
 
-		//JPane tìm kiếm
-		jp_timKiem = new JPanel();
-		jp_timKiem.setBackground(Color.WHITE);
-		jp_timKiem.setBounds(300, 39, 1160, 121);
-		add(jp_timKiem);
-		jp_timKiem.setLayout(null);
-
 		//Icon xổ xuống
 		ImageIcon downIcon = new ImageIcon(getClass().getResource("/img/Polygon_20.png"));
-		Image scaledDown = downIcon.getImage().getScaledInstance(20 ,20, Image.SCALE_SMOOTH); // Thay đổi kích thước logo
-
-		//JPane chứa content
-		jp_content = new JPanel();
-		jp_content.setBackground(SystemColor.controlHighlight);
-		jp_content.setBounds(0, 32, 1160, 92);
-		jp_timKiem.add(jp_content);
-		jp_content.setLayout(null);
-
-		textField_TimMaNV = new JTextField();
-		textField_TimMaNV.setForeground(SystemColor.textInactiveText);
-		textField_TimMaNV.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimMaNV.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimMaNV.setText("Theo mã nhân viên");
-		textField_TimMaNV.setBounds(10, 8, 165, 27);
-		jp_content.add(textField_TimMaNV);
-		textField_TimMaNV.setColumns(10);
-		
-		textField_TìmTheoGioiTinh = new JTextField();
-		textField_TìmTheoGioiTinh.setText("Theo giới tính");
-		textField_TìmTheoGioiTinh.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TìmTheoGioiTinh.setForeground(SystemColor.textInactiveText);
-		textField_TìmTheoGioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TìmTheoGioiTinh.setColumns(10);
-		textField_TìmTheoGioiTinh.setBounds(314, 8, 165, 27);
-		jp_content.add(textField_TìmTheoGioiTinh);
-		
-		textField_TimTenNV = new JTextField();
-		textField_TimTenNV.setText("Theo tên nhân viên");
-		textField_TimTenNV.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimTenNV.setForeground(SystemColor.textInactiveText);
-		textField_TimTenNV.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimTenNV.setColumns(10);
-		textField_TimTenNV.setBounds(10, 45, 165, 27);
-		jp_content.add(textField_TimTenNV);
-		
-		textField_TimTheoCa = new JTextField();
-		textField_TimTheoCa.setText("Theo Ca Làm Việc");
-		textField_TimTheoCa.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimTheoCa.setForeground(SystemColor.textInactiveText);
-		textField_TimTheoCa.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimTheoCa.setColumns(10);
-		textField_TimTheoCa.setBounds(314, 45, 165, 27);
-		jp_content.add(textField_TimTheoCa);
-		
-		textField_TimCccd = new JTextField();
-		textField_TimCccd.setText("Theo CCCD");
-		textField_TimCccd.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimCccd.setForeground(SystemColor.textInactiveText);
-		textField_TimCccd.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimCccd.setColumns(10);
-		textField_TimCccd.setBounds(647, 8, 165, 27);
-		jp_content.add(textField_TimCccd);
-		
-		textField_TimTheoEmail = new JTextField();
-		textField_TimTheoEmail.setText("Theo email");
-		textField_TimTheoEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimTheoEmail.setForeground(SystemColor.textInactiveText);
-		textField_TimTheoEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimTheoEmail.setColumns(10);
-		textField_TimTheoEmail.setBounds(647, 45, 165, 27);
-		jp_content.add(textField_TimTheoEmail);
-		
-		textField_TimSDT = new JTextField();
-		textField_TimSDT.setText("Theo số điện thoại");
-		textField_TimSDT.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimSDT.setForeground(SystemColor.textInactiveText);
-		textField_TimSDT.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimSDT.setColumns(10);
-		textField_TimSDT.setBounds(974, 8, 165, 27);
-		jp_content.add(textField_TimSDT);
-		
-		textField_TimTheoCV = new JTextField();
-		textField_TimTheoCV.setText("Theo chức vụ");
-		textField_TimTheoCV.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_TimTheoCV.setForeground(SystemColor.textInactiveText);
-		textField_TimTheoCV.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_TimTheoCV.setColumns(10);
-		textField_TimTheoCV.setBounds(974, 45, 165, 27);
-		jp_content.add(textField_TimTheoCV);
-		
-		//JPane header tiêu đề 
-		jp_header = new JPanel();
-		jp_header.setBounds(0, 0, 1160, 32);
-		jp_timKiem.add(jp_header);
-		jp_header.setBackground(new Color(51, 102, 153));
-		jp_header.setLayout(null);
-		//JLabel tiêu đề 
-		lbl_tieuDeTK = new JLabel("Tìm kiếm");
-		lbl_tieuDeTK.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_tieuDeTK.setForeground(new Color(255, 255, 255));
-		lbl_tieuDeTK.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbl_tieuDeTK.setBounds(0, 0, 95, 35);
-		jp_header.add(lbl_tieuDeTK);
-		
-		btnTim = new JButton("Tìm");
-		btnTim.setBounds(1055, 3, 85, 27);
-		jp_header.add(btnTim);
-		btnTim.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTim.addActionListener(this);
-		// Thêm FocusListener để xử lý sự kiện khi người dùng nhấp vào JTextField
-		textField_TimMaNV.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				// Khi JTextField được chọn, xóa nội dung mặc định
-				if (textField_TimMaNV.getText().equals("Theo mã nhân viên")) {
-					textField_TimMaNV.setText("");
-					textField_TimMaNV.setForeground(Color.BLACK); // Đặt màu chữ về màu đen
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				// Khi JTextField không còn được chọn, nếu không có nội dung, đặt lại nội dung mặc định
-				if (textField_TimMaNV.getText().isEmpty()) {
-					textField_TimMaNV.setForeground(SystemColor.textInactiveText);
-					textField_TimMaNV.setText("Theo mã nhân viên");
-				}
-			}
-		});
+		Image scaledDown = downIcon.getImage().getScaledInstance(20 ,20, Image.SCALE_SMOOTH);
 
 		//JPane thông tin nhân viên
 		jp_thongTinNV = new JPanel();
-		jp_thongTinNV.setBounds(10, 39, 280, 526);
+		jp_thongTinNV.setBounds(10, 39, 327, 526);
 		add(jp_thongTinNV);
 		jp_thongTinNV.setLayout(null);
 
@@ -299,59 +161,59 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		Image scaledDown1 = downIcon1.getImage().getScaledInstance(20 ,20, Image.SCALE_SMOOTH); // Thay đổi kích thước logo
 
 		jp_contentThongTin = new JPanel();
-		jp_contentThongTin.setBounds(0, 31, 280, 495);
+		jp_contentThongTin.setBounds(0, 31, 327, 495);
 		jp_thongTinNV.add(jp_contentThongTin);
 		jp_contentThongTin.setLayout(null);
 
 		textField_MaNV = new JTextField();
-		textField_MaNV.setBounds(129, 18, 141, 25);
+		textField_MaNV.setBounds(129, 18, 188, 25);
 		textField_MaNV.setEditable(false);
 		jp_contentThongTin.add(textField_MaNV);
 		textField_MaNV.setColumns(10);
 
 		textField_HoTen = new JTextField();
 		textField_HoTen.setColumns(10);
-		textField_HoTen.setBounds(129, 63, 141, 25);
+		textField_HoTen.setBounds(129, 63, 188, 25);
 		jp_contentThongTin.add(textField_HoTen);
 
 		textField_NgaySinh = new JTextField();
 		textField_NgaySinh.setColumns(10);
-		textField_NgaySinh.setBounds(129, 149, 141, 25);
+		textField_NgaySinh.setBounds(129, 149, 188, 25);
 		jp_contentThongTin.add(textField_NgaySinh);
 
 		textField_CCCD = new JTextField();
 		textField_CCCD.setColumns(10);
-		textField_CCCD.setBounds(129, 194, 141, 25);
+		textField_CCCD.setBounds(129, 194, 188, 25);
 		jp_contentThongTin.add(textField_CCCD);
 
 		textField_SDT = new JTextField();
 		textField_SDT.setColumns(10);
-		textField_SDT.setBounds(129, 244, 141, 25);
+		textField_SDT.setBounds(129, 244, 188, 25);
 		jp_contentThongTin.add(textField_SDT);
 
 		textField_Email = new JTextField();
 		textField_Email.setColumns(10);
-		textField_Email.setBounds(129, 290, 141, 25);
+		textField_Email.setBounds(129, 290, 188, 25);
 		jp_contentThongTin.add(textField_Email);
 
 		textField_ChucVu = new JTextField();
 		textField_ChucVu.setColumns(10);
-		textField_ChucVu.setBounds(129, 336, 141, 25);
+		textField_ChucVu.setBounds(129, 336, 188, 25);
 		jp_contentThongTin.add(textField_ChucVu);
 
 		textField_Ca = new JTextField();
 		textField_Ca.setColumns(10);
-		textField_Ca.setBounds(129, 382, 141, 25);
+		textField_Ca.setBounds(129, 382, 188, 25);
 		jp_contentThongTin.add(textField_Ca);
 
 		btnThem = new JButton("Thêm");
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnThem.setBounds(36, 458, 85, 27);
+		btnThem.setBounds(26, 458, 85, 27);
 		jp_contentThongTin.add(btnThem);
 
 		btnSua = new JButton("Sửa");
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnSua.setBounds(157, 458, 85, 27);
+		btnSua.setBounds(126, 458, 85, 27);
 		jp_contentThongTin.add(btnSua);
 
 		lbl_MaNV = new JLabel("Mã nhân viên");
@@ -413,7 +275,7 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		cb_nu = new JRadioButton("Nữ");
 		cb_nu.setToolTipText("");
 		cb_nu.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		cb_nu.setBounds(201, 109, 52, 21);
+		cb_nu.setBounds(217, 109, 52, 21);
 		jp_contentThongTin.add(cb_nu);
 
 		// Tạo ButtonGroup để nhóm hai JRadioButton
@@ -424,13 +286,13 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		cb_dangLam = new JRadioButton("Đang làm");
 		cb_dangLam.setToolTipText("");
 		cb_dangLam.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		cb_dangLam.setBounds(129, 417, 70, 21);
+		cb_dangLam.setBounds(129, 421, 70, 21);
 		jp_contentThongTin.add(cb_dangLam);
 
 		cb_nghiLam = new JRadioButton("Nghỉ làm");
 		cb_nghiLam.setToolTipText("");
 		cb_nghiLam.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		cb_nghiLam.setBounds(201, 417, 69, 21);
+		cb_nghiLam.setBounds(217, 421, 69, 21);
 		jp_contentThongTin.add(cb_nghiLam);
 
 		// Tạo ButtonGroup để nhóm hai JRadioButton
@@ -438,9 +300,15 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		group1.add(cb_dangLam);
 		group1.add(cb_nghiLam);
 		
+		btnTim = new JButton("Tìm");
+		btnTim.setBounds(232, 458, 85, 27);
+		jp_contentThongTin.add(btnTim);
+		btnTim.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnTim.addActionListener(this);
+		
 		//JPane header tiêu đề của thông tin nhân viên
 		jp_headerThongTin = new JPanel();
-		jp_headerThongTin.setBounds(0, 0, 280, 32);
+		jp_headerThongTin.setBounds(0, 0, 327, 32);
 		jp_thongTinNV.add(jp_headerThongTin);
 		jp_headerThongTin.setBackground(new Color(51, 102, 153));
 		jp_headerThongTin.setLayout(null);
@@ -452,11 +320,11 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		lbl_tieuDeTT.setBounds(10, 0, 153, 35);
 		jp_headerThongTin.add(lbl_tieuDeTT);
 		downIconLabel1 = new JLabel(new ImageIcon(scaledDown1));
-		downIconLabel1.setBounds(250, 0, 30, 35);
+		downIconLabel1.setBounds(287, 0, 30, 35);
 		jp_headerThongTin.add(downIconLabel1);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(300, 170, 1160, 395);
+		scrollPane.setBounds(347, 78, 1113, 487);
 		add(scrollPane);
 
 		table_NV = new JTable();
@@ -524,6 +392,10 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 		cb_nu.addActionListener(this);
 		cb_dangLam.addActionListener(this);
 		cb_nghiLam.addActionListener(this);
+		
+		comboBox = new JComboBox();
+		comboBox.setBounds(347, 39, 185, 29);
+		add(comboBox);
 		datatoTable();
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -551,17 +423,17 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 				deleteField();
 			}
 		}
-		if(o.equals(btnTim)) {
-			if (!isSearching) {
-				// Lần nhấp chuột đầu tiên - thực hiện tìm kiếm
-				search();
-				isSearching = true; // Đặt trạng thái thành true
-			} else {
-				// Lần nhấp chuột thứ hai - tải lại dữ liệu
-				model.setRowCount(0);
-				isSearching = false; // Đặt lại trạng thái thành false
-			}
-		}
+//		if(o.equals(btnTim)) {
+//			if (!isSearching) {
+//				// Lần nhấp chuột đầu tiên - thực hiện tìm kiếm
+//				search();
+//				isSearching = true; // Đặt trạng thái thành true
+//			} else {
+//				// Lần nhấp chuột thứ hai - tải lại dữ liệu
+//				model.setRowCount(0);
+//				isSearching = false; // Đặt lại trạng thái thành false
+//			}
+//		}
 		if(o.equals(btnSua)) {
 			update();
 		}
@@ -763,22 +635,10 @@ public class QuanLyNhanVien_GUI extends JPanel implements ActionListener,MouseLi
 //		return filteredList; // Trả về danh sách lọc
 //	}
 
+	
+	
 	//Hàm tìm kiếm nhân viên
-	public void search() {
-		if (!textField_TimMaNV.getText().equals("")) {
-			String maNV= textField_TimMaNV.getText();
-			NhanVien nv = dsnv.getNhanVienTheoMaNV(maNV);
-			int stt = 1;
-			if (nv != null) { // Kiểm tra xem đối tượng SanPham có null không trước khi thêm vào bảng
-				model.setRowCount(0);
-				model.addRow(new Object[] { stt++, nv.getMaNV(), nv.getTenNV(), nv.getNgaySinh(),nv.isGioiTinh()==true ?"Nữ" : "Nam",
-						nv.getCa().getMaCa(), nv.getCccd(), nv.getEmail(), nv.getSdt(), nv.isTrangThai()==true?"Đang làm":"Nghỉ việc",nv.getChucVu() 
-				});
-			}
-		}else {
-			JOptionPane.showMessageDialog(this, "Nhập mã nhân viên cần tìm.");
-		}
-	}
+	
 
 	//Hàm tải dữ liệu vào bảng
 	public void datatoTable() {
