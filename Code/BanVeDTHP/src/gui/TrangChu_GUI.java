@@ -375,7 +375,7 @@ public class TrangChu_GUI extends JFrame implements ActionListener,MouseListener
 			@Override
 			public void menuSelected(MenuEvent e) {
 				// TODO Auto-generated method stub
-				QuanLyKhachHang_GUI jpkh= new QuanLyKhachHang_GUI(TrangChu_GUI.this);
+				QuanLyKhachHang_GUI jpkh= new QuanLyKhachHang_GUI();
 				content.removeAll();
 				System.out.println("thành công xóa");
 				content.add(jpkh); // Sử dụng layout thích hợp
