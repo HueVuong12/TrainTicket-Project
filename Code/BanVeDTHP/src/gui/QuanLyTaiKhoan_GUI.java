@@ -118,8 +118,11 @@ public class QuanLyTaiKhoan_GUI extends JPanel  implements ActionListener,MouseL
 	  		goBackIconLabel.setBounds(10, 0, 39, 27);
 	  		goBackIconLabel.addMouseListener(new MouseAdapter() {
 	  			public void mouseClicked(MouseEvent e) {
-	  				trangChu.setVisible(true);
-	  				QuanLyTaiKhoan_GUI.this.setVisible(false);
+	  				ConTent_JPanel jpct = new ConTent_JPanel();
+					trangChu.content.removeAll();
+	  				trangChu.content.add(jpct);
+	  				trangChu.content.revalidate();
+	  				trangChu.content.repaint();
 	  			}
 	  		});
 	  		goBackIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
