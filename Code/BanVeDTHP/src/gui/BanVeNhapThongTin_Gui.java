@@ -1,11 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,15 +16,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.DefaultCellEditor;
 import javax.swing.Icon;
 
-public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
+public class BanVeNhapThongTin_Gui extends JPanel {
 	
 	private JTable table;
 	private JLabel goBackIconLabel;
@@ -38,10 +30,15 @@ public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_KHSDV;
+	private JTextField textField_1_KHSDV;
+	private JTextField textField_2_KHSDV;
+	private JTextField textField_3_KHSDV;
 	private JTable table_KHMV;
+	private JTable table_KHSDV;
 	private JPanel jp_KHSDV;
 	
-	public BanVeNhapThongTin_Gui(BanVe_GUI banVe_GUI,TrangChu_GUI trangChu) {
+	public BanVeNhapThongTin_Gui(BanVe_GUI banVe_GUI) {
 		setBackground(SystemColor.window);
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 170, 1460, 570);
@@ -66,10 +63,9 @@ public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
 		panel_1.setLayout(null);
 		goBackIconLabel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				trangChu.content.removeAll();
-				trangChu.content.add(banVe_GUI);
-				trangChu.content.revalidate();
-				trangChu.content.repaint();
+				ConTent_JPanel jpct = new ConTent_JPanel();
+				jpct.setVisible(true);
+				BanVeNhapThongTin_Gui.this.setVisible(false);
 			}
 		});
 		
@@ -111,12 +107,12 @@ public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
 		lb_Email.setBounds(75, 56, 96, 22);
 		panel_2.add(lb_Email);
 		
-		textField = new JTextField();
+		RoundedTextField textField = new RoundedTextField(15);
 		textField.setColumns(10);
 		textField.setBounds(260, 15, 300, 25);
 		panel_2.add(textField);
 		
-		textField_1 = new JTextField();
+		RoundedTextField textField_1 = new RoundedTextField(15);
 		textField_1.setColumns(10);
 		textField_1.setBounds(260, 53, 300, 25);
 		panel_2.add(textField_1);
@@ -131,12 +127,12 @@ public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
 		lb_CCCD.setBounds(732, 56, 143, 25);
 		panel_2.add(lb_CCCD);
 		
-		textField_2 = new JTextField();
+		RoundedTextField textField_2 = new RoundedTextField(15);
 		textField_2.setColumns(10);
 		textField_2.setBounds(945, 15, 300, 25);
 		panel_2.add(textField_2);
 		
-		textField_3 = new JTextField();
+		RoundedTextField textField_3 = new RoundedTextField(15);
 		textField_3.setColumns(10);
 		textField_3.setBounds(945, 53, 300, 25);
 		panel_2.add(textField_3);
@@ -146,110 +142,84 @@ public class BanVeNhapThongTin_Gui extends JPanel implements ActionListener{
 		jp_KHMV.add(scrollPane);
 		
 		table_KHMV = new JTable();
-//		table_KHMV.setFont(new Font("Tahoma", Font, 16));
+		table_KHMV.setFont(new Font("Tahoma", Font.BOLD, 16));
 		scrollPane.setViewportView(table_KHMV);
 		table_KHMV.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"1", "Lê Tấn Phong","Sinh Viên", "Thông tin chỗ", "551,000 VND", "0", "551,000 VND", "Xóa"}
 			},
 			new String[] {
 				"STT", "Khách hàng", "Đối tượng", "Thông tin chỗ", "Giá", "Giảm đối tượng", "Thành tiền", ""
 			}
 		));
-	    table_KHMV.setRowHeight(30); // Set chiều cao hàng
-		// Đặt renderer và editor cho nút xóa
-        table_KHMV.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
-        table_KHMV.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(new JCheckBox()));
 		
-        // Tạo JComboBox cho cột "Trạng Thái"
-        JComboBox<String> comboBoxKhuyenMai = new JComboBox<>();
-        comboBoxKhuyenMai.addItem("Sinh Viên");
-        comboBoxKhuyenMai.addItem("Trẻ Em");
-        comboBoxKhuyenMai.addItem("Cao Tuổi");
-
-        // Lấy cột "Trạng Thái" từ bảng
-        TableColumn khuyenMaiColumn = table_KHMV.getColumnModel().getColumn(2); // 9 là chỉ số của cột "Trạng Thái"
-        // Thiết lập JComboBox làm editor cho cột "Trạng Thái"
-        khuyenMaiColumn.setCellEditor(new DefaultCellEditor(comboBoxKhuyenMai));
-     // Thiết lập renderer cho cột để hiển thị JComboBox
-        khuyenMaiColumn.setCellRenderer(new ComboBoxRenderer(comboBoxKhuyenMai));
-        
-        
-        
 		jp_KHSDV = new JPanel();
 		jp_KHSDV.setBackground(SystemColor.textHighlightText);
 		tabbedPane.addTab("Khách hàng mua vé", null, jp_KHSDV, null);
 		jp_KHSDV.setLayout(null);
 		
-	}
-	// lớp ComboBoxRenderer như sau để làm renderer cho cột:
-	class ComboBoxRenderer extends JComboBox<String> implements TableCellRenderer {
-	    public ComboBoxRenderer(JComboBox<String> comboBox) {
-	        super();
-	        for (int i = 0; i < comboBox.getItemCount(); i++) {
-	            this.addItem(comboBox.getItemAt(i));
-	        }
-	    }
-
-	    @Override
-	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        if (isSelected) {
-	            setBackground(table.getSelectionBackground());
-	        } else {
-	            setBackground(table.getBackground());
-	        }
-	        setSelectedItem(value);
-	        return this;
-	    }
-	}
-	// Editor cho nút xóa
-    class ButtonEditor extends DefaultCellEditor {
-        private JButton button;
-        private JTable table;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton("Xóa");
-            button.setOpaque(true);
-            button.setBackground(Color.RED);
-            button.setForeground(Color.WHITE);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                    int row = table.getSelectedRow();
-                    if (row != -1) {
-                        ((DefaultTableModel) table.getModel()).removeRow(row);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            this.table = table;
-            return button;
-        }
-
-        @Override
-        public Object getCellEditorValue() {
-            return "Xóa";
-        }
-
-        @Override
-        public boolean stopCellEditing() {
-            return super.stopCellEditing();
-        }
-
-        @Override
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-    }
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		JButton bt_ThanhToan_1 = new JButton("Thanh toán");
+		bt_ThanhToan_1.setBounds(1235, 411, 120, 30);
+		jp_KHSDV.add(bt_ThanhToan_1);
+		bt_ThanhToan_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
+		JPanel panel_2_1 = new JPanel();
+		panel_2_1.setLayout(null);
+		panel_2_1.setBounds(20, 0, 1335, 98);
+		jp_KHSDV.add(panel_2_1);
+		
+		JLabel lb_Ten_1 = new JLabel("Họ và tên");
+		lb_Ten_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lb_Ten_1.setBounds(75, 15, 96, 25);
+		panel_2_1.add(lb_Ten_1);
+		
+		JLabel lb_Email_1 = new JLabel("Email");
+		lb_Email_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lb_Email_1.setBounds(75, 56, 96, 22);
+		panel_2_1.add(lb_Email_1);
+		
+		RoundedTextField textField_KHSDV = new RoundedTextField(15);
+		textField_KHSDV.setColumns(10);
+		textField_KHSDV.setBounds(260, 15, 300, 25);
+		panel_2_1.add(textField_KHSDV);
+		
+		RoundedTextField textField_1_KHSDV = new RoundedTextField(15);
+		textField_1_KHSDV.setColumns(10);
+		textField_1_KHSDV.setBounds(260, 53, 300, 25);
+		panel_2_1.add(textField_1_KHSDV);
+		
+		JLabel lb_SDT_KHSDV = new JLabel("Số điện thoại");
+		lb_SDT_KHSDV.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lb_SDT_KHSDV.setBounds(732, 15, 143, 25);
+		panel_2_1.add(lb_SDT_KHSDV);
+		
+		JLabel lb_CCCD_KHSDV = new JLabel("CCCD/ Hộ chiếu");
+		lb_CCCD_KHSDV.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lb_CCCD_KHSDV.setBounds(732, 56, 143, 25);
+		panel_2_1.add(lb_CCCD_KHSDV);
+		
+		RoundedTextField textField_2_KHSDV = new RoundedTextField(15);
+		textField_2_KHSDV.setColumns(10);
+		textField_2_KHSDV.setBounds(945, 15, 300, 25);
+		panel_2_1.add(textField_2_KHSDV);
+		
+		RoundedTextField textField_3_KHSDV = new RoundedTextField(15);
+		textField_3_KHSDV.setColumns(10);
+		textField_3_KHSDV.setBounds(945, 53, 300, 25);
+		panel_2_1.add(textField_3_KHSDV);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(20, 123, 1335, 259);
+		jp_KHSDV.add(scrollPane_1);
+		
+		table_KHSDV = new JTable();
+		table_KHSDV.setFont(new Font("Tahoma", Font.BOLD, 16));
+		scrollPane_1.setViewportView(table_KHSDV);
+		table_KHSDV.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"STT", "Khách hàng", "Đối tượng", "Thông tin chỗ", "Giá", "Giảm đối tượng", "Thành tiền", ""
+			}
+		));
 	}
-	
-	
 }
