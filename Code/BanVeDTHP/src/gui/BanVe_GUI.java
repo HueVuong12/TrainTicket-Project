@@ -450,6 +450,10 @@ public class BanVe_GUI extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				jp_TinhTrangGhe.removeAll();
+				jp_TinhTrangGhe.revalidate();
+				jp_TinhTrangGhe.repaint();
 
 				Toa_JPanel toaDau = new Toa_JPanel(chuyenTau.getMaTau(), 1);
 				toaDau.setBounds(0, 0, 100, 72);

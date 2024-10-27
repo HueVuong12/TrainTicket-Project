@@ -89,7 +89,7 @@ CREATE TABLE HoaDon (
     ngayLapHoaDon DATETIME NOT NULL,
     nhanVien VARCHAR(50) NOT NULL,
     khachHang VARCHAR(50) NOT NULL,
-    daHoanVe BIT NOT NULL,
+	daHoanVe BIT NOT NULL,
 	daHoanTien BIT NOT NULL,
     FOREIGN KEY (nhanVien) REFERENCES NhanVien(maNV),
     FOREIGN KEY (khachHang) REFERENCES KhachHang(maKH)
@@ -282,3 +282,23 @@ WHILE @i <= 20 BEGIN
     INSERT INTO Ghe (soGhe, maToa, trangThai) VALUES (@i, 'TA003_05', 1);
     SET @i = @i + 1;
 END;
+
+-- Thêm 5 khách hàng
+INSERT INTO KhachHang (maKH, tenKH, email, sdt, cccd) VALUES
+('KH0001', N'Nguyễn Văn A', 'abc@gmail.com', '0912345678', '049204013502'),
+('KH0002', N'Trần Thị B', 'def@gmail.com', '0912345679', '049204013503'),
+('KH0003', N'Phạm Văn C', 'ghi@gmail.com', '0912345680', '049204013504'),
+('KH0004', N'Nguyễn Thị D', 'jkl@gmail.com', '0912345681', '049204013505'),
+('KH0005', N'Lê Văn E', 'mno@gmail.com', '0912345682', '049204013506');
+
+-- Thêm 3 hóa đơn
+INSERT INTO HoaDon (maHoaDon, ngayLapHoaDon, nhanVien, khachHang, daHoanVe, daHoanTien) VALUES
+('220924NV00100001', '2024-09-26', 'NV001', 'KH0001', 0, 0),
+('220924NV00200002', '2024-09-26', 'NV002', 'KH0002', 1, 1),
+('220924NV00100003', '2024-09-26', 'NV001', 'KH0003', 0, 1);
+
+-- Thêm 3 chi tiết hóa đơn vào bảng ChiTietHoaDon
+INSERT INTO ChiTietHoaDon (maChiTiet, hoaDon, soLuong, thue) VALUES
+('CT220924NV00100001', '220924NV00100001', 2, 1000),
+('CT220924NV00100002', '220924NV00200002', 1, 1000),
+('CT220924NV00100003', '220924NV00100003', 3, 1000);
